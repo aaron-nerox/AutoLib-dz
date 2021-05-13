@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DD212121"
-    tools:context=".LoginActivity">
+    android:background="@color/dark_gray"
+    tools:context=".auth.LoginActivity">
 
     <TextView
         android:id="@+id/logo"
@@ -40,7 +40,7 @@
                 android:text="Login to your"
                 android:textSize="28sp"
                 android:textStyle="bold"
-                android:textColor="#212121"/>
+                android:textColor="@color/yello"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
                 android:text="Account"
                 android:textSize="28sp"
                 android:textStyle="bold"
-                android:textColor="#212121"/>
+                android:textColor="@color/yello"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -126,7 +126,7 @@
                 android:text="Login"
                 android:textAllCaps="false"
                 android:textColor="#fff"
-                android:textSize="18sp"
+                android:textSize="24sp"
                 android:textStyle="bold">
 
             </androidx.appcompat.widget.AppCompatButton>
@@ -149,7 +149,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Register"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/yello"/>
 
             </LinearLayout>
 

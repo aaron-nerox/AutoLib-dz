@@ -1,9 +1,10 @@
-package com.clovertech.autolibdz
+package com.clovertech.autolibdz.auth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.clovertech.autolibdz.R
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() , View.OnClickListener {

@@ -69,9 +69,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:layout_gravity="center"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:hint="Email"
+                    android:textSize="14sp"
                     android:textColor="#DD212121"
                     android:background="#00000000"/>
 
@@ -95,9 +97,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:layout_gravity="center"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:hint="Password"
+                    android:textSize="14sp"
                     android:textColor="#DD212121"
                     android:background="#00000000"/>
 

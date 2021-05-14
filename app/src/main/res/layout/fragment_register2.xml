@@ -23,10 +23,12 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center"
             android:inputType="phone"
             android:maxLines="1"
             android:hint="Phone number"
+            android:textSize="14sp"
             android:textColor="#DD212121"
             android:background="#00000000"/>
 
@@ -57,10 +59,12 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
                 android:inputType="textPersonName"
                 android:maxLines="1"
                 android:hint="Your picture"
+                android:textSize="14sp"
                 android:textColor="#DD212121"
                 android:background="#00000000"/>
 
@@ -84,10 +88,12 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
                 android:inputType="textPersonName"
                 android:maxLines="1"
                 android:hint="Selfie-permis"
+                android:textSize="14sp"
                 android:textColor="#DD212121"
                 android:background="#00000000"/>
 
@@ -112,10 +118,12 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center"
             android:inputType="textPersonName"
             android:maxLines="1"
             android:hint="Upload your profile picture"
+            android:textSize="14sp"
             android:textColor="#DD212121"
             android:background="#00000000"/>
 

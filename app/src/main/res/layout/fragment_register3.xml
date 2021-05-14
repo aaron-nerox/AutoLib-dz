@@ -5,19 +5,19 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".Register1Fragment">
+    tools:context=".Register3Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="18sp"
+        android:padding="18dp"
         android:background="@drawable/_rounded_20dp_light_grey"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_email"
+            android:src="@drawable/ic_card"
             app:tint="#DD212121" />
 
         <EditText
@@ -25,9 +25,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_gravity="center"
-            android:inputType="textEmailAddress"
+            android:inputType="phone"
             android:maxLines="1"
-            android:hint="Email"
+            android:hint="Card number"
             android:textSize="14sp"
             android:textColor="#DD212121"
             android:background="#00000000"/>
@@ -46,7 +46,73 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="10dp"
-            android:padding="18sp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Expiry"
+                android:textSize="18sp"
+                android:textColor="#212121"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:padding="18dp"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:hint="MM/YYYY"
+                android:textSize="14sp"
+                android:textColor="#DD212121"
+                android:background="@drawable/_rounded_20dp_light_grey"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Code"
+                android:textSize="18sp"
+                android:textColor="#212121"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:padding="18dp"
+                android:inputType="numberPassword"
+                android:maxLines="1"
+                android:hint="********"
+                android:textSize="14sp"
+                android:textColor="#DD212121"
+                android:background="@drawable/_rounded_20dp_light_grey"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="10dp"
+            android:padding="18dp"
             android:background="@drawable/_rounded_20dp_light_grey"
             android:orientation="horizontal">
 
@@ -63,7 +129,7 @@
                 android:layout_gravity="center"
                 android:inputType="textPersonName"
                 android:maxLines="1"
-                android:hint="Nom"
+                android:hint="First name"
                 android:textSize="14sp"
                 android:textColor="#DD212121"
                 android:background="#00000000"/>
@@ -75,7 +141,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="10dp"
-            android:padding="18sp"
+            android:padding="18dp"
             android:background="@drawable/_rounded_20dp_light_grey"
             android:orientation="horizontal">
 
@@ -92,40 +158,12 @@
                 android:layout_gravity="center"
                 android:inputType="textPersonName"
                 android:maxLines="1"
-                android:hint="Prénom"
+                android:hint="Last name"
                 android:textSize="14sp"
                 android:textColor="#DD212121"
                 android:background="#00000000"/>
 
         </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:padding="18sp"
-        android:background="@drawable/_rounded_20dp_light_grey"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_location"
-            app:tint="#DD212121" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_gravity="center"
-            android:inputType="text"
-            android:maxLines="1"
-            android:hint="Password"
-            android:textSize="14sp"
-            android:textColor="#DD212121"
-            android:background="#00000000"/>
 
     </LinearLayout>
 

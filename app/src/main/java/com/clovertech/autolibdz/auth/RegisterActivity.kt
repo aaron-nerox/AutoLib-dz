@@ -6,6 +6,7 @@ import android.view.View
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.Register1Fragment
 import com.clovertech.autolibdz.Register2Fragment
+import com.clovertech.autolibdz.Register3Fragment
 import com.clovertech.autolibdz.adapter.MyViewPagerAdapter
 import com.clovertech.autolibdz.ui.gallery.GalleryFragment
 import com.clovertech.autolibdz.ui.home.HomeFragment
@@ -38,7 +39,7 @@ class RegisterActivity : AppCompatActivity()  , View.OnClickListener {
         val adapter = MyViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(Register1Fragment())
         adapter.addFragment(Register2Fragment())
-        adapter.addFragment(SlideshowFragment())
+        adapter.addFragment(Register3Fragment())
         return adapter
     }
 }

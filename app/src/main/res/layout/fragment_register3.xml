@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".Register3Fragment">
+    tools:context=".auth.fragments.Register3Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -55,14 +55,15 @@
                 android:textSize="18sp"
                 android:textColor="#212121"/>
 
-            <EditText
+            <TextView
+                android:id="@+id/date_txt_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:padding="18dp"
-                android:inputType="textPersonName"
                 android:maxLines="1"
-                android:hint="MM/YYYY"
+                android:singleLine="true"
+                android:hint="JJ/MM/YYYY"
                 android:textSize="14sp"
                 android:textColor="#DD212121"
                 android:background="@drawable/_rounded_20dp_light_grey"/>
@@ -73,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -90,6 +91,7 @@
                 android:padding="18dp"
                 android:inputType="numberPassword"
                 android:maxLines="1"
+                android:singleLine="true"
                 android:hint="********"
                 android:textSize="14sp"
                 android:textColor="#DD212121"
@@ -129,6 +131,7 @@
                 android:layout_gravity="center"
                 android:inputType="textPersonName"
                 android:maxLines="1"
+                android:singleLine="true"
                 android:hint="First name"
                 android:textSize="14sp"
                 android:textColor="#DD212121"
@@ -158,6 +161,7 @@
                 android:layout_gravity="center"
                 android:inputType="textPersonName"
                 android:maxLines="1"
+                android:singleLine="true"
                 android:hint="Last name"
                 android:textSize="14sp"
                 android:textColor="#DD212121"

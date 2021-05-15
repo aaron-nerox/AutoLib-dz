@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".Register1Fragment">
+    tools:context=".auth.fragments.Register1Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,6 +63,7 @@
                 android:layout_gravity="center"
                 android:inputType="textPersonName"
                 android:maxLines="1"
+                android:singleLine="true"
                 android:hint="Nom"
                 android:textSize="14sp"
                 android:textColor="#DD212121"
@@ -92,6 +93,7 @@
                 android:layout_gravity="center"
                 android:inputType="textPersonName"
                 android:maxLines="1"
+                android:singleLine="true"
                 android:hint="Prénom"
                 android:textSize="14sp"
                 android:textColor="#DD212121"

@@ -29,29 +29,34 @@ class RegisterActivity : AppCompatActivity()  , View.OnClickListener {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, Register1Fragment())
                 .commitAllowingStateLoss()
+
         next_layout.setOnClickListener(this)
         login_txt_view.setOnClickListener(this)
+        registr_btn.setOnClickListener(this)
 
     }
 
     override fun onClick(view: View?) {
         when (view?.id){
+            R.id.registr_btn -> {
+
+            }
             R.id.next_layout -> {
                 when (currentFragment){
                     1 -> {
                         currentFragment = 2
                         dot2.setColorFilter(ContextCompat.getColor(baseContext,R.color.yello))
                         supportFragmentManager.beginTransaction()
-                                .replace(R.id.container, Register2Fragment())
-                                .commitAllowingStateLoss()
+                            .replace(R.id.container, Register2Fragment())
+                            .commitAllowingStateLoss()
                     }
                     2 -> {
                         currentFragment = 3
                         dot3.setColorFilter(ContextCompat.getColor(baseContext,R.color.yello))
                         registr_btn.visibility = View.VISIBLE
                         supportFragmentManager.beginTransaction()
-                                .replace(R.id.container, Register3Fragment())
-                                .commitAllowingStateLoss()
+                            .replace(R.id.container, Register3Fragment())
+                            .commitAllowingStateLoss()
                     }
                     3 -> {
                     }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.clovertech.autolibdz.R
+import com.clovertech.autolibdz.password.ResetPasswordActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() , View.OnClickListener {
@@ -21,10 +22,10 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.login_btn -> {
-                startActivity(Intent(this, RegisterActivity::class.java))
+
             }
             R.id.forgotPassword_txt_view -> {
-                startActivity(Intent(this, RegisterActivity::class.java))
+                startActivity(Intent(this, ResetPasswordActivity::class.java))
             }
             R.id.register_txt_view -> {
                 startActivity(Intent(this, RegisterActivity::class.java))

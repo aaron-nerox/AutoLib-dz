@@ -5,12 +5,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/yello"
     tools:context=".HomeActivity">
 
-    <FrameLayout
+    <RelativeLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/yello">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AutoLib"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_grey"
+            android:layout_centerInParent="true"/>
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@color/dark_grey"/>
+    </RelativeLayout>
+
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/fragments_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/app_bar"
+        app:cardCornerRadius="20dp"/>
 
     <include
         android:id="@+id/bottom_bar"

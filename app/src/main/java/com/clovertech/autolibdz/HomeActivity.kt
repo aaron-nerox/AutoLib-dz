@@ -51,7 +51,7 @@ class HomeActivity : AppCompatActivity() {
         images.add(event_img as ImageView)
         images.add(favorite_img as ImageView)
         images.add(profile_img as ImageView)
-        fragments.add(Register1Fragment())
+        fragments.add(HomeFragment())
         fragments.add(Register2Fragment())
         fragments.add(Register3Fragment())
         fragments.add(Register1Fragment())

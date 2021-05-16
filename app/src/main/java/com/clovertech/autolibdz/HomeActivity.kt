@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.clovertech.autolibdz.auth.fragments.Register1Fragment
 import com.clovertech.autolibdz.auth.fragments.Register2Fragment
 import com.clovertech.autolibdz.auth.fragments.Register3Fragment
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.bottom_bar_layout.*
 import java.util.*
 
@@ -37,6 +38,8 @@ class HomeActivity : AppCompatActivity() {
                     .beginTransaction()
                     .replace(R.id.fragments_container, fragments[i])
                     .commit()
+                if (i == 0) search_dialog.visibility = View.VISIBLE
+                else search_dialog.visibility = View.GONE
             }
         }
 

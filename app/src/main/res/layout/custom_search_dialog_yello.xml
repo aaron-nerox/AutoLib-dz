@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:translationZ="1dp"
+    android:gravity="bottom">
+
+    <RelativeLayout
+        android:id="@+id/search_park"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="-24dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:translationZ="1dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/_circle_white">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_search"
+            app:tint="@color/yello" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/checked_park"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="-36dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:translationZ="1dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/_circle_white">
+
+        <ImageView
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_check"
+            app:tint="@color/dark_grey" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:background="@drawable/_rounded_20dp_light_grey"
+        android:backgroundTint="@color/yello"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Close Park for you"
+            android:textSize="18sp"
+            android:textColor="@color/dark_grey"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_location"
+                app:tint="@color/dark_grey"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Smart Park Babz"
+                android:textSize="18sp"
+                android:textColor="@color/dark_grey"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="37dp"
+            android:text="cité El Djorf"
+            android:textSize="14sp"
+            android:textColor="@color/dark_grey" />
+
+    </LinearLayout>
+
+</RelativeLayout>

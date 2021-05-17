@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="500dp"
     android:padding="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:backgroundTint="@color/dark_grey"
+    android:backgroundTint="@color/yello"
     android:layout_gravity="center"
     app:cardCornerRadius="20dp"
     android:elevation="10dp"
@@ -21,7 +22,7 @@
             android:layout_height="wrap_content"
             android:padding="12dp"
             android:background="@drawable/_rounded_10dp_light_grey"
-            android:backgroundTint="#22FFFFFF">
+            android:backgroundTint="#22333333">
 
             <EditText
                 android:id="@+id/searched_txt_position"
@@ -31,9 +32,9 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:hint="Search"
-                android:textColorHint="@color/yello"
+                android:textColorHint="@color/dark_grey"
                 android:textSize="16sp"
-                android:textColor="@color/yello"
+                android:textColor="@color/dark_grey"
                 android:background="#00000000"/>
 
             <RelativeLayout
@@ -48,7 +49,7 @@
                     android:layout_height="25dp"
                     android:layout_alignParentEnd="true"
                     android:src="@drawable/ic_search"
-                    app:tint="#000" />
+                    app:tint="@color/yello" />
 
             </RelativeLayout>
 
@@ -67,42 +68,49 @@
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    layout="@layout/row_positions"/>
+                    layout="@layout/row_park"/>
 
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    layout="@layout/row_positions"/>
+                    layout="@layout/row_park"/>
 
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    layout="@layout/row_positions"/>
+                    layout="@layout/row_park"/>
 
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    layout="@layout/row_positions"/>
+                    layout="@layout/row_park"/>
 
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    layout="@layout/row_positions"/>
+                    layout="@layout/row_park"/>
 
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    layout="@layout/row_positions"/>
+                    layout="@layout/row_park"/>
 
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    layout="@layout/row_positions"/>
+                    layout="@layout/row_park"/>
 
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    layout="@layout/row_positions"/>
+                    layout="@layout/row_park"/>
+
+                <include
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/row_park"/>
+
+
 
             </LinearLayout>
 

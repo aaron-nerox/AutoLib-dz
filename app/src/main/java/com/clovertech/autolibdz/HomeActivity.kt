@@ -32,18 +32,17 @@ class HomeActivity : AppCompatActivity() , View.OnClickListener {
     private val images : ArrayList<ImageView> = ArrayList()
     private val fragments : ArrayList<Fragment> = ArrayList()
     lateinit var searchDialogPosition : Dialog
+    lateinit var searchDialogPark : Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
         searchDialogPosition = Dialog(this)
+        searchDialogPark = Dialog(this)
 
         init()
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragments_container, fragments[0])
-            .commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragments_container, fragments[0]).commit()
 
         for (i in layouts.indices) {
             layouts[i].setOnClickListener {
@@ -82,6 +81,11 @@ class HomeActivity : AppCompatActivity() , View.OnClickListener {
                 searchDialogPosition.setContentView(R.layout.custom_search_dialog_position_expanded)
                 searchDialogPosition.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
                 searchDialogPosition.show()
+            }
+            R.id.search_park -> {
+                searchDialogPark.setContentView(R.layout.custom_search_dialog_park_expanded)
+                searchDialogPark.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+                searchDialogPark.show()
             }
         }
     }

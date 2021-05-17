@@ -1,6 +1,9 @@
 package com.clovertech.autolibdz
 
+import android.app.Dialog
+import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.util.TypedValue
@@ -28,10 +31,13 @@ class HomeActivity : AppCompatActivity() , View.OnClickListener {
     private val layouts : ArrayList<LinearLayout> = ArrayList()
     private val images : ArrayList<ImageView> = ArrayList()
     private val fragments : ArrayList<Fragment> = ArrayList()
+    lateinit var searchDialogPosition : Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        searchDialogPosition = Dialog(this)
 
         init()
         supportFragmentManager
@@ -46,13 +52,21 @@ class HomeActivity : AppCompatActivity() , View.OnClickListener {
                     .beginTransaction()
                     .replace(R.id.fragments_container, fragments[i])
                     .commit()
-                if (i == 0) search_position_dialog.visibility = View.VISIBLE
-                else search_position_dialog.visibility = View.GONE
+                if (i == 0) {
+                    search_position_dialog.visibility = View.VISIBLE
+                    search_park_dialog.visibility = View.VISIBLE
+                }
+                else {
+                    search_position_dialog.visibility = View.GONE
+                    search_park_dialog.visibility = View.GONE
+                }
             }
         }
 
         checked_position.setOnClickListener(this)
         checked_park.setOnClickListener(this)
+        search_position.setOnClickListener(this)
+        search_park.setOnClickListener(this)
 
     }
 
@@ -63,6 +77,11 @@ class HomeActivity : AppCompatActivity() , View.OnClickListener {
             }
             R.id.checked_park -> {
                 moveSearchParkDialog()
+            }
+            R.id.search_position -> {
+                searchDialogPosition.setContentView(R.layout.custom_search_dialog_position_expanded)
+                searchDialogPosition.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+                searchDialogPosition.show()
             }
         }
     }

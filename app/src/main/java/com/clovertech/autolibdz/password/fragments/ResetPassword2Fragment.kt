@@ -16,9 +16,6 @@ import kotlinx.android.synthetic.main.fragment_reset_password2.view.*
 
 class ResetPassword2Fragment : Fragment() {
 
-    var activeEditText = 1
-    var editTextes : ArrayList<EditText> = ArrayList()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -29,12 +26,6 @@ class ResetPassword2Fragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_reset_password2, container, false)
-
-        editTextes.add(view.number1)
-        editTextes.add(view.number2)
-        editTextes.add(view.number3)
-        editTextes.add(view.number4)
-        editTextes.add(view.number5)
 
         view.number1.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
@@ -108,7 +99,6 @@ class ResetPassword2Fragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         })
-
 
         return view
     }

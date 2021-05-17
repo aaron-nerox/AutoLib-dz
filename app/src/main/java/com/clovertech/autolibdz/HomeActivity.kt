@@ -2,9 +2,13 @@ package com.clovertech.autolibdz
 
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.os.Handler
+import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -13,9 +17,13 @@ import com.clovertech.autolibdz.auth.fragments.Register2Fragment
 import com.clovertech.autolibdz.auth.fragments.Register3Fragment
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.bottom_bar_layout.*
+import kotlinx.android.synthetic.main.custom_search_dialog_yello.*
+import kotlinx.android.synthetic.main.custom_search_dialog_black.*
+import java.security.AccessController.getContext
 import java.util.*
 
-class HomeActivity : AppCompatActivity() {
+
+class HomeActivity : AppCompatActivity() , View.OnClickListener {
 
     private val layouts : ArrayList<LinearLayout> = ArrayList()
     private val images : ArrayList<ImageView> = ArrayList()
@@ -38,11 +46,25 @@ class HomeActivity : AppCompatActivity() {
                     .beginTransaction()
                     .replace(R.id.fragments_container, fragments[i])
                     .commit()
-                if (i == 0) search_dialog.visibility = View.VISIBLE
-                else search_dialog.visibility = View.GONE
+                if (i == 0) search_position_dialog.visibility = View.VISIBLE
+                else search_position_dialog.visibility = View.GONE
             }
         }
 
+        checked_position.setOnClickListener(this)
+        checked_park.setOnClickListener(this)
+
+    }
+
+    override fun onClick(view : View?) {
+        when(view?.id){
+            R.id.checked_position -> {
+                moveSearchPositionDialog()
+            }
+            R.id.checked_park -> {
+                moveSearchParkDialog()
+            }
+        }
     }
 
     private fun init() {
@@ -73,5 +95,41 @@ class HomeActivity : AppCompatActivity() {
                 )
             }
         }
+    }
+
+    fun Float.toDips() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this, resources.displayMetrics)
+
+    private fun moveSearchPositionDialog(){
+        var handler= Handler()
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                val params = RelativeLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    (150f).toDips().toInt()
+                )
+                params.addRule(RelativeLayout.BELOW , R.id.app_bar)
+                search_position_dialog.layoutParams = params
+                search_position_dialog.x = search_position_dialog.x + (search_position_dialog.width * 0.9).toFloat()
+                checked_position.visibility = View.GONE
+                search_position.visibility = View.GONE
+            }
+        }, 500)
+    }
+
+    private fun moveSearchParkDialog(){
+        var handler= Handler()
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                val params = RelativeLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    (150f).toDips().toInt()
+                )
+                params.addRule(RelativeLayout.BELOW , R.id.search_position_dialog)
+                search_park_dialog.layoutParams = params
+                search_park_dialog.x = search_park_dialog.x + (search_park_dialog.width * 0.9).toFloat()
+                checked_park.visibility = View.GONE
+                search_park.visibility = View.GONE
+            }
+        }, 500)
     }
 }

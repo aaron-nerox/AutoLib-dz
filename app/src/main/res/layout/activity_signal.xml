@@ -62,17 +62,18 @@
 
             </TextView>
 
-            <TextView
+            <EditText
                 android:id="@+id/msg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="top"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/x_solid_grey_10dp"
                 android:minHeight="300dp"
                 android:padding="12dp"
-                android:text="Message...">
+                android:hint="Message...">
 
-            </TextView>
+            </EditText>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/report_btn"

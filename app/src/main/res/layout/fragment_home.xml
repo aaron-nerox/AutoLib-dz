@@ -17,7 +17,7 @@
     <include
         android:id="@+id/search_park_dialog"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="80dp"
@@ -27,7 +27,7 @@
     <include
         android:id="@+id/search_position_dialog"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginBottom="95dp"
         layout="@layout/custom_search_dialog_black"

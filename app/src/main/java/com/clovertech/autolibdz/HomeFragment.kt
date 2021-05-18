@@ -14,6 +14,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
@@ -27,6 +28,7 @@ import kotlinx.android.synthetic.main.custom_search_dialog_black.view.*
 import kotlinx.android.synthetic.main.custom_search_dialog_yello.*
 import kotlinx.android.synthetic.main.custom_search_dialog_yello.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 
 
 class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickListener , View.OnClickListener {
@@ -35,6 +37,8 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
     lateinit var searchDialogPosition : Dialog
     lateinit var searchDialogPark : Dialog
+    var xPosition : Float = 0.0f
+    var yPosition : Float = 0.0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,40 +59,52 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
         view.checked_park.setOnClickListener(this)
         view.search_position.setOnClickListener(this)
         view.search_park.setOnClickListener(this)
+        view.search_position_dialog.setOnClickListener(this)
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.google_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        bottomSheetBehavior = BottomSheetBehavior.from(view.bottom_sheet_layout)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior = from(view.bottom_sheet_layout)
+        bottomSheetBehavior.state = STATE_HIDDEN
+        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == STATE_EXPANDED) {
+                    activity?.bottom_bar?.visibility = View.GONE
+                    images_container.visibility = View.VISIBLE
+                    img_container.visibility = View.GONE
+                    dots.visibility = View.VISIBLE
+                }
+                else if (newState == STATE_HIDDEN || newState == STATE_COLLAPSED) {
+                    activity?.bottom_bar?.visibility = android.view.View.VISIBLE
+                    images_container.visibility = View.GONE
+                    img_container.visibility = View.VISIBLE
+                    dots.visibility = View.GONE
+                }
+            }
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+        })
 
         return view
     }
 
     override fun onClick(view: View?) {
         when(view?.id){
+            R.id.search_position_dialog -> {
+                if (search_position.visibility != View.VISIBLE){
+                    bottomSheetBehavior.state = STATE_HIDDEN
+                    search_position_dialog.x = xPosition
+                    search_position_dialog.y = yPosition
+                    search_position.visibility = View.VISIBLE
+                    checked_position.visibility = View.VISIBLE
+                    search_park_dialog.visibility = View.VISIBLE
+                }
+            }
             R.id.checked_position -> {
                 moveSearchPositionDialog()
             }
             R.id.checked_park -> {
-                moveSearchParkDialog()
-                bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetCallback() {
-                    override fun onStateChanged(bottomSheet: View, newState: Int) {
-                        if (newState == STATE_EXPANDED) {
-                            activity?.bottom_bar?.visibility = View.GONE
-                            images_container.visibility = View.VISIBLE
-                            img_container.visibility = View.GONE
-                            dots.visibility = View.VISIBLE
-                        }
-                        else if (newState == STATE_HIDDEN || newState == STATE_COLLAPSED) {
-                            activity?.bottom_bar?.visibility = android.view.View.VISIBLE
-                            images_container.visibility = View.GONE
-                            img_container.visibility = View.VISIBLE
-                            dots.visibility = View.GONE
-                        }
-                    }
-                    override fun onSlide(bottomSheet: View, slideOffset: Float) {}
-                })
+                search_park_dialog.visibility = View.GONE
+                bottomSheetBehavior.state = STATE_COLLAPSED
             }
             R.id.search_position -> {
                 searchDialogPosition.setContentView(R.layout.custom_search_dialog_position_expanded)
@@ -127,6 +143,8 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
     fun Float.toDips() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this, resources.displayMetrics)
 
     private fun moveSearchPositionDialog(){
+        xPosition = search_position_dialog.x
+        yPosition = search_position_dialog.y
         var handler= Handler()
         handler.postDelayed(object : Runnable {
             override fun run() {
@@ -136,19 +154,6 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
                 search_position.visibility = View.GONE
             }
         }, 500)
-    }
-
-    private fun moveSearchParkDialog(){
-        var handler= Handler()
-        handler.postDelayed(object : Runnable {
-            override fun run() {
-                search_park_dialog.x = search_park_dialog.x + (search_park_dialog.width * 0.88).toFloat()
-                search_park_dialog.y = (400).toFloat()
-                checked_park.visibility = View.GONE
-                search_park.visibility = View.GONE
-            }
-        }, 500)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
 }

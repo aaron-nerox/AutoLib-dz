@@ -47,6 +47,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/fullname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/monteserrat_semibold"
@@ -57,6 +58,7 @@
                 </TextView>
 
                 <TextView
+                    android:id="@+id/username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
@@ -71,6 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
+                    android:id="@+id/phonenumber"
                     android:fontFamily="@font/monteserrat_semibold"
                     android:text="0561218829"
                     android:textColor="#b0b0b0"
@@ -219,6 +222,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/report_problem"
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
 

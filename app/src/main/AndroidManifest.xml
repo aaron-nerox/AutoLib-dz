@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AutoLibDZ">
+
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.ProfileAct"
             android:label="@string/app_name"
             android:theme="@style/Theme.AutoLibDZ.NoActionBar">
             <intent-filter>

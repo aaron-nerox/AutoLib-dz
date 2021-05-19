@@ -5,6 +5,7 @@ import ViewModel.MainViewModelFactory
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -13,6 +14,8 @@ import com.clovertech.autolibdz.R
 import kotlinx.android.synthetic.main.activity_signal.*
 import model.Signal
 import repository.Repository
+import retrofit2.Response
+import utils.RetrofitInstance
 
 class SignalAct : AppCompatActivity() {
     private lateinit var viewModel : MainViewModel
@@ -24,8 +27,6 @@ class SignalAct : AppCompatActivity() {
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this,viewModelFactory)
             .get(MainViewModel::class.java)
-
-
         val types = arrayOf("theft","panne")
         reporting_type.setOnClickListener {
             val mbuilder =
@@ -49,8 +50,8 @@ class SignalAct : AppCompatActivity() {
                     "Yes"
                 ) { dialog, which ->
 
-                    val signal = Signal(6,reporting_type.text.toString(),3,"2021-05-18T02:37:03.137Z"
-                        ,"Auto",msg.text.toString(),14)
+                    val signal = Signal(0,reporting_type.text.toString(),3,""
+                        ,"Tenant",msg.text.toString(),14)
 
                     viewModel.pushSignal(signal)
                     viewModel.signalResponse.observe(this, Observer {
@@ -59,6 +60,11 @@ class SignalAct : AppCompatActivity() {
                             Log.e("Push",response.body().toString())
                             Log.e("Push",response.code().toString())
                             Log.e("Push",response.message())
+                            msg.setText("")
+                            reporting_type.setText("")
+                            Toast.makeText(this,"Alert sent sucessfully",Toast.LENGTH_SHORT).show()
+
+
                         }
                     })
                 }
@@ -74,4 +80,5 @@ class SignalAct : AppCompatActivity() {
 
         }
     }
+
 }

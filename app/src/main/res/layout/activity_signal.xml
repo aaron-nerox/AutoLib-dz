@@ -58,7 +58,7 @@
                 android:background="@drawable/x_solid_grey_10dp"
                 android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
                 android:padding="12dp"
-                android:text="Reporting type">
+                android:hint="Reporting type">
 
             </TextView>
 

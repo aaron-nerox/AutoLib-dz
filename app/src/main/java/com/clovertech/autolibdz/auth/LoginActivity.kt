@@ -3,19 +3,22 @@ package com.clovertech.autolibdz.auth
 import `view-model`.AuthenticationViewModel
 import `view-model`.AuthenticationViewModelFactory
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolibdz.HomeActivity
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.password.ResetPasswordActivity
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login.*
 import model.Authentication
+import org.json.JSONObject
 import repository.Repository
+
 
 class LoginActivity : AppCompatActivity() , View.OnClickListener {
 
@@ -28,7 +31,7 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
         /// Authentification Api
         val repository = Repository()
         val viewModelFactory = AuthenticationViewModelFactory(repository)
-        viewModel = ViewModelProvider(this,viewModelFactory)
+        viewModel = ViewModelProvider(this, viewModelFactory)
             .get(AuthenticationViewModel::class.java)
 
         login_btn.setOnClickListener(this)
@@ -58,22 +61,21 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
         }else if (password_edit_txt.text.toString() == ""){
             password_edit_txt.setError("Password required !")
         } else {
-            val authentication = Authentication( email_edit_txt.text.toString(), password_edit_txt.text.toString())
+            val authentication = Authentication("ha_saoudi@esi.dz", "123456789")
             viewModel.pushAuthentication(authentication)
-            viewModel.authenticationResponse.observe(this, Observer {
-                    response ->
-                if (response.isSuccessful){
+            viewModel.authenticationResponse.observe(this, Observer { response ->
+                if (response.isSuccessful) {
+                    Toast.makeText(this, "SignIn Successfully", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, HomeActivity::class.java))
-                    Toast.makeText(this,"Login Successfully !",Toast.LENGTH_SHORT).show()
+                    Log.e("Push", response.body()?.token.toString())
+                    Log.e("Push", response.body().toString())
+                    Log.e("Push", response.code().toString())
+                    Log.e("Push", response.message())
+                } else {
+                    Toast.makeText(this, "Login failed !!!", Toast.LENGTH_SHORT).show()
                     Log.e("Push",response.body().toString())
-                    Log.e("Push",response.code().toString())
-                    Log.e("Push",response.message())
-                }
-                else {
-                    Toast.makeText(this,"Login Refused !",Toast.LENGTH_SHORT).show()
-                    //Log.e("Push",response.body().toString())
-                    Log.e("Push",response.code().toString())
-                    Log.e("Push",response.message())
+                    Log.e("Push", response.code().toString())
+                    Log.e("Push", response.message())
                 }
             })
         }

@@ -1,8 +1,10 @@
 package com.clovertech.autolibdz.auth
 
-import `view-model`.AuthenticationViewModel
-import `view-model`.AuthenticationViewModelFactory
+import `view-model`.MainViewModel
+import `view-model`.MainViewModelFactory
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,26 +15,18 @@ import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolibdz.HomeActivity
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.password.ResetPasswordActivity
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login.*
 import model.Authentication
-import org.json.JSONObject
 import repository.Repository
 
 
 class LoginActivity : AppCompatActivity() , View.OnClickListener {
 
-    private lateinit var viewModel : AuthenticationViewModel
+    private lateinit var viewModel : MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-        /// Authentification Api
-        val repository = Repository()
-        val viewModelFactory = AuthenticationViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(AuthenticationViewModel::class.java)
 
         login_btn.setOnClickListener(this)
         forgotPassword_txt_view.setOnClickListener(this)
@@ -56,16 +50,23 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
     }
 
     private fun login(){
+        /// Authentification Api
+        val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory)
+                .get(MainViewModel::class.java)
+
         if (email_edit_txt.text.toString() == ""){
             email_edit_txt.setError("Email required !")
         }else if (password_edit_txt.text.toString() == ""){
             password_edit_txt.setError("Password required !")
         } else {
-            val authentication = Authentication("ha_saoudi@esi.dz", "123456789")
+            var authentication = Authentication(email_edit_txt.text.toString(), password_edit_txt.text.toString())
             viewModel.pushAuthentication(authentication)
             viewModel.authenticationResponse.observe(this, Observer { response ->
                 if (response.isSuccessful) {
                     Toast.makeText(this, "SignIn Successfully", Toast.LENGTH_SHORT).show()
+                    saveUserToken(response.body()?.token.toString())
                     startActivity(Intent(this, HomeActivity::class.java))
                     Log.e("Push", response.body()?.token.toString())
                     Log.e("Push", response.body().toString())
@@ -73,12 +74,19 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
                     Log.e("Push", response.message())
                 } else {
                     Toast.makeText(this, "Login failed !!!", Toast.LENGTH_SHORT).show()
-                    Log.e("Push",response.body().toString())
+                    Log.e("Push", response.body().toString())
                     Log.e("Push", response.code().toString())
                     Log.e("Push", response.message())
                 }
             })
         }
+    }
+
+    private fun saveUserToken(token: String){
+        val preferences: SharedPreferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE)
+        preferences.edit().putString("TOKEN", token).apply()
+        /// Retrive Saved TOKEN
+        //val retrivedToken = preferences.getString("TOKEN", null) //second parameter default value.
     }
 
 }

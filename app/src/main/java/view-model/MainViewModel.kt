@@ -9,7 +9,7 @@ import model.Token
 import repository.Repository
 import retrofit2.Response
 
-class AuthenticationViewModel (private val repository: Repository): ViewModel() {
+class MainViewModel (private val repository: Repository): ViewModel() {
 
     val authenticationResponse: MutableLiveData<Response<Token>> = MutableLiveData()
 

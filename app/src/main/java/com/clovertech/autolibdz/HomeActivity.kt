@@ -61,9 +61,9 @@ class HomeActivity : AppCompatActivity() {
         images.add(favorite_img as ImageView)
         images.add(profile_img as ImageView)
         fragments.add(HomeFragment())
+        fragments.add(FindYourCarFragment())
         fragments.add(Register2Fragment())
         fragments.add(Register3Fragment())
-        fragments.add(Register1Fragment())
     }
 
     private fun editTint(pos: Int) {

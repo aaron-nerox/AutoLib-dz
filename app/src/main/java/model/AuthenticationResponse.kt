@@ -1,6 +1,6 @@
 package model
 
-class Token (
+class AuthenticationResponse (
         val token : String,
         val id: Int
         )

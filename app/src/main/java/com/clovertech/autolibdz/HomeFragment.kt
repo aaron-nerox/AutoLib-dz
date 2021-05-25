@@ -1,6 +1,7 @@
 package com.clovertech.autolibdz
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -137,6 +138,8 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
         } else {
             marker.showInfoWindow()
         }
+
+        startActivity(Intent(context, FindYourCarActivity::class.java))
         return false
     }
 

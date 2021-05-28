@@ -1,6 +1,7 @@
 package utils
 
 import api.AuthenticationApi
+import api.RegistrationApi
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,13 +17,17 @@ object RetrofitInstance {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("http://e2366c91b468.ngrok.io")
+            .baseUrl("http://192.168.1.5:8100/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
     }
     val authenticationApi : AuthenticationApi by lazy {
         retrofitAuthentication.create(AuthenticationApi::class.java)
+    }
+
+    val registrationApi: RegistrationApi by lazy {
+        retrofitAuthentication.create(RegistrationApi::class.java)
     }
 
 }

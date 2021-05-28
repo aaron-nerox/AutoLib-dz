@@ -21,16 +21,17 @@
             app:tint="#DD212121" />
 
         <EditText
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:background="#00000000"
+            android:hint="Email"
             android:inputType="textEmailAddress"
             android:maxLines="1"
-            android:hint="Email"
-            android:textSize="14sp"
             android:textColor="#DD212121"
-            android:background="#00000000"/>
+            android:textSize="14sp" />
 
     </LinearLayout>
 
@@ -57,17 +58,18 @@
                 app:tint="#DD212121" />
 
             <EditText
+                android:id="@+id/nom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:background="#00000000"
+                android:hint="Nom"
                 android:inputType="textPersonName"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:hint="Nom"
-                android:textSize="14sp"
                 android:textColor="#DD212121"
-                android:background="#00000000"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -87,17 +89,18 @@
                 app:tint="#DD212121" />
 
             <EditText
+                android:id="@+id/prenom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:background="#00000000"
+                android:hint="Prénom"
                 android:inputType="textPersonName"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:hint="Prénom"
-                android:textSize="14sp"
                 android:textColor="#DD212121"
-                android:background="#00000000"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -118,6 +121,7 @@
             app:tint="#DD212121" />
 
         <EditText
+            android:id="@+id/adresse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

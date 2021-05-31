@@ -2,6 +2,8 @@
 <resources>
     <color name="primary_color">#F9C319</color>
     <color name="purple_200">#BB86FC</color>
+    <color name="primaryColor">#F9C319</color>
+    <color name="darkColor">#333333</color>
     <color name="purple_500">#6200EE</color>
     <color name="purple_700">#3700B3</color>
     <color name="teal_200">#03DAC5</color>

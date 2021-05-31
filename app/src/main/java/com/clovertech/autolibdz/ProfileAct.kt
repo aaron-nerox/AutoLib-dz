@@ -1,14 +1,18 @@
 package com.clovertech.autolibdz
 
+import `view-model`.MainViewModel
+import `view-model`.MainViewModelFactory
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_profile.*
 import repository.Repository
 
 class ProfileAct : AppCompatActivity() {
+    private lateinit var viewModel : MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)

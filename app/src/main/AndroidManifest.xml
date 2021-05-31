@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AutoLibDZ"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ProfileAct"></activity>
+        <activity android:name=".SignalAct"></activity>
+        <activity android:name=".ProfileAct" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".password.ResetPasswordActivity" />
         <activity android:name=".auth.RegisterActivity" />

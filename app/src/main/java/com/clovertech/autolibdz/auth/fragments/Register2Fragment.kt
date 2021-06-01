@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observe
 import com.clovertech.autolibdz.R
 import kotlinx.android.synthetic.main.fragment_register2.view.*
 

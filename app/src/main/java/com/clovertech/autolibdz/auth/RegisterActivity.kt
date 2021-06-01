@@ -44,7 +44,7 @@ class RegisterActivity : AppCompatActivity()  , View.OnClickListener {
         registr_btn.setOnClickListener(this)
 
         model.setUser(User(0, "", "", "", "", "", "tenant"))
-        model.setLocataire(Locataire(0, "", "", ""))
+        model.setLocataire(Locataire(0, "", "", "", "", ""))
 
     }
 
@@ -85,6 +85,7 @@ class RegisterActivity : AppCompatActivity()  , View.OnClickListener {
     }
 
     fun register() {
+        Toast.makeText(this, "Entered here ${model.user.value!!.nom}", Toast.LENGTH_SHORT).show()
         RetrofitInstance.registrationApi.registerUser(model.user.value!!).enqueue(object : Callback<User> {
             override fun onFailure(call: Call<User>, t: Throwable) {
                 Toast.makeText(this@RegisterActivity, "Register failed.", Toast.LENGTH_SHORT).show()
@@ -97,15 +98,14 @@ class RegisterActivity : AppCompatActivity()  , View.OnClickListener {
             ) {
                 val usersResponse = response.body()
 
-
-
+                Toast.makeText(this@RegisterActivity, "code ${response.code()}", Toast.LENGTH_SHORT).show()
                 if (response.code() == 200) {
-
+                    Toast.makeText(this@RegisterActivity, "User here ${usersResponse?.idUser}", Toast.LENGTH_SHORT).show()
                     usersResponse?.idUser?.let {
                         Log.e("id", it.toString())
                         model.setIdUser(it)
 
-                        val locataire = Locataire(it, "", "", "")
+                        val locataire = Locataire(it, "", "", "", "", "")
 
                         RetrofitInstance.registrationApi.registerLocataire(locataire).enqueue(object : Callback<Locataire> {
                             override fun onFailure(call: Call<Locataire>, t: Throwable) {

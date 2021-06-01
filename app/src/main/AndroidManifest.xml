@@ -2,14 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.clovertech.autolibdz">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA"
-                     android:required="true"
-                     android:requiredFeature="true" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AutoLibDZ"
         android:usesCleartextTraffic="true">
+        <activity android:name=".FindYourCarActivity"></activity>
         <activity android:name=".HomeActivity" />
         <activity android:name=".password.ResetPasswordActivity" />
         <activity android:name=".auth.RegisterActivity" />
@@ -33,5 +26,14 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
     </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.CAMERA"
+        android:required="true"
+        android:requiredFeature="true" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

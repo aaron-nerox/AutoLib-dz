@@ -9,25 +9,26 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
 
-    private val retrofitAuthentication by lazy {
-        val client = OkHttpClient.Builder()
-            .connectTimeout(60, TimeUnit.SECONDS)
-            .writeTimeout(60, TimeUnit.SECONDS)
-            .readTimeout(60, TimeUnit.SECONDS)
-            .build()
+    val client = OkHttpClient.Builder()
+        .connectTimeout(60, TimeUnit.SECONDS)
+        .writeTimeout(60, TimeUnit.SECONDS)
+        .readTimeout(60, TimeUnit.SECONDS)
+        .build()
 
-        Retrofit.Builder()
-            .baseUrl("http://192.168.1.5:8100/")
+    fun instance(baseUrl: String): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
     }
+
     val authenticationApi : AuthenticationApi by lazy {
-        retrofitAuthentication.create(AuthenticationApi::class.java)
+        instance("http://192.168.43.222:8005/").create(AuthenticationApi::class.java)
     }
 
     val registrationApi: RegistrationApi by lazy {
-        retrofitAuthentication.create(RegistrationApi::class.java)
+        instance("http://192.168.43.222:8100/").create(RegistrationApi::class.java)
     }
 
 }

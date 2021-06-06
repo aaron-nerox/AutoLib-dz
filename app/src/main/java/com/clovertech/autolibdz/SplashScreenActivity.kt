@@ -19,7 +19,7 @@ class SplashScreenActivity : AppCompatActivity() {
                     e.printStackTrace()
                 } finally {
                     if (firstRun()){
-                        val toMain = Intent(this@SplashScreenActivity, LoginActivity::class.java)
+                        val toMain = Intent(this@SplashScreenActivity, MainActivity::class.java)
                         toMain.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         val prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE)
                         val editor = prefs.edit()
@@ -28,7 +28,7 @@ class SplashScreenActivity : AppCompatActivity() {
                         startActivity(toMain)
                         finish()
                     }else {
-                        val toMain = Intent(this@SplashScreenActivity, LoginActivity::class.java)
+                        val toMain = Intent(this@SplashScreenActivity, MainActivity::class.java)
                         toMain.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         startActivity(toMain)
                     }

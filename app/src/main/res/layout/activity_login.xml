@@ -139,9 +139,7 @@
                     android:textAllCaps="false"
                     android:textColor="#fff"
                     android:textSize="24sp"
-                    android:textStyle="bold">
-
-                </androidx.appcompat.widget.AppCompatButton>
+                    android:textStyle="bold"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"

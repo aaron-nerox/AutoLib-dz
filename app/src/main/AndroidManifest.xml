@@ -10,30 +10,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AutoLibDZ"
         android:usesCleartextTraffic="true">
-        <activity android:name=".FindYourCarActivity"></activity>
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".password.ResetPasswordActivity" />
-        <activity android:name=".auth.RegisterActivity" />
-        <activity android:name=".auth.LoginActivity">
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".FindYourCarActivity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".password.ResetPasswordActivity" />
+        <activity android:name=".auth.RegisterActivity" />
+        <activity android:name=".auth.LoginActivity"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission
         android:name="android.permission.CAMERA"
         android:required="true"
         android:requiredFeature="true" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

@@ -4,12 +4,11 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.clovertech.autolibdz.auth.LoginActivity
 
-class SplashScreenActivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+        setContentView(R.layout.activity_splash)
 
         val thread: Thread = object : Thread() {
             override fun run() {
@@ -19,7 +18,7 @@ class SplashScreenActivity : AppCompatActivity() {
                     e.printStackTrace()
                 } finally {
                     if (firstRun()){
-                        val toMain = Intent(this@SplashScreenActivity, MainActivity::class.java)
+                        val toMain = Intent(this@SplashActivity, OnBoardingActivity::class.java)
                         toMain.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         val prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE)
                         val editor = prefs.edit()
@@ -28,7 +27,7 @@ class SplashScreenActivity : AppCompatActivity() {
                         startActivity(toMain)
                         finish()
                     }else {
-                        val toMain = Intent(this@SplashScreenActivity, MainActivity::class.java)
+                        val toMain = Intent(this@SplashActivity, OnBoardingActivity::class.java)
                         toMain.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         startActivity(toMain)
                     }

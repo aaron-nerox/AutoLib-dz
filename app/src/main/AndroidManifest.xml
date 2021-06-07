@@ -19,20 +19,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AutoLibDZ"
         android:usesCleartextTraffic="true">
-        <activity android:name=".OnBoardingActivity"></activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".OnBoardingActivity" android:theme="@style/Theme.DarkGrey"/>
+        <activity android:name=".MainActivity"/>
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FindYourCarActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".password.ResetPasswordActivity" />
-        <activity android:name=".auth.RegisterActivity" />
-        <activity android:name=".auth.LoginActivity" />
+        <activity android:name=".FindYourCarActivity"/>
+        <activity android:name=".HomeActivity" android:theme="@style/Theme.Yello"/>
+        <activity android:name=".password.ResetPasswordActivity" android:theme="@style/Theme.DarkGrey"/>
+        <activity android:name=".auth.RegisterActivity" android:theme="@style/Theme.DarkGrey"/>
+        <activity android:name=".auth.LoginActivity" android:theme="@style/Theme.DarkGrey"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

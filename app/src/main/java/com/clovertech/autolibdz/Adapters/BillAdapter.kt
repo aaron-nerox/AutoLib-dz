@@ -23,7 +23,7 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
 
         holder.id_facture.text= data[position].idBill.toString()
         holder.date_facture.text=data[position].creationDate
-        holder.lieu_facture.text=data[position].address
+        holder.lieu_facture.text=data[position].totalRate.toString()
         holder.card_img.setImageResource(R.drawable.visa_logo)
         var cv = data[position] //ID OF CARDVIEW
 

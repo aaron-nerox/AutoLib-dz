@@ -1,61 +1,78 @@
 package com.clovertech.autolibdz.Adapters
 
-import android.Manifest
-import android.app.Activity
+import android.app.DownloadManager
+import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.pm.PackageManager
-import android.os.Build
+import android.content.Context.CLIPBOARD_SERVICE
+import android.content.Context.DOWNLOAD_SERVICE
+import android.content.Intent
+import android.content.IntentFilter
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
-import androidx.core.app.ActivityCompat.requestPermissions
-import androidx.core.content.ContextCompat
-
+import androidx.core.app.ActivityCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolibdz.DataClasses.Facture
 import com.clovertech.autolibdz.R
+
 
 class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.Adapter<MyBillHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyBillHolder {
         return MyBillHolder(LayoutInflater.from(context).inflate(R.layout.facture_item, parent, false))
     }
-    private  val STORAGE_PERMISSION_CODES:Int=1000
     override fun getItemCount()=data.size
 
     override fun onBindViewHolder(holder: MyBillHolder, position: Int) {
-
+        var downId:Long=0
 
         holder.id_facture.text= data[position].idBill.toString()
         holder.date_facture.text=data[position].creationDate
         holder.prix.text=data[position].totalRate.toString()
         holder.penality.text=data[position].penaltyRate.toString()
+
         holder.download.setOnClickListener{
+            Toast.makeText(context,"first",Toast.LENGTH_SHORT).show()
 
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            {
-                if(ContextCompat.checkSelfPermission(context,Manifest.permission.WRITE_EXTERNAL_STORAGE)==PackageManager.PERMISSION_DENIED)
 
-                { //permssion denied
-                    requestPermissions(context as Activity,arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),STORAGE_PERMISSION_CODES)
+            var request = DownloadManager.Request(
+                Uri.parse("https://54.37.87.85:5056/bill/download/22"))
+                .setTitle("Facture autolibdz")
+                .setDescription("check la facture ")
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
+                .setAllowedOverMetered(true)
 
-                }else { //permssion already granted perform download
-                    startDownlaod()
+               var dm= context.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
 
+                downId=   dm.enqueue(request)
+            Toast.makeText(context,"$downId",Toast.LENGTH_SHORT).show()
+
+            var br = object:BroadcastReceiver(){
+                override fun onReceive(context: Context?, intent: Intent?) {
+                    var id : Long? = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID,1)
+                    if (id==downId)
+                    {
+                        Toast.makeText(context,"$downId+ $id",Toast.LENGTH_SHORT).show()
+
+                        Toast.makeText(context,"download succefully",Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }else {
 
             }
+            context.registerReceiver(br,IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+
         }
+
 
     }
 }
-    private fun startDownlaod()
-    {
 
-    }
+
 
 
 
@@ -66,7 +83,7 @@ class MyBillHolder(view: View) : RecyclerView.ViewHolder(view) {
     val date_facture= view.findViewById<TextView>(R.id.date)
     val prix= view.findViewById<TextView>(R.id.prix)
     val penality= view.findViewById<TextView>(R.id.penality)
-    val download= view.findViewById<ImageView>(R.id.download)
+    val download= view.findViewById<Button>(R.id.download)
 
 
 }

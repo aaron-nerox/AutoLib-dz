@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolibdz.DataClass.paymentInfo
 import com.clovertech.autolibdz.R
-import kotlinx.android.synthetic.main.fragment_card.*
 
 class CardAdapter(val context: Context, var data: List<paymentInfo>,var fragmentManager: FragmentManager,
                   var amount:String,var idrental:String): RecyclerView.Adapter<MyViewHolder>(){
@@ -58,7 +57,7 @@ class CardAdapter(val context: Context, var data: List<paymentInfo>,var fragment
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        val cv= view.findViewById<CardView>(R.id.cardView)
+        val cv= view.findViewById<CardView>(R.id.promo_item)
         val nom= view.findViewById<TextView>(R.id.nom)
         val rip= view.findViewById<TextView>(R.id.rib)
         val date_exp= view.findViewById<TextView>(R.id.date_exp)

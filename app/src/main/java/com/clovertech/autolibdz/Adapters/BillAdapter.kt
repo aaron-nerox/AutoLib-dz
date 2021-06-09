@@ -31,7 +31,7 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
 }
 
 class MyBillHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val cv= view.findViewById<CardView>(R.id.cardView)
+    val cv= view.findViewById<CardView>(R.id.promo_item)
     val id_facture= view.findViewById<TextView>(R.id.id_facture)
     val date_facture= view.findViewById<TextView>(R.id.date)
     val lieu_facture= view.findViewById<TextView>(R.id.lieu)

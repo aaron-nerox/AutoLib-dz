@@ -42,6 +42,7 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
                     requestPermissions(context as Activity,arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),STORAGE_PERMISSION_CODES)
 
                 }else { //permssion already granted perform download
+                    startDownlaod()
 
                 }
             }else {
@@ -51,6 +52,13 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
 
     }
 }
+    private fun startDownlaod()
+    {
+
+    }
+
+
+
 
 class MyBillHolder(view: View) : RecyclerView.ViewHolder(view) {
     val cv= view.findViewById<CardView>(R.id.facture_item)

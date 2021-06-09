@@ -23,18 +23,22 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
 
         holder.id_facture.text= data[position].idBill.toString()
         holder.date_facture.text=data[position].creationDate
-        holder.lieu_facture.text=data[position].totalRate.toString()
-        holder.card_img.setImageResource(R.drawable.visa_logo)
-        var cv = data[position] //ID OF CARDVIEW
+        holder.prix.text=data[position].totalRate.toString()
+        holder.penality.text=data[position].penaltyRate.toString()
+        holder.download.setOnClickListener{
+
+        }
 
     }
 }
 
 class MyBillHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val cv= view.findViewById<CardView>(R.id.promo_item)
+    val cv= view.findViewById<CardView>(R.id.facture_item)
     val id_facture= view.findViewById<TextView>(R.id.id_facture)
     val date_facture= view.findViewById<TextView>(R.id.date)
-    val lieu_facture= view.findViewById<TextView>(R.id.lieu)
-    val card_img= view.findViewById<ImageView>(R.id.card_img)
+    val prix= view.findViewById<TextView>(R.id.prix)
+    val penality= view.findViewById<TextView>(R.id.penality)
+    val download= view.findViewById<ImageView>(R.id.download)
+
 
 }

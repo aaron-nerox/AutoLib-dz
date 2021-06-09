@@ -16,5 +16,20 @@
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_slideshow" />
+        <item
+            android:id="@+id/nav_facture"
+            android:icon="@drawable/ic_baseline_facture_24"
+            android:iconTint="@color/black"
+            android:title="@string/menu_facture" />
+        <item
+            android:id="@+id/nav_card"
+            android:icon="@drawable/ic_baseline_payment_24"
+            android:iconTint="@color/black"
+            android:title="@string/menu_card" />
+        <item
+            android:id="@+id/nav_sub"
+            android:icon="@drawable/ic_baseline_payment_24"
+            android:iconTint="@color/black"
+            android:title="Subscription" />
     </group>
 </menu>

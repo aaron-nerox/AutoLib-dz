@@ -89,14 +89,14 @@
 
             />
 
-        <ImageView
+        <Button
             android:id="@+id/download"
-            android:layout_width="22dp"
-            android:layout_height="19dp"
-            android:layout_marginLeft="270dp"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="245dp"
             android:layout_marginTop="90dp"
-
-            app:srcCompat="@drawable/ic_download" />
+            android:background="none"
+            android:drawableLeft="@drawable/ic_baseline_download_for_offline_24" />
 
 
     </androidx.cardview.widget.CardView>

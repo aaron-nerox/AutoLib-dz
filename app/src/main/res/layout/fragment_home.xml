@@ -4,12 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
     tools:context=".HomeFragment">
-=======
-android:background="@drawable/white_rectangle_elt"
-    tools:context=".ui.home.HomeFragment">
->>>>>>> 6222fe78ce4562ac2d16377f2a968e5d40bd4437
 
     <fragment
         android:id="@+id/google_map"
@@ -23,7 +18,6 @@ android:background="@drawable/white_rectangle_elt"
         android:id="@+id/search_park_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:layout_marginStart="30dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="80dp"
@@ -40,16 +34,3 @@ android:background="@drawable/white_rectangle_elt"
         android:layout_gravity="bottom" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-=======
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
->>>>>>> 6222fe78ce4562ac2d16377f2a968e5d40bd4437

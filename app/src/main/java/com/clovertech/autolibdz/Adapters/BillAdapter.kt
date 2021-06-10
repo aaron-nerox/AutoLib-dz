@@ -43,7 +43,7 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
 
             var request = DownloadManager.Request(
                 Uri.parse("http://54.37.87.85:5056/bill/download/22"))
-                .setTitle("Facture autolib")
+                .setTitle("Bill autoLibDz")
                 .setDescription("check la facture ")
                 .setAllowedOverMetered(true)
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);

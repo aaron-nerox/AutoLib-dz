@@ -8,6 +8,7 @@ import android.content.Context.DOWNLOAD_SERVICE
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,19 +46,15 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
             holder.penality.text="Without Penality"
 
         }
-
         holder.download.setOnClickListener{
 
-
             var request = DownloadManager.Request(
-                Uri.parse("https://gallica.bnf.fr/ark:/12148/bpt6k201333r.pdf"))
-                .setTitle("Bill autoLibDz")
+                Uri.parse("http://54.37.87.85:5056/bill/download/22"))
+                .setTitle("test")
                 .setDescription("check la facture ")
                 .setAllowedOverMetered(true)
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Test.pdf")
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-
-
-
             var dm= context.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
                 downId = dm.enqueue(request)
 
@@ -74,10 +71,7 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
                     Toast.makeText(context,"download successfully",Toast.LENGTH_SHORT).show()
                 }
             }
-
-
         }
-
         context.registerReceiver(br,IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
     }

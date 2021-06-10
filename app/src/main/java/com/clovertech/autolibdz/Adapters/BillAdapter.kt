@@ -36,13 +36,21 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
         holder.id_facture.text= data[position].idBill.toString()
         holder.date_facture.text=data[position].creationDate
         holder.prix.text=data[position].totalRate.toString()
-        holder.penality.text=data[position].penaltyRate.toString()
+        val penality=data[position].penaltyRate
+        if (penality>0)
+        {
+            holder.penality.text="With Penality"
+
+        }else {
+            holder.penality.text="Without Penality"
+
+        }
 
         holder.download.setOnClickListener{
 
 
             var request = DownloadManager.Request(
-                Uri.parse("http://54.37.87.85:5056/bill/download/22"))
+                Uri.parse("https://gallica.bnf.fr/ark:/12148/bpt6k201333r.pdf"))
                 .setTitle("Bill autoLibDz")
                 .setDescription("check la facture ")
                 .setAllowedOverMetered(true)

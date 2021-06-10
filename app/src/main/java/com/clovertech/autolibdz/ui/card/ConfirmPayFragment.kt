@@ -1,5 +1,7 @@
 package com.clovertech.autolibdz.ui.card
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -32,7 +34,24 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
 
     }
 
+    @SuppressLint("ResourceType")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        // START ALERT DIALOG
+        val builder = AlertDialog.Builder(context)
+        //set title for alert dialog
+        builder.setTitle(R.string.SucdialogTitle)
+        //set message for alert dialog
+        builder.setMessage(R.string.SucdialogMessage)
+        builder.setIconAttribute(R.drawable.ic_baseline_done_outline_24)
+
+        //performing positive action
+        builder.setPositiveButton("OK"){dialogInterface, which ->
+            Toast.makeText(context,"clicked yes",Toast.LENGTH_LONG).show()
+        }
+
+        // END ALERT DIALOG
+
         super.onViewCreated(view, savedInstanceState)
 
         close.setOnClickListener{
@@ -67,11 +86,9 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
                     Log.e("push",response.raw().toString())
                     this.dismiss()
 
-                    Toast.makeText(
-                            context,
-                            "Payment process successful yaay",
-                            Toast.LENGTH_SHORT
-                    ).show()
+                    val alertDialog: AlertDialog = builder.create()
+                    alertDialog.setCancelable(false)
+                    alertDialog.show()
 
 
                 }

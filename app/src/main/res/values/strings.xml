@@ -73,6 +73,8 @@
     <string name="total">Total of points you have</string>
     <string name="select">Select code promo</string>
     <string name="point_buy">Buy points</string>
+    <string name="SucdialogTitle">Payment Successfull !</string> dialogMessage
+    <string name="SucdialogMessage">Your payment is sent with success, a Bill has been sent to your email</string>
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>

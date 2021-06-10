@@ -26,10 +26,12 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyBillHolder {
         return MyBillHolder(LayoutInflater.from(context).inflate(R.layout.facture_item, parent, false))
     }
+
     override fun getItemCount()=data.size
 
     override fun onBindViewHolder(holder: MyBillHolder, position: Int) {
         var downId:Long=0
+
 
         holder.id_facture.text= data[position].idBill.toString()
         holder.date_facture.text=data[position].creationDate
@@ -37,37 +39,38 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
         holder.penality.text=data[position].penaltyRate.toString()
 
         holder.download.setOnClickListener{
-            Toast.makeText(context,"first",Toast.LENGTH_SHORT).show()
 
 
             var request = DownloadManager.Request(
-                Uri.parse("https://54.37.87.85:5056/bill/download/22"))
-                .setTitle("Facture autolibdz")
+                Uri.parse("http://54.37.87.85:5056/bill/download/22"))
+                .setTitle("Facture autolib")
                 .setDescription("check la facture ")
-                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
                 .setAllowedOverMetered(true)
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
-               var dm= context.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
 
-                downId=   dm.enqueue(request)
-            Toast.makeText(context,"$downId",Toast.LENGTH_SHORT).show()
 
-            var br = object:BroadcastReceiver(){
-                override fun onReceive(context: Context?, intent: Intent?) {
-                    var id : Long? = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID,1)
-                    if (id==downId)
-                    {
-                        Toast.makeText(context,"$downId+ $id",Toast.LENGTH_SHORT).show()
-
-                        Toast.makeText(context,"download succefully",Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-            }
-            context.registerReceiver(br,IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+            var dm= context.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+                downId = dm.enqueue(request)
 
         }
 
+        var br = object:BroadcastReceiver(){
+
+            override fun onReceive(context: Context?, intent: Intent?) {
+
+                var id : Long? = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID,1)
+
+                if (id==downId)
+                {
+                    Toast.makeText(context,"download successfully",Toast.LENGTH_SHORT).show()
+                }
+            }
+
+
+        }
+
+        context.registerReceiver(br,IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
     }
 }
@@ -83,7 +86,7 @@ class MyBillHolder(view: View) : RecyclerView.ViewHolder(view) {
     val date_facture= view.findViewById<TextView>(R.id.date)
     val prix= view.findViewById<TextView>(R.id.prix)
     val penality= view.findViewById<TextView>(R.id.penality)
-    val download= view.findViewById<Button>(R.id.download)
+    val download= view.findViewById<ImageView>(R.id.download)
 
 
 }

@@ -1,6 +1,6 @@
 package com.clovertech.autolibdz.auth
 
-import `view-model`.RegisterViewModel
+import com.clovertech.autolibdz.ViewModel.RegisterViewModel
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

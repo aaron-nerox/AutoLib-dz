@@ -1,7 +1,7 @@
 package com.clovertech.autolibdz.auth
 
-import `view-model`.MainViewModel
-import `view-model`.MainViewModelFactory
+import com.clovertech.autolibdz.ViewModel.MainViewModel
+import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences

@@ -1,6 +1,6 @@
 package com.clovertech.autolibdz.auth.fragments
 
-import `view-model`.RegisterViewModel
+import com.clovertech.autolibdz.ViewModel.RegisterViewModel
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri

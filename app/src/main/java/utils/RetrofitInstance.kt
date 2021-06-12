@@ -1,7 +1,6 @@
 package utils
 
 import api.AuthenticationApi
-import api.BorneApi
 import api.RegistrationApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -31,11 +30,12 @@ object RetrofitInstance {
 
     val registrationApi: RegistrationApi by lazy {
         retrofitInstance("http://192.168.43.103:8100").create(RegistrationApi::class.java)
+
     }
 
-    val borneApi: BorneApi by lazy {
+    /*val borneApi: BorneApi by lazy {
         retrofitInstance("http://192.168.43.103:8200").create(BorneApi::class.java)
-    }
+    }*/
 
 
 

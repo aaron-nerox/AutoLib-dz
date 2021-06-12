@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,6 +20,10 @@
          ACCESS_COARSE_LOCATION instead. -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+=======
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+>>>>>>> 42e2e9404f09cbfa3ea520cc58a11613b761fe85
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -27,10 +32,15 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.AutoLibDZ">
-        <activity android:name=".HomeActivity"/>
         <activity android:name=".password.ResetPasswordActivity" />
         <activity android:name=".auth.RegisterActivity" />
-        <activity android:name=".auth.LoginActivity">
+        <activity android:name=".HomeActivity"
+        android:theme="@style/Theme.AutoLibDZ"
+        android:usesCleartextTraffic="true" />
+        <activity
+            android:name=".auth.LoginActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AutoLibDZ.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

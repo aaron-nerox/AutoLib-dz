@@ -1,6 +1,55 @@
 <resources>
     <string name="app_name">AutoLib DZ</string>
     <string name="map_key" translatable="false">AIzaSyB_qsP8AOP_P0MdlPz-48TDaJYjTP3vbjo</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pay">Payer</string>
+    <string name="prix">Prix Total</string>
+    <string name="dure">Durée</string>
+    <string name="reservation">Informations de reservation</string>
+    <string name="code">Code Promo</string>
+    <string name="condition">J"accepte cette condition de location.</string>
+    <string name="warning">Assurez-vous de remettre la voiture dans delai sinon il y aura une pénalité tardive</string>
+    <string name="car">VOLKSWAGEN POLO 6</string>
+    <string name="general">Specifications General</string>
+    <string name="marque">VOLKSWAGEN POLO</string>
+    <string name="price">4000 Da/Hr</string>
+    <string name="estimation">Prix estimé.</string>
+    <string name="detrails">Details</string>
+    <string name="search">   Chercher par marque voiture ...</string>
+    <string name="rating">4.6</string>
+    <string name="speed">240 Km/H</string>
+    <string name="engine">12488 cc</string>
+    <string name="seat"> 5 Seats</string>
+    <string name="bhp">81.8 BHP</string>
+    <string name="book">Reserver</string>
+    <string name="price_jr">8000 DA/Jr</string>
+    <string name="price_hr">4000 DA/Hr</string>
+    <string name="carburant">Type de Carburant </string>
+    <string name="moteur">Cylindrée du moteur</string>
+    <string name="type_fuel">Diesel</string>
+    <string name="engine_val">1248 cc</string>
+    <string name="vitesse">Vitesse</string>
+    <string name="moteur_car">Moteur</string>
+    <string name="places">Places</string>
+    <string name="bh">BHP</string>
+    <string name="overview">Voiture Details</string>
+    <string name="spec">Specifications</string>
+    <string-array name="typepaiement">
+        <item>Jour</item>
+        <item>Heure</item>
+    </string-array>
+    <string name="menu_facture">Mes factures</string>
+    <string name="menu_card">Mes cartes</string>
+    <string name="choose_card">Choose your card</string>
+    <string name="id_facture">ID Facture</string>
+    <string name="date">Date</string>
+    <string name="Lieu">Lieu</string>
+    <string name="add_card">Add Card</string>
+    <string name="card_num">Card number</string>
+    <string name="exp">Expiry</string>
+    <string name="mm">MM</string>
+    <string name="yy">YY</string>
+    <string name="sec_code">Security Code</string>
+    <string name="lamia">Selmane Lamia</string>
+    <string name="firstname">First Name</string>
+    <string name="lastname">Last Name</string>
 </resources>

@@ -10,6 +10,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -30,6 +31,11 @@ import kotlinx.android.synthetic.main.custom_search_dialog_yello.*
 import kotlinx.android.synthetic.main.custom_search_dialog_yello.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import model.Borne
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import utils.RetrofitInstance
 
 
 class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickListener , View.OnClickListener {
@@ -134,6 +140,33 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
                         .title("Algeria")
         )
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(algeria, 5f))
+
+        val call = RetrofitInstance.borneApi.getBornes()
+        call.enqueue(object: Callback<List<Borne>> {
+            override fun onFailure(call: Call<List<Borne>>, t: Throwable) {
+                t.printStackTrace()
+                Toast.makeText(activity, t.toString(), Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<List<Borne>>, response: Response<List<Borne>>) {
+                if (response.isSuccessful) {
+                    if (response.body() != null) {
+                        val bornes = response.body()
+                        bornes?.forEach { borne: Borne ->
+                            val borneCoordinates = LatLng(borne.latitude.toString().toDouble(), borne.longitude.toString().toDouble())
+                            googleMap.addMarker(
+                                    MarkerOptions()
+                                            .position(borneCoordinates)
+                                            .title("Wilaya: ${borne.city}")
+                            )
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(borneCoordinates, 5f))
+                        }
+                    }
+                } else {
+                    Toast.makeText(activity, response.code().toString(), Toast.LENGTH_LONG).show()
+                }
+            }
+        })
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {

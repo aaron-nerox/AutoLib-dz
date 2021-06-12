@@ -74,7 +74,7 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
                     Log.e("Push", response.code().toString())
                     Log.e("Push", response.message())
                 } else {
-                    Toast.makeText(this, "Login failed !!!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Login failed !!! ${response.message()}", Toast.LENGTH_SHORT).show()
                     Log.e("Push", response.body().toString())
                     Log.e("Push", response.code().toString())
                     Log.e("Push", response.message())

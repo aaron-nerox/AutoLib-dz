@@ -1,8 +1,10 @@
 package com.clovertech.autolibdz.utils
 
 import com.clovertech.autolibdz.APIs.CardsApi
+import com.clovertech.autolibdz.APIs.FactureApi
 import com.clovertech.autolibdz.APIs.PayApi
 import com.clovertech.autolibdz.APIs.RentalApi
+import com.clovertech.autolibdz.utils.Constants.Companion.Bill_BASE_URL
 import com.clovertech.autolibdz.utils.Constants.Companion.CARD_BASE_URL
 import com.clovertech.autolibdz.utils.Constants.Companion.Cars_BASE_URL
 import com.clovertech.autolibdz.utils.Constants.Companion.Pricing_BASE_URL
@@ -52,6 +54,11 @@ object RetrofitInstance {
     val subApi:PayApi by lazy {
         Retrofit.Builder().baseUrl("http://54.37.87.85:5020/subscription/").addConverterFactory(
                 GsonConverterFactory.create()).build().create(PayApi::class.java)
+
+    }
+    val factureApi:FactureApi by lazy {
+        Retrofit.Builder().baseUrl(Bill_BASE_URL).addConverterFactory(
+                GsonConverterFactory.create()).build().create(FactureApi::class.java)
 
     }
 }

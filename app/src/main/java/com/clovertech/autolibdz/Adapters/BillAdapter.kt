@@ -18,9 +18,20 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat.getSystemService
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.clovertech.autolibdz.APIs.CarsApi
+import com.clovertech.autolibdz.APIs.FactureApi
 import com.clovertech.autolibdz.DataClasses.Facture
 import com.clovertech.autolibdz.R
+import com.clovertech.autolibdz.ViewModel.ViewModelCars
+import com.clovertech.autolibdz.ViewModel.ViewModelCarsFactory
+import com.clovertech.autolibdz.repository.CarsRepository
+import com.clovertech.autolibdz.repository.FactureRepository
+import com.clovertech.autolibdz.utils.RetrofitInstance
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.Adapter<MyBillHolder>(){
@@ -35,6 +46,7 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
 
 
         holder.id_facture.text= data[position].idBill.toString()
+        val factID=data[position].idBill
         holder.date_facture.text=data[position].creationDate
         holder.prix.text=data[position].totalRate.toString()
         val penality=data[position].penaltyRate
@@ -47,6 +59,32 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
 
         }
         holder.download.setOnClickListener{
+
+            val factureApi =  FactureApi()
+            val repository= FactureRepository(factureApi)
+
+
+            CoroutineScope(Dispatchers.Main).launch{
+                val response=repository.geBillByID(factID)
+                if(response.ok==true){
+                    Toast.makeText(
+                          context,
+                            "id facture: ${response.urlBill}",
+
+                            Toast.LENGTH_LONG
+                    ).show()
+                }   else {
+                    Toast.makeText(
+                            context,
+                            "Error Occurred: ${response.ok}",
+                            Toast.LENGTH_LONG
+                    ).show()
+                }
+
+            }
+
+
+
 
             var request = DownloadManager.Request(
                 Uri.parse("http://54.37.87.85:5056/bill/download/22"))

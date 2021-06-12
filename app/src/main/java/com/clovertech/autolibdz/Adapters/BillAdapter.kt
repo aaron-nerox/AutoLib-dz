@@ -73,7 +73,35 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
 
                             Toast.LENGTH_LONG
                     ).show()
-                }   else {
+
+
+                    var request = DownloadManager.Request(
+                            Uri.parse("http://54.37.87.85:5056${response.urlBill}"))
+                            .setTitle("testapi2")
+                            .setDescription("check la facture ")
+                            .setAllowedOverMetered(true)
+                            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Test.pdf")
+                            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                    var dm= context.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+                    downId = dm.enqueue(request)
+
+
+                    var br = object:BroadcastReceiver(){
+
+                        override fun onReceive(context: Context?, intent: Intent?) {
+
+                            var id : Long? = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID,1)
+
+                            if (id==downId)
+                            {   Toast.makeText(context,"http://54.37.87.85:5056${response.urlBill}",Toast.LENGTH_SHORT).show()
+
+                                Toast.makeText(context,"download successfully",Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                    context.registerReceiver(br,IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+
+                }else {
                     Toast.makeText(
                             context,
                             "Error Occurred: ${response.ok}",
@@ -81,36 +109,14 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
                     ).show()
                 }
 
-            }
 
-
-
-
-            var request = DownloadManager.Request(
-                Uri.parse("http://54.37.87.85:5056/bill/download/22"))
-                .setTitle("test")
-                .setDescription("check la facture ")
-                .setAllowedOverMetered(true)
-                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Test.pdf")
-                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-            var dm= context.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
-                downId = dm.enqueue(request)
-
-        }
-
-        var br = object:BroadcastReceiver(){
-
-            override fun onReceive(context: Context?, intent: Intent?) {
-
-                var id : Long? = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID,1)
-
-                if (id==downId)
-                {
-                    Toast.makeText(context,"download successfully",Toast.LENGTH_SHORT).show()
                 }
+
             }
-        }
-        context.registerReceiver(br,IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+
+
+
+
 
     }
 }

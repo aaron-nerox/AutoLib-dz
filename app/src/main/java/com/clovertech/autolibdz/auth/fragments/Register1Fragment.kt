@@ -1,6 +1,6 @@
 package com.clovertech.autolibdz.auth.fragments
 
-import `view-model`.RegisterViewModel
+import com.clovertech.autolibdz.ViewModel.RegisterViewModel
 import android.os.Bundle
 import android.util.Patterns
 import androidx.fragment.app.Fragment

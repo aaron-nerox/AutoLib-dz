@@ -1,4 +1,4 @@
-package `view-model`
+package com.clovertech.autolibdz.ViewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -51,9 +51,18 @@ class RegisterViewModel: ViewModel() {
         _locataire.value?.selfie = photo
     }
 
+    fun setRefPermit(refPermit: String) {
+        _locataire.value?.refPermit = refPermit
+    }
+    fun setAccountState(state: String) {
+        _locataire.value?.accountState = state
+    }
+
+
     fun setPermis(photo: String) {
         _locataire.value?.permitPicture = photo
     }
+
 
     fun setIdUser(id: Int) {
         _locataire.value?.idUser = id

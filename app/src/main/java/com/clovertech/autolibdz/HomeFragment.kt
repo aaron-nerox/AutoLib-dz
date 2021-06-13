@@ -1,6 +1,7 @@
 package com.clovertech.autolibdz
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -60,6 +61,7 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
         view.search_position.setOnClickListener(this)
         view.search_park.setOnClickListener(this)
         view.search_position_dialog.setOnClickListener(this)
+        view.see_cars_btn.setOnClickListener(this)
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.google_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -115,6 +117,9 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
                 searchDialogPark.setContentView(R.layout.custom_search_dialog_park_expanded)
                 searchDialogPark.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
                 searchDialogPark.show()
+            }
+            R.id.see_cars_btn -> {
+                startActivity(Intent(context,FindYourCarActivity::class.java))
             }
         }
     }

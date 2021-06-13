@@ -1,23 +1,11 @@
 <resources>
     <string name="app_name">AutoLib DZ</string>
     <string name="map_key" translatable="false">AIzaSyB_qsP8AOP_P0MdlPz-48TDaJYjTP3vbjo</string>
-<<<<<<< HEAD
-    <!-- TODO: Remove or change this placeholder text -->
-=======
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
     <string name="pay">Payer</string>
     <string name="prix">Prix Total</string>
     <string name="dure">Durée</string>
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
     <string name="reservation">Informations de reservation</string>
-<string name="code">Code Promo</string>
+    <string name="code">Code Promo</string>
     <string name="condition">J"accepte cette condition de location.</string>
     <string name="warning">Assurez-vous de remettre la voiture dans delai sinon il y aura une pénalité tardive</string>
     <string name="car">VOLKSWAGEN POLO 6</string>
@@ -64,8 +52,4 @@
     <string name="lamia">Selmane Lamia</string>
     <string name="firstname">First Name</string>
     <string name="lastname">Last Name</string>
-
-
->>>>>>> 42e2e9404f09cbfa3ea520cc58a11613b761fe85
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

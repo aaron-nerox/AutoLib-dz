@@ -1,7 +1,7 @@
 package com.clovertech.autolibdz.auth
 
-import `view-model`.MainViewModel
-import `view-model`.MainViewModelFactory
+import com.clovertech.autolibdz.ViewModel.MainViewModel
+import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -74,7 +74,7 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
                     Log.e("Push", response.code().toString())
                     Log.e("Push", response.message())
                 } else {
-                    Toast.makeText(this, "Login failed !!!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Login failed !!! ${response.message()}", Toast.LENGTH_SHORT).show()
                     Log.e("Push", response.body().toString())
                     Log.e("Push", response.code().toString())
                     Log.e("Push", response.message())

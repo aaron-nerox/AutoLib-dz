@@ -1,4 +1,4 @@
-package `view-model`
+package com.clovertech.autolibdz.ViewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

@@ -2,16 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.clovertech.autolibdz">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission
         android:name="android.permission.CAMERA"
         android:required="true"
         android:requiredFeature="true" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-<<<<<<< HEAD
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -20,10 +19,8 @@
          ACCESS_COARSE_LOCATION instead. -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-=======
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
->>>>>>> 42e2e9404f09cbfa3ea520cc58a11613b761fe85
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -40,12 +37,17 @@
         <activity
             android:name=".auth.LoginActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.AutoLibDZ.NoActionBar">
+            android:theme="@style/Theme.AutoLibDZ.NoActionBar" />
+        <activity android:name=".OnBoardingActivity" android:theme="@style/Theme.DarkGrey"/>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".FindYourCarActivity"/>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />

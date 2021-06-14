@@ -67,18 +67,13 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
             CoroutineScope(Dispatchers.Main).launch{
                 val response=repository.geBillByID(factID)
                 if(response.ok==true){
-                    Toast.makeText(
-                          context,
-                            "id facture: ${response.urlBill}",
 
-                            Toast.LENGTH_LONG
-                    ).show()
 
 
                     var request = DownloadManager.Request(
                             Uri.parse("http://54.37.87.85:5056${response.urlBill}"))
-                            .setTitle("testapi2")
-                            .setDescription("check la facture ")
+                            .setTitle("Facture AutoLibDZ")
+                            .setDescription("check your Bill ")
                             .setAllowedOverMetered(true)
                             .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Test.pdf")
                             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
@@ -93,9 +88,9 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
                             var id : Long? = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID,1)
 
                             if (id==downId)
-                            {   Toast.makeText(context,"http://54.37.87.85:5056${response.urlBill}",Toast.LENGTH_SHORT).show()
+                            {
 
-                                Toast.makeText(context,"download successfully",Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context,"Bill Downloaded successfully",Toast.LENGTH_SHORT).show()
                             }
                         }
                     }

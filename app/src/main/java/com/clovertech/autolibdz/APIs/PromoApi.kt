@@ -15,7 +15,7 @@ interface PromoApi {
         operator fun invoke():PromoApi{
             return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://54.37.87.85:5040/payment/cards/")
+                .baseUrl("http://54.37.87.85:5090/promocode/getPromoCodes/")
                 .build()
                 .create(PromoApi::class.java)
 

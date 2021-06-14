@@ -15,15 +15,15 @@ class PromoAdapter(val context: Context, var data:List<Promo>): RecyclerView.Ada
         return MyPHolder(LayoutInflater.from(context).inflate(R.layout.promo_item, parent, false))
     }
 
-    override fun getItemCount()=data.size
+    override fun getItemCount()=4
 
 
 
 
     override fun onBindViewHolder(holder: MyPHolder, position: Int) {
-        holder.CodePromoName.text="Flash30"
-        holder.reductionRate.text=data[position].pricePoints.toString()
-        holder.pricePoints.text=data[position].pricePoints.toString()
+        holder.CodePromoName.text="Flash32"
+        holder.reductionRate.text="data[position].pricePoints.toString()"
+        holder.pricePoints.text="data[position].pricePoints.toString()"
 
         var cv = data[position] //ID OF CARDVIEW
        /* holder.cv.setOnClickListener{

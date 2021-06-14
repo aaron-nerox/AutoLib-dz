@@ -36,21 +36,7 @@ class PromoFragment : Fragment() {
         return root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        val api= PromoApi()
-        val repository= PromoRepository(api)
-        val promo= PromoViewModelFactory(repository)
-        promoCodeViewModel=ViewModelProvider(this,promo).get(PromoCodeViewModel::class.java)
-        promoCodeViewModel.getPromo()
-        promoCodeViewModel.promo.observe(viewLifecycleOwner, Observer { promoList->
-            list_promo.also {
-                it.layoutManager=LinearLayoutManager(requireContext())
-                it.setHasFixedSize(true)
-                it.adapter= PromoAdapter(requireContext(),promoList)
-            }
-        })
-    }
+
 
 
 }

@@ -54,5 +54,10 @@
         android:name="com.clovertech.autolibdz.ui.subscription.SubscriptionFragment"
         android:label="fragment_subscription"
         tools:layout="@layout/fragment_subscription" />
+    <fragment
+        android:id="@+id/nav_promo"
+        android:name="com.clovertech.autolibdz.ui.promo.PromoFragment"
+        android:label="fragment_promo"
+        tools:layout="@layout/fragment_promo" />
 
 </navigation>

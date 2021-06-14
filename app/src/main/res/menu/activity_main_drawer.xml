@@ -31,5 +31,10 @@
             android:icon="@drawable/ic_baseline_payment_24"
             android:iconTint="@color/black"
             android:title="Subscription" />
+        <item
+            android:id="@+id/nav_promo"
+            android:icon="@drawable/ic_baseline_redeem_24"
+            android:iconTint="@color/black"
+            android:title="Code Promo" />
     </group>
 </menu>

@@ -21,7 +21,7 @@ class PromoAdapter(val context: Context, var data:List<Promo>): RecyclerView.Ada
 
 
     override fun onBindViewHolder(holder: MyPHolder, position: Int) {
-        holder.CodePromoName.text=data[position].promoCodeName
+        holder.CodePromoName.text="Flash30"
         holder.reductionRate.text=data[position].pricePoints.toString()
         holder.pricePoints.text=data[position].pricePoints.toString()
 

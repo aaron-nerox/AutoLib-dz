@@ -8,14 +8,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 interface PromoApi {
-    @GET("all")
+    @GET("getPromoCodes")
     suspend fun getAllPromo(): Response<MutableList<Promo>>
 
     companion object{
         operator fun invoke():PromoApi{
             return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://54.37.87.85:5090/promocode/getPromoCodes/")
+                .baseUrl("http://54.37.87.85:5090/promocode/")
                 .build()
                 .create(PromoApi::class.java)
 

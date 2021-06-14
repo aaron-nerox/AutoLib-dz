@@ -9,7 +9,7 @@ import retrofit2.http.GET
 
 interface PromoApi {
     @GET("getPromoCodes")
-    suspend fun getAllPromo(): Response<ArrayList<Promo>>
+    suspend fun getAllPromo(): Response<MutableList<Promo>>
 
     companion object{
         operator fun invoke():PromoApi{

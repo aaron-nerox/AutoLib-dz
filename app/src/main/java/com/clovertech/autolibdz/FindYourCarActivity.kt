@@ -1,15 +1,20 @@
 package com.clovertech.autolibdz
 
+import android.Manifest
+import android.app.AlertDialog
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothServerSocket
 import android.bluetooth.BluetoothSocket
 import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
@@ -65,6 +70,37 @@ class FindYourCarActivity : AppCompatActivity() {
 
         // rippleBackground.startRippleAnimation()
 
+        if (ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                            this,
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                    )
+            ) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+                AlertDialog.Builder(this)
+                        .setTitle("Location Permission Needed")
+                        .setMessage("This app needs the Location permission, please accept to use location functionality")
+                        .setPositiveButton(
+                                "OK"
+                        ) { _, _ ->
+                            //Prompt the user once explanation has been shown
+                            requestLocationPermission()
+                        }
+                        .create()
+                        .show()
+            } else {
+                // No explanation needed, we can request the permission.
+                requestLocationPermission()
+            }
+        }
+
         val requestCode = 1
         val discoverableIntent: Intent = Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE).apply {
             putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300)
@@ -83,15 +119,11 @@ class FindYourCarActivity : AppCompatActivity() {
         try {
             val opts = IO.Options()
             opts.path = "/socket"
-
-
             mSocket = IO.socket("http://192.168.43.103:8123", opts)
-            Toast.makeText(this, "Connected successfully here ya khouya", Toast.LENGTH_LONG).show()
         } catch(e: URISyntaxException) {
             e.printStackTrace()
         }
 
-        Toast.makeText(this, "Demande vehicule", Toast.LENGTH_SHORT).show()
         val jsonInfos = JSONObject()
         jsonInfos.put("idVehicule", 2)
         val jsonInfosObj = JSONObject()
@@ -100,7 +132,6 @@ class FindYourCarActivity : AppCompatActivity() {
         jsonInfos.put("locataire", jsonInfosObj)
         Toast.makeText(this, "Discover peers button Clicked ...", Toast.LENGTH_SHORT).show()
         mSocket.emit("demande vehicule", jsonInfos)
-        Toast.makeText(this, "Demande vehicule executed ya khou", Toast.LENGTH_SHORT).show()
 
         mSocket.on(Socket.EVENT_CONNECT, onConnected)
         mSocket.on("error", onError)
@@ -109,6 +140,25 @@ class FindYourCarActivity : AppCompatActivity() {
         mSocket.on("disconnect", onDisconnect)
         mSocket.connect()
 
+    }
+
+    private fun requestLocationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                    ),
+                    100
+            )
+        } else {
+            ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    100
+            )
+        }
     }
 
     private val onConnected: Emitter.Listener = Emitter.Listener {
@@ -140,7 +190,6 @@ private class AcceptThread(
     private var mmServerSocket: BluetoothServerSocket? = null
 
     override fun run() {
-        activity.runOnUiThread { Toast.makeText(activity, "Entered here .....", Toast.LENGTH_LONG).show() }
         mmServerSocket = bluetoothAdapter?.listenUsingInsecureRfcommWithServiceRecord("PermissionsP2p", UUID(100, 200))
         // Keep listening until exception occurs or a socket is returned.
         var shouldLoop = true
@@ -158,7 +207,6 @@ private class AcceptThread(
                 var input = ByteArray(1)
                 it.inputStream.read(input)
                 activity.runOnUiThread {
-                    Toast.makeText(activity, "Accept Thread ${input[0]}", Toast.LENGTH_LONG).show()
                     val associationStatus = activity.findViewById<TextView>(R.id.association_status_id)
                     associationStatus.text = "Association effectuée avec ${socket.remoteDevice.name}"
                 }

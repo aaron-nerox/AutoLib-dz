@@ -26,7 +26,7 @@ class PromoAdapter(val context: Context, var data:List<Promo>): RecyclerView.Ada
         val red = ((data[position].reductionRate)*100).roundToInt()
         val point = data[position].pricePoints.roundToInt()
         holder.reductionRate.text=red.toString()+"%"
-        holder.pricePoints.text=point.toString()
+        holder.pricePoints.text=point.toString()+"points"
 
         var cv = data[position] //ID OF CARDVIEW
 

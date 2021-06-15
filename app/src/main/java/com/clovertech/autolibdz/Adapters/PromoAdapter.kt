@@ -9,6 +9,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolibdz.DataClasses.Promo
 import com.clovertech.autolibdz.R
+import kotlin.math.roundToInt
 
 class PromoAdapter(val context: Context, var data:List<Promo>): RecyclerView.Adapter<MyPHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyPHolder {
@@ -21,16 +22,14 @@ class PromoAdapter(val context: Context, var data:List<Promo>): RecyclerView.Ada
 
 
     override fun onBindViewHolder(holder: MyPHolder, position: Int) {
-        holder.CodePromoName.text="Flash32"
-        holder.reductionRate.text=data[position].pricePoints.toString()
-        holder.pricePoints.text=data[position].pricePoints.toString()
+     //   holder.CodePromoName.text="Flash32"
+        val red = ((data[position].reductionRate)*100).roundToInt()
+        val point = data[position].pricePoints.roundToInt()
+        holder.reductionRate.text=red.toString()+"%"
+        holder.pricePoints.text=point.toString()
 
         var cv = data[position] //ID OF CARDVIEW
-       /* holder.cv.setOnClickListener{
-            val paymentId=data[position].paymentId
-            val last4=data[position].card.last4
-            val args = bundleOf("paymentId" to paymentId,"amount" to "1900","idRental" to "10", "type" to "penaltyRate","last4" to last4)
-        }*/
+
 
     }
 
@@ -38,7 +37,7 @@ class PromoAdapter(val context: Context, var data:List<Promo>): RecyclerView.Ada
 class MyPHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     val cv= view.findViewById<CardView>(R.id.promo_item)
-    val CodePromoName= view.findViewById<TextView>(R.id.CodePromoName)
+    //val CodePromoName= view.findViewById<TextView>(R.id.CodePromoName)
     val reductionRate= view.findViewById<TextView>(R.id.reductionRate)
     val pricePoints= view.findViewById<TextView>(R.id.pricePoints)
 

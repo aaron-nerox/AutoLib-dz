@@ -28,57 +28,39 @@
 
         <ImageView
             android:id="@+id/card_img"
-            android:layout_width="56dp"
-            android:layout_height="50dp"
+            android:layout_width="44dp"
+            android:layout_height="39dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="7dp"
             app:srcCompat="@drawable/ic_baseline_redeem_24"
             app:tint="@color/black" />
 
         <TextView
-            android:id="@+id/CodePromoName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="10dp"
-            android:text="FLASH20"
-            android:textColor="@color/black" />
-
-        <TextView
             android:id="@+id/reductionRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="160dp"
+            android:layout_marginLeft="100dp"
             android:layout_marginTop="10dp"
             android:text="-20%"
+            android:textColor="@color/orange" />
+
+        <TextView
+            android:id="@+id/pricePoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="190dp"
+            android:layout_marginTop="10dp"
+            android:text="10points"
             android:textColor="@color/orange" />
 
         <ImageView
             android:id="@+id/card_img2"
             android:layout_width="30dp"
             android:layout_height="22dp"
-            android:layout_marginLeft="190dp"
+            android:layout_marginLeft="150dp"
             android:layout_marginTop="10dp"
             app:srcCompat="@drawable/ic_baseline_arrow_forward_24"
             app:tint="@color/black" />
-
-        <TextView
-            android:id="@+id/pricePoints"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="220dp"
-            android:layout_marginTop="10dp"
-            android:text="10points"
-            android:textColor="@color/orange" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="30dp"
-            android:text="Get -20% of reduction with 10points"
-            android:textColor="@color/grey_C8" />
 
 
     </androidx.cardview.widget.CardView>

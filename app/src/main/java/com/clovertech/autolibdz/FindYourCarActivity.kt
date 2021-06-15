@@ -18,11 +18,8 @@ import androidx.core.app.ActivityCompat
 import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
-import kotlinx.android.synthetic.main.activity_find_your_car.*
-import model.AssociationData
 import org.json.JSONObject
 import java.io.IOException
-import java.lang.Exception
 import java.net.URISyntaxException
 import java.util.*
 
@@ -113,13 +110,10 @@ class FindYourCarActivity : AppCompatActivity() {
             startActivityForResult(enableBtIntent, 100)
         }
 
-        val acceptThread = AcceptThread(this)
-        acceptThread?.start()
-
         try {
             val opts = IO.Options()
             opts.path = "/socket"
-            mSocket = IO.socket("http://192.168.43.103:8123", opts)
+            mSocket = IO.socket("http://192.168.43.222:8123", opts)
         } catch(e: URISyntaxException) {
             e.printStackTrace()
         }
@@ -128,10 +122,19 @@ class FindYourCarActivity : AppCompatActivity() {
         jsonInfos.put("idVehicule", 2)
         val jsonInfosObj = JSONObject()
         jsonInfosObj.put("id", 1)
-        jsonInfosObj.put("nom", "Galaxy J8")
+        val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+        val name: String = mBluetoothAdapter.name
+        jsonInfosObj.put("nom", name)
         jsonInfos.put("locataire", jsonInfosObj)
         Toast.makeText(this, "Discover peers button Clicked ...", Toast.LENGTH_SHORT).show()
         mSocket.emit("demande vehicule", jsonInfos)
+
+        val acceptThread = AcceptThread(this)
+        acceptThread?.start()
+
+
+
+
 
         mSocket.on(Socket.EVENT_CONNECT, onConnected)
         mSocket.on("error", onError)
@@ -195,6 +198,7 @@ private class AcceptThread(
         var shouldLoop = true
         while (shouldLoop) {
             val socket: BluetoothSocket? = try {
+
                 val bluetoothSocket = mmServerSocket?.accept()
                 activity.runOnUiThread { Toast.makeText(activity, "Change the UI to indicate that the connexion has been done successfully!", Toast.LENGTH_LONG).show() }
                 bluetoothSocket

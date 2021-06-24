@@ -1,44 +1,41 @@
 package com.clovertech.autolibdz
 
+import android.Manifest
+import android.app.AlertDialog
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothServerSocket
+import android.bluetooth.BluetoothSocket
+import android.content.ContentValues
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
 import kotlinx.android.synthetic.main.activity_find_your_car.*
-import model.AssociationData
 import org.json.JSONObject
-import java.lang.Exception
+import java.io.IOException
 import java.net.URISyntaxException
+import java.util.*
 
 class FindYourCarActivity : AppCompatActivity() {
 
+    private var nameTablet: String? = null
+
     private lateinit var mSocket: Socket
-    private val onStartLink: Emitter.Listener = Emitter.Listener {
-        this@FindYourCarActivity.runOnUiThread(Runnable {
-            //val data: JSONObject = it[0] as JSONObject
-            Toast.makeText(this,"Linking ...", Toast.LENGTH_SHORT).show()
-        })
-    }
-    private val onLinkStarted: Emitter.Listener = Emitter.Listener {
-        this@FindYourCarActivity.runOnUiThread(Runnable {
-            //val data: JSONObject = it[0] as JSONObject
-            Toast.makeText(this,"Vehicule found & Connection Established", Toast.LENGTH_SHORT).show()
-        })
-    }
-    private val onLinkFailed: Emitter.Listener = Emitter.Listener {
-        this@FindYourCarActivity.runOnUiThread(Runnable {
-            //val data: JSONObject = it[0] as JSONObject
-            Toast.makeText(this,"Link Failed !", Toast.LENGTH_SHORT).show()
-        })
-    }
+
     private val onError: Emitter.Listener = Emitter.Listener {
-        this@FindYourCarActivity.runOnUiThread(Runnable {
+        this.runOnUiThread(Runnable {
             try {
                 val data: Exception = it[0] as Exception
-                Toast.makeText(this@FindYourCarActivity, data.message, Toast.LENGTH_SHORT).show()
+                data.printStackTrace()
+                Toast.makeText(this, data.message, Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
                 val data: JSONObject = it[0] as JSONObject
 
@@ -46,45 +43,180 @@ class FindYourCarActivity : AppCompatActivity() {
 
         })
     }
+    private val onLink: Emitter.Listener = Emitter.Listener {
+
+        val data: JSONObject = it[0] as JSONObject
+        nameTablet = data.getString("nomLocataire")
+        this.runOnUiThread(Runnable {
+            Toast.makeText(this, "Discovering ...", Toast.LENGTH_SHORT).show()
+        })
+        val discovering = bluetoothAdapter?.startDiscovery()
+    }
+
+    private val onDisconnect: Emitter.Listener = Emitter.Listener {
+        this.runOnUiThread(Runnable {
+            Toast.makeText(this, "Diconnected!", Toast.LENGTH_SHORT).show()
+        })
+    }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find_your_car)
 
-        rippleBackground.startRippleAnimation()
+         rippleBackground.startRippleAnimation()
+
+        if (ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                            this,
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                    )
+            ) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+                AlertDialog.Builder(this)
+                        .setTitle("Location Permission Needed")
+                        .setMessage("This app needs the Location permission, please accept to use location functionality")
+                        .setPositiveButton(
+                                "OK"
+                        ) { _, _ ->
+                            //Prompt the user once explanation has been shown
+                            requestLocationPermission()
+                        }
+                        .create()
+                        .show()
+            } else {
+                // No explanation needed, we can request the permission.
+                requestLocationPermission()
+            }
+        }
+
+        val requestCode = 1
+        val discoverableIntent: Intent = Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE).apply {
+            putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300)
+        }
+        startActivityForResult(discoverableIntent, requestCode)
+
+
+        if (bluetoothAdapter?.isEnabled == false) {
+            val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+            startActivityForResult(enableBtIntent, 100)
+        }
 
         try {
             val opts = IO.Options()
-            opts.port = 8000
             opts.path = "/socket"
             mSocket = IO.socket("http://192.168.43.222:8123", opts)
         } catch(e: URISyntaxException) {
-            Log.e("212121",e.message.toString())
+            e.printStackTrace()
         }
 
-        mSocket.on("start link", onStartLink)
-        mSocket.on("link started", onLinkStarted)
-        mSocket.on("link failed", onLinkFailed)
+        val jsonInfos = JSONObject()
+        jsonInfos.put("idVehicule", 2)
+        val jsonInfosObj = JSONObject()
+        jsonInfosObj.put("id", 1)
+        val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+        val name: String = mBluetoothAdapter.name
+        jsonInfosObj.put("nom", name)
+        jsonInfos.put("locataire", jsonInfosObj)
+        Toast.makeText(this, "Discover peers button Clicked ...", Toast.LENGTH_SHORT).show()
+        mSocket.emit("demande vehicule", jsonInfos)
+
+        val acceptThread = AcceptThread(this)
+        acceptThread?.start()
+
+
+
+
+
+        mSocket.on(Socket.EVENT_CONNECT, onConnected)
         mSocket.on("error", onError)
         mSocket.on("connect_error", onError)
+        mSocket.on("start link", onLink)
+        mSocket.on("disconnect", onDisconnect)
         mSocket.connect()
 
-        val obj = JSONObject()
-        obj.put("idLocataire", 1)
-        obj.put("idVehicule", 3)
-        mSocket.emit("demande vehicule", obj)
+    }
 
+    private fun requestLocationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                    ),
+                    100
+            )
+        } else {
+            ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    100
+            )
+        }
+    }
+
+    private val onConnected: Emitter.Listener = Emitter.Listener {
+        val obj = JSONObject()
+        obj.put("id", 1)
+        mSocket.emit("connected vehicule", obj)
     }
 
     override fun onDestroy() {
         super.onDestroy()
 
+        // Don't forget to unregister the ACTION_FOUND receiver.
+        // unregisterReceiver(receiver)
         mSocket.disconnect()
-        mSocket.off("start link", onStartLink)
-        mSocket.off("link started", onLinkStarted)
-        mSocket.off("link failed", onLinkFailed)
         mSocket.off("error", onError)
         mSocket.off("connect_error", onError)
+        mSocket.off("start link", onLink)
+
+
     }
 
+}
+
+
+private class AcceptThread(
+        val activity: FindYourCarActivity
+) : Thread() {
+
+    private var mmServerSocket: BluetoothServerSocket? = null
+
+    override fun run() {
+        mmServerSocket = bluetoothAdapter?.listenUsingInsecureRfcommWithServiceRecord("PermissionsP2p", UUID(100, 200))
+        // Keep listening until exception occurs or a socket is returned.
+        var shouldLoop = true
+        while (shouldLoop) {
+            val socket: BluetoothSocket? = try {
+
+                val bluetoothSocket = mmServerSocket?.accept()
+                activity.runOnUiThread { Toast.makeText(activity, "Change the UI to indicate that the connexion has been done successfully!", Toast.LENGTH_LONG).show() }
+                bluetoothSocket
+            } catch (e: IOException) {
+                Log.e(ContentValues.TAG, "Socket's accept() method failed", e)
+                shouldLoop = false
+                null
+            }
+            socket?.also {
+                var input = ByteArray(1)
+                it.inputStream.read(input)
+                activity.runOnUiThread {
+                    val associationStatus = activity.findViewById<TextView>(R.id.association_status_id)
+                    associationStatus.text = "Association effectuée avec ${socket.remoteDevice.name}"
+                }
+                // mmServerSocket?.close()
+                // shouldLoop = false
+            }
+        }
+    }
 }

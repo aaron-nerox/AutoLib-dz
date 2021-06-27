@@ -70,7 +70,7 @@
     <string name="create">Create</string>
     <string name="cancel">Cancel</string>
     <string name="create_abon">Create subscription card</string>
-    <string name="total">Total of points you have</string>
+    <string name="total">Your total points</string>
     <string name="select">Select code promo</string>
     <string name="point_buy">Buy points</string>
     <string name="SucdialogTitle">Payment Successfull !</string> dialogMessage

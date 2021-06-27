@@ -13,10 +13,11 @@ import com.clovertech.autolibdz.Adapters.PromoAdapter
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.ViewModel.*
 import com.clovertech.autolibdz.repository.PromoRepository
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_promo.*
 
 
-class PromoFragment : Fragment() {
+class PromoFragment : BottomSheetDialogFragment() {
 
     private lateinit var promoViewModel: PromoViewModel
     private lateinit var promoCodeViewModel: PromoCodeViewModel

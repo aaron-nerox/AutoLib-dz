@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/pro"
     android:layout_width="wrap_content"
-    android:layout_height="85dp"
+    android:layout_height="100dp"
     >
 
     <androidx.cardview.widget.CardView
         android:id="@+id/promo_item"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
@@ -20,17 +21,17 @@
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
         <ImageView
             android:id="@+id/card_img"
             android:layout_width="44dp"
             android:layout_height="39dp"
             android:layout_marginLeft="20dp"
-
+            android:layout_marginTop="8dp"
             app:srcCompat="@drawable/ic_baseline_redeem_24"
             app:tint="@color/black" />
 
@@ -39,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="18dp"
             android:text="-20%"
             android:textColor="@color/orange" />
 
@@ -48,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="190dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="18dp"
             android:text="10points"
             android:textColor="@color/orange" />
 
@@ -57,7 +58,7 @@
             android:layout_width="30dp"
             android:layout_height="22dp"
             android:layout_marginLeft="150dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="18dp"
             app:srcCompat="@drawable/ic_baseline_arrow_forward_24"
             app:tint="@color/black" />
 

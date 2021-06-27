@@ -245,15 +245,15 @@
         app:layout_constraintVertical_bias="0.619" />
 
     <Button
-        android:id="@+id/pay"
+        android:id="@+id/code_promo"
 
-        android:layout_width="126dp"
-        android:layout_height="47dp"
+        android:layout_width="142dp"
+        android:layout_height="50dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="105dp"
 
         android:background="@drawable/button_bgr2"
-        android:text="@string/pay"
+        android:text="@string/code"
         android:textColor="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -263,15 +263,12 @@
         app:layout_constraintVertical_bias="0.545" />
 
     <Button
-        android:id="@+id/code"
-
+        android:id="@+id/pay"
         android:layout_width="206dp"
         android:layout_height="46dp"
-
         android:layout_marginBottom="176dp"
         android:background="@drawable/button_bgr2"
-
-        android:text="@string/code"
+        android:text="@string/pay"
         android:textColor="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

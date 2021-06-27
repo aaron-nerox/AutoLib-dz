@@ -7,10 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -20,7 +20,8 @@ import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.ViewModel.RentalViewModel
 import com.clovertech.autolibdz.ViewModel.RentalViewModelFactory
 import com.clovertech.autolibdz.repository.RentalRepository
-import kotlinx.android.synthetic.main.fragment_car_details.*
+import com.clovertech.autolibdz.ui.card.ConfirmPayFragment
+import com.clovertech.autolibdz.ui.promo.PromoFragment
 import kotlinx.android.synthetic.main.tarification.*
 import java.time.Instant
 import java.time.LocalDate
@@ -34,6 +35,7 @@ class TarificationFragment : Fragment(){
     private lateinit var rentalViewModel: RentalViewModel
     val typepaiement = arrayOf("Jour", "Heur")
     val cardslist = arrayOf("Credit Card", "Carte d'abonnement")
+    var fragmentManager: FragmentManager,
     var days = 0
     var totalprice = 0
     var idrental=-1
@@ -83,6 +85,11 @@ class TarificationFragment : Fragment(){
             else{
                 Toast.makeText(activity,"Vous pouvez pas Avoir une durée < 0",Toast.LENGTH_SHORT).show()
             }}
+        code_promo.setOnClickListener {
+            val promoFragment = PromoFragment()
+           // promoFragment.arguments=args
+          promoFragment.show(fragmentManager, "confirm_pay_fragment")
+        }
         pay.setOnClickListener{
             val date_time= if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 DateTimeFormatter

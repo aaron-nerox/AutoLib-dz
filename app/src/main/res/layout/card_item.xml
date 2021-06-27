@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-tools:context=".MainActivity">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/promo_item"
@@ -18,7 +19,9 @@ tools:context=".MainActivity">
         app:cardElevation="10dp"
         app:cardMaxElevation="12dp"
         app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true">
+        app:cardUseCompatPadding="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <!--
     In the above cardview widget
@@ -35,20 +38,22 @@ tools:context=".MainActivity">
             android:id="@+id/nom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="35dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:textSize="15sp"
             android:text="@string/lamia"
+            android:textColor="@color/gray"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/rib"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="45dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="50dp"
+            android:text="test"
+            android:textColor="@color/gray2"
             android:textSize="15sp" />
 
 
@@ -56,9 +61,10 @@ tools:context=".MainActivity">
             android:id="@+id/date_exp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="85dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="80dp"
+            android:text="test"
+            android:textColor="@color/gray2"
             android:textSize="15sp" />
 
         <ImageView
@@ -71,8 +77,6 @@ tools:context=".MainActivity">
             app:srcCompat="@drawable/visa_logo" />
 
 
-
-
     </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

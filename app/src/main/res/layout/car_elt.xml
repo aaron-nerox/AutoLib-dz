@@ -1,30 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
 
-    android:background="@drawable/card_bgr"
-   >
+    android:background="@drawable/card_bgr">
 
-
-    <ImageView
-        android:id="@+id/car_img"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/car_pic_brg"
-        android:src="@drawable/car_pic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.009">
-
-    </ImageView>
 
     <TextView
         android:id="@+id/marque"
@@ -33,59 +16,99 @@
         android:gravity="center"
         android:text="@string/marque"
         android:textAlignment="center"
-        android:textColor="@color/gray"
+        android:textColor="#FFC107"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/car_img"
+        app:layout_constraintVertical_bias="0.04000002" />
 
     <TextView
         android:id="@+id/prix"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="sans-serif-condensed-light"
         android:gravity="center"
-        android:text="@string/price"
+
+        android:text="@string/unit_price_day"
         android:textAlignment="center"
         android:textColor="@color/gray"
-        android:textSize="15sp"
-        android:textStyle="bold"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="@+id/prix2" />
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
+    <TextView
+        android:id="@+id/prix3"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:text="@string/unit_price_hour_text"
+
+        android:textAlignment="center"
+        android:textColor="@color/gray2"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/prix2"
+        app:layout_constraintTop_toBottomOf="@+id/prix2" />
+
+    <TextView
+        android:id="@+id/prix2"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="4dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:text="@string/unit_price_day_text"
+        android:textAlignment="center"
+
+        android:textColor="@color/gray2"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintStart_toStartOf="@+id/car_img"
         app:layout_constraintTop_toBottomOf="@+id/marque" />
 
     <TextView
-        android:id="@+id/price"
+        android:id="@+id/prix4"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="sans-serif-condensed-light"
+
         android:gravity="center"
-        android:text="@string/estimation"
+        android:text="@string/unit_price_day"
         android:textAlignment="center"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prix" />
+        android:textColor="@color/gray"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="@+id/prix3" />
 
     <Button
         android:id="@+id/details"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+
         android:background="@drawable/button_bgr"
         android:text="@string/detrails"
         android:textSize="12sp"
-
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/price" />
+        app:layout_constraintTop_toBottomOf="@+id/car_img"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/rating_img"
@@ -93,41 +116,61 @@
         android:layout_height="60dp"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/car_img"
-        app:layout_constraintVertical_bias="0.285"
+        app:layout_constraintVertical_bias="0.525"
         app:srcCompat="@drawable/rating_bgr" />
 
-    <TextView
-        android:id="@+id/rating_v"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="360dp"
-        android:layout_marginBottom="29dp"
-        android:text="@string/rating"
-        android:textAlignment="center"
-        android:textColor="@color/gray"
-        app:layout_constraintBottom_toBottomOf="@+id/rating_img"
-        app:layout_constraintEnd_toEndOf="@+id/rating_img"
+    <ImageView
+        android:id="@+id/car_img"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/car_pic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/rating_img"
-        app:layout_constraintTop_toTopOf="@+id/rating_img"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+    </ImageView>
 
     <ImageView
         android:id="@+id/img_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rating_img"
         app:layout_constraintEnd_toEndOf="@+id/rating_img"
         app:layout_constraintStart_toStartOf="@+id/rating_img"
         app:layout_constraintTop_toBottomOf="@+id/rating_v"
         app:srcCompat="@drawable/ic_baseline_stars_24" />
+
+    <TextView
+        android:id="@+id/rating_v"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="360dp"
+        android:text="@string/rating"
+        android:textAlignment="center"
+        android:textColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="@+id/rating_img"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/rating_img"
+        app:layout_constraintTop_toTopOf="@+id/rating_img" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.42" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

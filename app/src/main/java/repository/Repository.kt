@@ -11,4 +11,11 @@ class Repository {
         return RetrofitInstance.authenticationApi.pushAuthentication(authentication)
     }
 
+    suspend fun pushSignal(signal: Signal): Response<Signal> {
+        return RetrofitInstance.signalApi.pushSignal(signal)
+    }
+
+    suspend fun getUser(): User {
+        return RetrofitInstance.api.getUser()
+    }
 }

@@ -1,12 +1,11 @@
 package model
 
 class User (
-    val idUser: Int,
-    val userName: String,
-    val phoneNumber: Int,
-    val lastName: String,
-    val firstName: String,
-    val address: String,
-    val userType: String
-
+        var idUser: Int,
+        var nom: String,
+        var prenom: String,
+        var address: String,
+        var numeroTelephone: String,
+        var userName: String,
+        var type: String
 )

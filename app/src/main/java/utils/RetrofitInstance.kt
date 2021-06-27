@@ -1,9 +1,10 @@
 package utils
 
 import api.AuthenticationApi
-import api.SignalApi
-import api.UserApi
+import api.BorneApi
+import api.RegistrationApi
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import utils.Constants.Companion.SIGNAL_BASE_URL
@@ -12,21 +13,27 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
 
-    private val retrofitAuthentication by lazy {
-        val client = OkHttpClient.Builder()
-            .connectTimeout(60, TimeUnit.SECONDS)
-            .writeTimeout(60, TimeUnit.SECONDS)
-            .readTimeout(60, TimeUnit.SECONDS)
-            .build()
-
+    private val client by lazy {
+        OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .build()
+    }
+    fun retrofitInstance(url: String): Retrofit =
         Retrofit.Builder()
-            .baseUrl("http://e2366c91b468.ngrok.io")
+            .baseUrl(url)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
-    }
+
     val authenticationApi : AuthenticationApi by lazy {
-        retrofitAuthentication.create(AuthenticationApi::class.java)
+        retrofitInstance("http://192.168.43.222:8005").create(AuthenticationApi::class.java)
+    }
+
+    val registrationApi: RegistrationApi by lazy {
+        retrofitInstance("http://192.168.43.222:8100").create(RegistrationApi::class.java)
+
     }
     private val retrofitUser by lazy {
         Retrofit.Builder()
@@ -46,5 +53,14 @@ object RetrofitInstance {
     val signalApi : SignalApi by lazy {
         retrofitSignal.create(SignalApi::class.java)
     }
+
+    val borneApi: BorneApi by lazy {
+        retrofitInstance("http://192.168.43.222:8200").create(BorneApi::class.java)
+    }
+
+
+
+
+
 
 }

@@ -1,15 +1,13 @@
 package repository
 
 import model.Authentication
-import model.Signal
-import model.Token
-import model.User
+import model.AuthenticationResponse
 import retrofit2.Response
 import utils.RetrofitInstance
 
 class Repository {
 
-    suspend fun pushAuthentication(authentication: Authentication): Response<Token> {
+    suspend fun pushAuthentication(authentication : Authentication) : Response<AuthenticationResponse> {
         return RetrofitInstance.authenticationApi.pushAuthentication(authentication)
     }
 

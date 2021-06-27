@@ -21,16 +21,17 @@
             app:tint="#DD212121" />
 
         <EditText
+            android:id="@+id/phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:background="#00000000"
+            android:hint="Phone number"
             android:inputType="phone"
             android:maxLines="1"
-            android:hint="Phone number"
-            android:textSize="14sp"
             android:textColor="#DD212121"
-            android:background="#00000000"/>
+            android:textSize="14sp" />
 
     </LinearLayout>
 
@@ -58,16 +59,17 @@
                 app:tint="#DD212121" />
 
             <TextView
+                android:id="@+id/profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:background="#00000000"
+                android:hint="Your picture"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:hint="Your picture"
-                android:textSize="14sp"
                 android:textColor="#DD212121"
-                android:background="#00000000"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -88,16 +90,17 @@
                 app:tint="#DD212121" />
 
             <TextView
+                android:id="@+id/selfie_permis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:background="#00000000"
+                android:hint="Selfie-permis"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:hint="Selfie-permis"
-                android:textSize="14sp"
                 android:textColor="#DD212121"
-                android:background="#00000000"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -119,15 +122,16 @@
             app:tint="#DD212121" />
 
         <TextView
+            android:id="@+id/selfie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:background="#00000000"
+            android:hint="your driving license picture"
             android:maxLines="1"
-            android:hint="Upload your profile picture"
-            android:textSize="14sp"
             android:textColor="#DD212121"
-            android:background="#00000000"/>
+            android:textSize="14sp" />
 
     </LinearLayout>
 

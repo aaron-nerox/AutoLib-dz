@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/primaryColor"
     android:orientation="vertical"
-    tools:context=".ui.SignalAct">
+    tools:context=".SignalAct">
 
     <RelativeLayout
         android:layout_width="match_parent"

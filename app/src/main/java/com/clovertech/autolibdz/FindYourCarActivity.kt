@@ -113,7 +113,7 @@ class FindYourCarActivity : AppCompatActivity() {
         try {
             val opts = IO.Options()
             opts.path = "/socket"
-            mSocket = IO.socket("http://192.168.43.222:8123", opts)
+            mSocket = IO.socket("http://192.168.137.93:8123", opts)
         } catch(e: URISyntaxException) {
             e.printStackTrace()
         }

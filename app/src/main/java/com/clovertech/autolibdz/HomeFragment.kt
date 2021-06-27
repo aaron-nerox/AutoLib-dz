@@ -41,6 +41,7 @@ import utils.RetrofitInstance
 class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickListener , View.OnClickListener {
 
     private lateinit var googleMap: GoogleMap
+    private lateinit var mapFragment: SupportMapFragment
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
     lateinit var searchDialogPosition : Dialog
     lateinit var searchDialogPark : Dialog
@@ -69,7 +70,7 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
         view.search_position_dialog.setOnClickListener(this)
         view.see_cars_btn.setOnClickListener(this)
 
-        val mapFragment = childFragmentManager.findFragmentById(R.id.google_map) as SupportMapFragment
+        mapFragment = childFragmentManager.findFragmentById(R.id.google_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         bottomSheetBehavior = from(view.bottom_sheet_layout)
@@ -113,6 +114,11 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
             R.id.checked_park -> {
                 search_park_dialog.visibility = View.GONE
                 bottomSheetBehavior.state = STATE_COLLAPSED
+                val layout = mapFragment.view?.layoutParams
+
+                val height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 520f , resources.displayMetrics).toInt()
+                layout?.height = height
+                mapFragment.view?.layoutParams = layout
             }
             R.id.search_position -> {
                 searchDialogPosition.setContentView(R.layout.custom_search_dialog_position_expanded)

@@ -10,7 +10,8 @@ import com.clovertech.autolibdz.DataClass.PaymentMethod
 import com.clovertech.autolibdz.DataClass.paymentResponse
 import com.clovertech.autolibdz.DataClasses.SubscriptionRequest
 import com.clovertech.autolibdz.DataClasses.SubscriptionResponse
-import com.clovertech.autolibdz.repository.CardsRepository
+import com.clovertech.autolibdz.DataClasses.paySubRequest
+import com.clovertech.autolibdz.DataClasses.paySubResponse
 import com.clovertech.autolibdz.repository.PaymentRepository
 import com.clovertech.autolibdz.ui.card.CardRequest
 import kotlinx.coroutines.launch
@@ -21,6 +22,8 @@ class MainViewModel(private val repository: PaymentRepository): ViewModel() {
     val AddCardResponse: MutableLiveData<Response<paymentResponse>> = MutableLiveData()
     val PayResponse: MutableLiveData<Response<PayResponse>> = MutableLiveData()
     val SubResponse: MutableLiveData<Response<SubscriptionResponse>> = MutableLiveData()
+    val PaySubResponse: MutableLiveData<Response<paySubResponse>> = MutableLiveData()
+
 
 
 
@@ -46,6 +49,12 @@ class MainViewModel(private val repository: PaymentRepository): ViewModel() {
         viewModelScope.launch {
             val response: Response<SubscriptionResponse> = repository.addSub(subscriptionRequest)
             SubResponse.value = response
+        }
+    }
+    fun subPay(paySubRequest: paySubRequest){
+        viewModelScope.launch {
+            val response: Response<paySubResponse> = repository.subPay(paySubRequest)
+            PaySubResponse.value = response
         }
     }
 }

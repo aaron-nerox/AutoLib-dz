@@ -15,6 +15,7 @@ import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.ViewModel.MainViewModel
 import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
 import com.clovertech.autolibdz.repository.PaymentRepository
+import com.clovertech.autolibdz.ui.promo.idCodePromo
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_add_card.*
 import kotlinx.android.synthetic.main.fragment_add_card.close
@@ -70,9 +71,9 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
             val amount= arguments?.getString("amount").toString()
             val idRental= arguments?.getString("idRental").toString()
             val type=arguments?.getString("type").toString()
-            println("paymentId is"+paymentId)
+
             Toast.makeText(context,amount,Toast.LENGTH_LONG).show()
-            val pay = Pay(paymentId,amount,idRental,type)
+            val pay = Pay(paymentId,amount,idRental,type,idCodePromo)
 
             viewModel.pay(pay)
             viewModel.PayResponse.observe(viewLifecycleOwner, Observer { response ->

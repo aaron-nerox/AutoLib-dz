@@ -23,7 +23,7 @@ interface FactureApi {
         operator fun invoke():FactureApi{
             return Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl("http://54.37.87.85:5056/bill/")
+                    .baseUrl(baseUrl+"bill/")
                     .build()
                     .create(FactureApi::class.java)
 

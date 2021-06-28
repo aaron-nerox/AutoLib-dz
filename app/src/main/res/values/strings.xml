@@ -69,7 +69,7 @@
 
     <string name="add_card">Ajouter carte</string>
     <string name="card_num">N° Carte</string>
-    <string name="exp">Date expiration</string>
+    <string name="exp">Date d\'expiration</string>
     <string name="sec_code">Code de sécurité</string>
     <string name="lamia">Selmane Lamia</string>
     <string name="firstname">Prénom</string>
@@ -85,7 +85,8 @@
     <string name="create_abon">Créer une carte d\'abonnement</string>
     <string name="total">Vos points</string>
     <string name="select">Selectionnez un code promo</string>
-    <string name="SucdialogTitle">Paiement effectué !</string> dialogMessage
+    <string name="SucdialogTitle">Paiement effectué !</string>
+    dialogMessage
     <string name="SucdialogMessage">Votre paiement a été effectué avec succes, vérifier votre mail pour la facture.</string>
 
     <!--  Additional stuff   -->

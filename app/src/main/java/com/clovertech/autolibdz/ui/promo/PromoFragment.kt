@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +17,10 @@ import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.ViewModel.*
 import com.clovertech.autolibdz.repository.PromoRepository
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.android.synthetic.main.fragment_add_card.*
 import kotlinx.android.synthetic.main.fragment_promo.*
+import kotlinx.android.synthetic.main.fragment_promo.close
+import kotlinx.android.synthetic.main.tarification.*
 
 
 class PromoFragment : BottomSheetDialogFragment() {
@@ -39,6 +45,15 @@ class PromoFragment : BottomSheetDialogFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+
+        close.setOnClickListener{
+            this.dismiss()
+        }
+        var priceReduHelper=price
+        priceReduHelper.setText("0 DA")
+        var totalprice= arguments?.getInt("totalprice")
+
         val api= PromoApi()
         val repository= PromoRepository(api)
         val promo= PromoViewModelFactory(repository)
@@ -48,9 +63,23 @@ class PromoFragment : BottomSheetDialogFragment() {
           list_promo.also {
                 it.layoutManager=LinearLayoutManager(requireContext())
                 it.setHasFixedSize(true)
-                it.adapter= PromoAdapter(requireContext(),promoList)
+                it.adapter= totalprice?.let { it1 ->
+                    PromoAdapter(requireContext(),promoList,priceReduHelper,
+                        it1
+                    )
+                }
             }
         })
+        confirm.setOnClickListener {
+            val newprice= pricetotarif
+            listner=true
+            requireActivity().total.setText(newprice.toString()+" DA")
+            this.dismiss()
+
+        }
+
+
+
     }
 
 

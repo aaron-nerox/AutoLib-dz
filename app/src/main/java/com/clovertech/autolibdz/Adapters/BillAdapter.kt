@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolibdz.APIs.CarsApi
 import com.clovertech.autolibdz.APIs.FactureApi
+import com.clovertech.autolibdz.APIs.baseUrl
 import com.clovertech.autolibdz.DataClasses.Facture
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.ViewModel.ViewModelCars
@@ -47,7 +48,7 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
 
         holder.id_facture.text= data[position].idBill.toString()
         val factID=data[position].idBill
-        holder.date_facture.text=data[position].creationDate
+        holder.date_facture.text=data[position].creationDate.subSequence(0,10)
         holder.prix.text=data[position].totalRate.toString()
         val penality=data[position].penaltyRate
         if (penality>0)
@@ -67,11 +68,12 @@ class BillAdapter (val context: Context, var data:List<Facture>): RecyclerView.A
             CoroutineScope(Dispatchers.Main).launch{
                 val response=repository.geBillByID(factID)
                 if(response.ok==true){
+                    Toast.makeText(context,response.urlBill,Toast.LENGTH_SHORT).show()
 
 
 
                     var request = DownloadManager.Request(
-                            Uri.parse("http://54.37.87.85:5056${response.urlBill}"))
+                            Uri.parse("${response.urlBill}"))
                             .setTitle("Facture AutoLibDZ")
                             .setDescription("check your Bill ")
                             .setAllowedOverMetered(true)

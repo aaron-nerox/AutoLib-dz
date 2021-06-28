@@ -45,8 +45,6 @@
         android:id="@+id/prix3"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center"
         android:text="@string/unit_price_hour_text"
@@ -55,7 +53,6 @@
         android:textColor="@color/gray2"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/prix2"
         app:layout_constraintTop_toBottomOf="@+id/prix2" />
 
@@ -97,9 +94,10 @@
         android:id="@+id/details"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
 
+        android:layout_marginBottom="16dp"
         android:background="@drawable/button_bgr"
         android:text="@string/detrails"
         android:textSize="12sp"
@@ -107,8 +105,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/car_img"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/prix4" />
 
     <ImageView
         android:id="@+id/rating_img"
@@ -127,6 +124,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:src="@drawable/car_pic"
         app:layout_constraintBottom_toBottomOf="parent"

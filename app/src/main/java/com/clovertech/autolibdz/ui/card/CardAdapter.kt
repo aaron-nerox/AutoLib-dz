@@ -35,10 +35,10 @@ class CardAdapter(val context: Context, var data: List<paymentInfo>,var fragment
 
                 val paymentId=data[position].paymentId
                 val last4=data[position].card.last4
-                Toast.makeText(context,amount, Toast.LENGTH_LONG).show()
+                Toast.makeText(context,"amount to pay adapter $amount", Toast.LENGTH_LONG).show()
                 Toast.makeText(context,idrental, Toast.LENGTH_LONG).show()
                 val args = bundleOf("paymentId" to paymentId,"amount"
-                        to amount,"idRental" to idrental, "type" to "penaltyRate","last4" to last4)
+                        to amount,"idRental" to idrental, "type" to "rentalRate","last4" to last4)
 
                 val confirmPayFragment = ConfirmPayFragment()
                 confirmPayFragment.arguments=args
@@ -50,6 +50,7 @@ class CardAdapter(val context: Context, var data: List<paymentInfo>,var fragment
 
 
         }
+
 
 
     }

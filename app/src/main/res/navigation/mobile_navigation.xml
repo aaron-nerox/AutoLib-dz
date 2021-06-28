@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_nav_slideshow_to_nav_card"
             app:destination="@id/nav_card" />
+        <action
+            android:id="@+id/action_nav_slideshow_to_nav_sub"
+            app:destination="@id/nav_sub" />
     </fragment>
     <fragment
         android:id="@+id/nav_listcar"

@@ -97,6 +97,7 @@ class AddCardFragment : BottomSheetDialogFragment () {
                             "Card Added sucessfully",
                             Toast.LENGTH_SHORT
                     ).show()
+                    this.dismiss()
 
 
                 }
@@ -104,11 +105,13 @@ class AddCardFragment : BottomSheetDialogFragment () {
                     Log.e("Push", response.body().toString())
                     Log.e("Push", response.code().toString())
                     Log.e("Push", response.message().toString())
+
                     Toast.makeText(
                             context,
                             "echec",
                             Toast.LENGTH_SHORT
                     ).show()
+                    this.dismiss()
                 }
             })
 

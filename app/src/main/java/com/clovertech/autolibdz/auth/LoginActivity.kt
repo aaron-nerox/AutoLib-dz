@@ -57,7 +57,7 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
                 .get(MainViewModel::class.java)
 
         startActivity(Intent(this, HomeActivity::class.java))
-        /*if (email_edit_txt.text.toString() == ""){
+        if (email_edit_txt.text.toString() == ""){
             email_edit_txt.setError("Email required !")
         }else if (password_edit_txt.text.toString() == ""){
             password_edit_txt.setError("Password required !")
@@ -80,7 +80,7 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
                     Log.e("Push", response.message())
                 }
             })
-        }*/
+        }
     }
 
     private fun saveUserToken(token: String){

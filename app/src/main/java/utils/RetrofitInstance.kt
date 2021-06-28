@@ -28,11 +28,11 @@ object RetrofitInstance {
             .build()
 
     val authenticationApi : AuthenticationApi by lazy {
-        retrofitInstance("http://192.168.43.222:8005").create(AuthenticationApi::class.java)
+        retrofitInstance("http://192.168.137.93:8005").create(AuthenticationApi::class.java)
     }
 
     val registrationApi: RegistrationApi by lazy {
-        retrofitInstance("http://192.168.43.222:8100").create(RegistrationApi::class.java)
+        retrofitInstance("http://192.168.137.93:8100").create(RegistrationApi::class.java)
 
     }
     private val retrofitUser by lazy {
@@ -55,12 +55,7 @@ object RetrofitInstance {
     }
 
     val borneApi: BorneApi by lazy {
-        retrofitInstance("http://192.168.43.222:8200").create(BorneApi::class.java)
+        retrofitInstance("http://192.168.137.93:8200").create(BorneApi::class.java)
     }
-
-
-
-
-
 
 }

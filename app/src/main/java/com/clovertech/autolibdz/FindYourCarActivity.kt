@@ -18,6 +18,7 @@ import androidx.core.app.ActivityCompat
 import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
+import kotlinx.android.synthetic.main.activity_find_your_car.*
 import org.json.JSONObject
 import java.io.IOException
 import java.net.URISyntaxException
@@ -64,8 +65,7 @@ class FindYourCarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find_your_car)
 
-
-        // rippleBackground.startRippleAnimation()
+         rippleBackground.startRippleAnimation()
 
         if (ActivityCompat.checkSelfPermission(
                         this,
@@ -113,7 +113,7 @@ class FindYourCarActivity : AppCompatActivity() {
         try {
             val opts = IO.Options()
             opts.path = "/socket"
-            mSocket = IO.socket("http://192.168.43.222:8123", opts)
+            mSocket = IO.socket("http://192.168.137.93:8123", opts)
         } catch(e: URISyntaxException) {
             e.printStackTrace()
         }

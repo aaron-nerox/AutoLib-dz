@@ -41,6 +41,7 @@ import utils.RetrofitInstance
 class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickListener , View.OnClickListener {
 
     private lateinit var googleMap: GoogleMap
+    private lateinit var mapFragment: SupportMapFragment
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
     lateinit var searchDialogPosition : Dialog
     lateinit var searchDialogPark : Dialog
@@ -69,7 +70,7 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
         view.search_position_dialog.setOnClickListener(this)
         view.see_cars_btn.setOnClickListener(this)
 
-        val mapFragment = childFragmentManager.findFragmentById(R.id.google_map) as SupportMapFragment
+        mapFragment = childFragmentManager.findFragmentById(R.id.google_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         bottomSheetBehavior = from(view.bottom_sheet_layout)
@@ -83,7 +84,7 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
                     dots.visibility = View.VISIBLE
                 }
                 else if (newState == STATE_HIDDEN || newState == STATE_COLLAPSED) {
-                    activity?.bottom_bar?.visibility = android.view.View.VISIBLE
+                    activity?.bottom_bar?.visibility = View.VISIBLE
                     images_container.visibility = View.GONE
                     img_container.visibility = View.VISIBLE
                     dots.visibility = View.GONE
@@ -113,6 +114,11 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
             R.id.checked_park -> {
                 search_park_dialog.visibility = View.GONE
                 bottomSheetBehavior.state = STATE_COLLAPSED
+                val layout = mapFragment.view?.layoutParams
+
+                val height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 520f , resources.displayMetrics).toInt()
+                layout?.height = height
+                mapFragment.view?.layoutParams = layout
             }
             R.id.search_position -> {
                 searchDialogPosition.setContentView(R.layout.custom_search_dialog_position_expanded)
@@ -145,13 +151,13 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
         call.enqueue(object: Callback<List<Borne>> {
             override fun onFailure(call: Call<List<Borne>>, t: Throwable) {
                 t.printStackTrace()
-                Toast.makeText(activity, t.toString(), Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, t.localizedMessage, Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<List<Borne>>, response: Response<List<Borne>>) {
-                Toast.makeText(context, "Entered here", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, "Entered here", Toast.LENGTH_SHORT).show()
                 if (response.isSuccessful) {
-                    Toast.makeText(context, "Response is successful", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(context, "Response is successful", Toast.LENGTH_SHORT).show()
                     if (response.body() != null) {
                         val bornes = response.body()
                         bornes?.forEach { borne: Borne ->

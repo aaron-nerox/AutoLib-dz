@@ -75,7 +75,6 @@
     <string name="firstname">Prénom</string>
     <string name="lastname">Nom</string>
 
-    <!--  Payment   -->
 
     <string name="do_pay">Voulez-vous vraiment utiliser cette carte pour le paiement ?</string>
     <string name="confirm">Confirmer</string>
@@ -88,13 +87,14 @@
     <string name="SucdialogTitle">Paiement effectué !</string>
     dialogMessage
     <string name="SucdialogMessage">Votre paiement a été effectué avec succes, vérifier votre mail pour la facture.</string>
+    <string name="map_key" translatable="false">AIzaSyB_qsP8AOP_P0MdlPz-48TDaJYjTP3vbjo</string>
 
     <!--  Additional stuff   -->
 
     <string name="mm">MM</string>
     <string name="yy">YY</string>
 
-    <!--  Random examples   -->
+
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_grey"
+    android:orientation="vertical"
+    tools:context=".auth.RegisterActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="80dp"
+                android:text="AutoLibDz"
+                android:textColor="#FFF"
+                android:textSize="32sp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="20dp"
+                android:background="@drawable/_rounded_top_20dp_white"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/register_form_txt_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="40dp"
+                    android:text="Register form"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/yello"/>
+
+                <FrameLayout
+                    android:id="@+id/container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+                <LinearLayout
+                    android:id="@+id/next_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="end"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Next"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/yello"/>
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="5dp"
+                        android:src="@drawable/ic_arrow_forward"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/dots"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/dot1"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/ic_circle_dark_grey_dot"
+                        app:tint="@color/yello" />
+
+                    <ImageView
+                        android:id="@+id/dot2"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/ic_circle_dark_grey_dot"/>
+
+
+                    <ImageView
+                        android:id="@+id/dot3"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/ic_circle_dark_grey_dot"/>
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/registr_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/_rounded_10dp_active"
+                    android:text="Register"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:visibility="gone">
+
+                </androidx.appcompat.widget.AppCompatButton>
+
+                <LinearLayout
+                    android:id="@+id/have_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Already have an account ? "
+                        android:textColor="#DD212121"/>
+
+                    <TextView
+                        android:id="@+id/login_txt_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Login"
+                        android:textColor="@color/yello"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/rights"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp"
+                    android:text="All rights reserved to AutoLibDZ"
+                    android:textColor="#B2B2B2"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

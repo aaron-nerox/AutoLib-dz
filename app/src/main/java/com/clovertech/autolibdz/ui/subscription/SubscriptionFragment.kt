@@ -1,7 +1,6 @@
 package com.clovertech.autolibdz.ui.subscription
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,18 +8,9 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.clovertech.autolibdz.DataClasses.SubscriptionRequest
 import com.clovertech.autolibdz.DataClasses.SubscriptionResponse
-import com.clovertech.autolibdz.DataClasses.paySubRequest
 import com.clovertech.autolibdz.R
-import com.clovertech.autolibdz.ViewModel.MainViewModel
-import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
-import com.clovertech.autolibdz.repository.PaymentRepository
-import com.clovertech.autolibdz.ui.card.ConfirmPayFragment
 import com.clovertech.autolibdz.utils.RetrofitInstance
-import kotlinx.android.synthetic.main.fragment_add_sub.*
 import kotlinx.android.synthetic.main.fragment_subscription.*
 import retrofit2.Call
 import retrofit2.Callback

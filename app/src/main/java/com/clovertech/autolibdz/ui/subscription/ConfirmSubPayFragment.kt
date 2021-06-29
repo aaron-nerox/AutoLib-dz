@@ -1,5 +1,6 @@
 package com.clovertech.autolibdz.ui.subscription
 
+import ViewModel.ViewModelCard
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,8 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolibdz.DataClasses.paySubRequest
 import com.clovertech.autolibdz.R
-import com.clovertech.autolibdz.ViewModel.MainViewModel
-import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
+import com.clovertech.autolibdz.ViewModel.MainViewModelFactoryCard
 import com.clovertech.autolibdz.repository.PaymentRepository
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_confirm_sub_pay.*
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_subscription.*
 
 class ConfirmSubPayFragment : BottomSheetDialogFragment()  {
 
-    private lateinit var viewModel : MainViewModel
+    private lateinit var viewModel : ViewModelCard
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,10 +50,10 @@ class ConfirmSubPayFragment : BottomSheetDialogFragment()  {
             Toast.LENGTH_SHORT
         ).show()
         val repository = PaymentRepository()
-        val viewModelFactory = MainViewModelFactory(repository)
+        val viewModelFactory = MainViewModelFactoryCard(repository)
 
         viewModel = ViewModelProvider(this,viewModelFactory)
-            .get(MainViewModel::class.java)
+            .get(ViewModelCard::class.java)
         confirm.setOnClickListener {
 if (amount!=null && idSub!=null)
 {

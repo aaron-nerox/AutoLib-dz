@@ -1,24 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-android:background="@drawable/white_rectangle_elt"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".HomeFragment">
 
-    <TextView
-        android:id="@+id/text_home"
+    <fragment
+        android:id="@+id/google_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+    <include layout="@layout/bottom_sheet_presistant_park"/>
+
+    <include
+        android:id="@+id/search_park_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="80dp"
+        layout="@layout/custom_search_dialog_yello"
+        android:layout_gravity="bottom" />
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:id="@+id/search_position_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="95dp"
+        layout="@layout/custom_search_dialog_black"
+        android:layout_gravity="bottom" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

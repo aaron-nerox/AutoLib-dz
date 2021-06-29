@@ -1,7 +1,7 @@
 package com.clovertech.autolibdz.ui.subscription
+import ViewModel.ViewModelCard
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +12,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolibdz.DataClasses.SubscriptionRequest
 import com.clovertech.autolibdz.R
-import com.clovertech.autolibdz.ViewModel.MainViewModel
-import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
+import com.clovertech.autolibdz.ViewModel.MainViewModelFactoryCard
 import com.clovertech.autolibdz.repository.PaymentRepository
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_add_sub.*
 class AddSubFragment :  BottomSheetDialogFragment() {
-    private lateinit var viewModel : MainViewModel
+    private lateinit var viewModel : ViewModelCard
 
     val dropdownlist= arrayOf("Select an option","Mensuel","Par 6 mois","Annuel")
 
@@ -59,9 +58,9 @@ class AddSubFragment :  BottomSheetDialogFragment() {
         create_card.setOnClickListener {
 
             val repository = PaymentRepository()
-            val viewModelFactory = MainViewModelFactory(repository)
+            val viewModelFactory = MainViewModelFactoryCard(repository)
             viewModel = ViewModelProvider(this,viewModelFactory)
-                    .get(MainViewModel::class.java)
+                    .get(ViewModelCard::class.java)
 
             var idSpinner=spinner.selectedItemPosition
             Toast.makeText(context,"you entered $idSpinner",Toast.LENGTH_SHORT).show()

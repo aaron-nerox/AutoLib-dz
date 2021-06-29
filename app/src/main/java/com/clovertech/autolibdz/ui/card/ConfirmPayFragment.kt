@@ -1,5 +1,6 @@
 package com.clovertech.autolibdz.ui.card
 
+import ViewModel.ViewModelCard
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
@@ -12,19 +13,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolibdz.DataClass.Pay
 import com.clovertech.autolibdz.R
-import com.clovertech.autolibdz.ViewModel.MainViewModel
-import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
+import com.clovertech.autolibdz.ViewModel.MainViewModelFactoryCard
 import com.clovertech.autolibdz.repository.PaymentRepository
 import com.clovertech.autolibdz.ui.promo.idCodePromo
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.fragment_add_card.*
 import kotlinx.android.synthetic.main.fragment_add_card.close
 import kotlinx.android.synthetic.main.fragment_confirm_pay.*
 
 class ConfirmPayFragment : BottomSheetDialogFragment() {
 
 
-    private lateinit var viewModel : MainViewModel
+    private lateinit var viewModel : ViewModelCard
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -63,9 +62,9 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
         }
         last4.setText("xxx xxxx "+arguments?.getString("last4").toString())
         val repository = PaymentRepository()
-        val viewModelFactory = MainViewModelFactory(repository)
+        val viewModelFactory = MainViewModelFactoryCard(repository)
         viewModel = ViewModelProvider(this,viewModelFactory)
-                .get(MainViewModel::class.java)
+                .get(ViewModelCard::class.java)
         confirm.setOnClickListener{
             val paymentId=arguments?.getString("paymentId").toString()
             val amount= arguments?.getString("amount").toString()

@@ -8,6 +8,7 @@
     android:background="@drawable/white_rectangle_elt">
 
 
+
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView"
         android:layout_width="301dp"
@@ -46,5 +47,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

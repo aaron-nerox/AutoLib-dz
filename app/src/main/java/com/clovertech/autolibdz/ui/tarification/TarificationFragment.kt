@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.TextView
 
 import android.widget.Toast
@@ -24,6 +26,7 @@ import com.clovertech.autolibdz.ViewModel.RentalViewModelFactory
 import com.clovertech.autolibdz.repository.RentalRepository
 import com.clovertech.autolibdz.ui.card.ConfirmPayFragment
 import com.clovertech.autolibdz.ui.promo.PromoFragment
+import com.clovertech.autolibdz.ui.promo.idTenantHelper
 import com.clovertech.autolibdz.ui.promo.listner
 import com.clovertech.autolibdz.ui.promo.pricetotarif
 import kotlinx.android.synthetic.main.fragment_promo.*
@@ -43,7 +46,7 @@ class TarificationFragment : Fragment(){
     var days = 0
     var totalprice = 0
     var idrental=-1
-
+    lateinit var type:String
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -73,13 +76,70 @@ class TarificationFragment : Fragment(){
         val factory = RentalViewModelFactory(repository)
         rentalViewModel = ViewModelProvider(this,factory)
                 .get(RentalViewModel::class.java)
-        plus.setOnClickListener {
-            var d:Int=  duree.text.toString().toInt()
-            d += 1
-            days=d
-            duree.setText(d.toString())
-            totalprice=(d* uni_jr!!)
-            total.setText(totalprice.toString()+" DA")
+
+        //tyoe de paiement :)
+        type_spinner.adapter=
+            ArrayAdapter<String>(requireActivity(),android.R.layout.simple_list_item_1,typepaiement
+        )
+        type_spinner.onItemSelectedListener=object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if(typepaiement.get(p2)=="jour"){
+                    var d:Int
+
+                    d=0
+                    duree.setText(d.toString())
+                    plus.setOnClickListener {
+                        d=  duree.text.toString().toInt()
+                        d += 1
+                        days=d
+                        duree.setText(d.toString())
+                        totalprice=(d* uni_jr!!)
+                        total.setText(totalprice.toString()+" DA")
+                    }
+                    moins.setOnClickListener {
+                        var d:Int=  duree.text.toString().toInt()
+                        if(d-1>=0){
+                            d -= 1
+                            days=d
+                            totalprice=(d* uni_jr!!)
+                            duree.setText(d.toString())
+                            total.setText(totalprice.toString()+" DA")
+                        }
+                        else{
+                            Toast.makeText(activity,"Vous pouvez pas Avoir une durée < 0",Toast.LENGTH_SHORT).show()
+                        }}
+                }
+                else{
+                    var d:Int
+
+                    d=0
+                    duree.setText(d.toString())
+                    plus.setOnClickListener {
+                         d=  duree.text.toString().toInt()
+                        d += 1
+                        days=d
+                        duree.setText(d.toString())
+                        totalprice=(d* uni_hr!!)
+                        total.setText(totalprice.toString()+" DA")
+                    }
+                    moins.setOnClickListener {
+                        var d:Int=  duree.text.toString().toInt()
+                        if(d-1>=0){
+                            d -= 1
+                            days=d
+                            totalprice=(d* uni_hr!!)
+                            duree.setText(d.toString())
+                            total.setText(totalprice.toString()+" DA")
+                        }
+                        else{
+                            Toast.makeText(activity,"Vous pouvez pas Avoir une durée < 0",Toast.LENGTH_SHORT).show()
+                        }}
+                }
+            }
 
         }
         moins.setOnClickListener {
@@ -94,6 +154,20 @@ class TarificationFragment : Fragment(){
             else{
                 Toast.makeText(activity,"Vous pouvez pas Avoir une durée < 0",Toast.LENGTH_SHORT).show()
             }}
+
+        //choix de cards
+        card_choix.adapter=ArrayAdapter<String>(requireActivity(),android.R.layout.simple_list_item_1,cardslist)
+        card_choix.onItemSelectedListener=object :AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                type=cardslist.get(p2)
+
+            }
+
+        }
 
         code_promo.setOnClickListener {
 
@@ -118,7 +192,8 @@ class TarificationFragment : Fragment(){
             Toast.makeText(context,"id $id",Toast.LENGTH_LONG).show()
             val rental=
                     id?.let {
-                        Rental(0,11, it,date_time,LocalTime.now().toString(),d.plusDays(2).toString()+" "+t.toString(),
+                        Rental(0,
+                            idTenantHelper, it,date_time,LocalTime.now().toString(),d.plusDays(2).toString()+" "+t.toString(),
                                 t.toString(),d.plusDays(2).toString()+" "+t.toString(),t.toString(),"jour",
                                 1,1,"active")
                     }
@@ -135,19 +210,24 @@ class TarificationFragment : Fragment(){
 
                             Log.e("Push",response.body().toString())
                             Log.e("Push",response.code().toString())
+                            //code promo
                             if (listner)
-                            {
+                            {   Toast.makeText(requireContext(),"to card :$pricetotarif",Toast.LENGTH_SHORT).show()
+
                                 val bundle = bundleOf("amount" to pricetotarif,"idrental" to idrental)
                                 Toast.makeText(requireContext(),"to card :$pricetotarif",Toast.LENGTH_SHORT).show()
                                 view?.findNavController()?.navigate(R.id.action_nav_slideshow_to_nav_card,bundle)
 
 
                             }
-                            sub=true
-                            if (sub)
+                            //card d'abonnement
+                           // sub=true
+                            else
+                            if (type=="Carte d'abonnement")
                             {
-                                val bundle = bundleOf("idTenant" to 11,"amount" to totalprice)
-                                Toast.makeText(requireContext(),"to card :$pricetotarif",Toast.LENGTH_SHORT).show()
+                                val bundle = bundleOf("idTenant" to idTenantHelper,"amount" to totalprice)
+                                Toast.makeText(requireContext(),"to card :$idTenantHelper",Toast.LENGTH_SHORT).show()
+                                Log.e("id", idTenantHelper.toString())
                                 view?.findNavController()?.navigate(R.id.action_nav_slideshow_to_nav_sub,bundle)
 
 

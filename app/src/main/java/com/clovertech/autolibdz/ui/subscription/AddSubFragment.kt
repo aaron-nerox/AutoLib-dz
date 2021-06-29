@@ -14,6 +14,7 @@ import com.clovertech.autolibdz.DataClasses.SubscriptionRequest
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.ViewModel.MainViewModelFactoryCard
 import com.clovertech.autolibdz.repository.PaymentRepository
+import com.clovertech.autolibdz.ui.promo.idTenantHelper
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_add_sub.*
 class AddSubFragment :  BottomSheetDialogFragment() {
@@ -65,7 +66,7 @@ class AddSubFragment :  BottomSheetDialogFragment() {
             var idSpinner=spinner.selectedItemPosition
             Toast.makeText(context,"you entered $idSpinner",Toast.LENGTH_SHORT).show()
 
-            val subscriptionRequest= SubscriptionRequest(1,idSpinner)
+            val subscriptionRequest= SubscriptionRequest(idTenantHelper,idSpinner)
             viewModel.addSub(subscriptionRequest)
             viewModel.SubResponse.observe(viewLifecycleOwner, Observer { response ->
                 if (response.isSuccessful) {

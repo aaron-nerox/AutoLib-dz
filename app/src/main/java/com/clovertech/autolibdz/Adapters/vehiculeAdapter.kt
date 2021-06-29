@@ -35,7 +35,7 @@ class MyCarAdapter(val context: Context, var data: List<Vehicle>): RecyclerView.
         holder.marque.text=data[position].vehiclemodel
         holder.prix.text= data[position].unitpriceperhour.toString()+"DA/Hr"
 
-
+        holder.prix4.text=data[position].unitpriceperday.toString()+"DA/Jr"
         holder.details.setOnClickListener { v->
         val car=data[position]
         val  id=data[position].idVehicle
@@ -78,6 +78,7 @@ class MyHolder(view: View) : RecyclerView.ViewHolder(view) {
     val prix=view.findViewById<TextView>(R.id.prix) as TextView
     val img=view.findViewById<ImageView>(R.id.car_img) as ImageView
     val details=view.findViewById<Button>(R.id.details) as Button
+    val prix4=view.findViewById<TextView>(R.id.prix4) as TextView
 
 
 

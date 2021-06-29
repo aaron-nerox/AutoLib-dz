@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.clovertech.autolibdz.DataClasses.SubscriptionResponse
 import com.clovertech.autolibdz.R
+import com.clovertech.autolibdz.ui.promo.idTenantHelper
 import com.clovertech.autolibdz.utils.RetrofitInstance
 import kotlinx.android.synthetic.main.fragment_subscription.*
 import retrofit2.Call
@@ -38,7 +39,7 @@ class SubscriptionFragment  : Fragment() {
         val amount= arguments?.getInt("amount")
 
 
-        val call = idTenant?.let { RetrofitInstance.subApi.getSubByTenant(it) }
+        val call = idTenantHelper?.let { RetrofitInstance.subApi.getSubByTenant(it) }
         if (call != null) {
             call.enqueue(object:Callback<SubscriptionResponse>{
                 override fun onFailure(call: Call<SubscriptionResponse>, t: Throwable) {

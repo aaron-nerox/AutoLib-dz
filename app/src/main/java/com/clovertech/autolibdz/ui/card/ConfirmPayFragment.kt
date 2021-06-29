@@ -3,6 +3,7 @@ package com.clovertech.autolibdz.ui.card
 import ViewModel.ViewModelCard
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolibdz.DataClass.Pay
+import com.clovertech.autolibdz.FindYourCarActivity
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.ViewModel.MainViewModelFactoryCard
 import com.clovertech.autolibdz.repository.PaymentRepository
@@ -34,10 +36,12 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
 
     }
 
-    @SuppressLint("ResourceType")
+    @SuppressLint("ResourceType", "UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        // START ALERT DIALOG
+
+        super.onViewCreated(view, savedInstanceState)
+       /* // START ALERT DIALOG
         val builder = AlertDialog.Builder(context)
         //set title for alert dialog
         builder.setTitle(R.string.SucdialogTitle)
@@ -47,12 +51,15 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
 
         //performing positive action
         builder.setPositiveButton("OK"){dialogInterface, which ->
-            Toast.makeText(context,"clicked yes",Toast.LENGTH_LONG).show()
-        }
+           // Toast.makeText(requireActivity(),"clicked yes",Toast.LENGTH_LONG).show()
+
+            startActivity(Intent(requireContext(),
+                FindYourCarActivity::class.java))
+        }*/
 
         // END ALERT DIALOG
 
-        super.onViewCreated(view, savedInstanceState)
+     //   super.onViewCreated(view, savedInstanceState)
 
         close.setOnClickListener{
             this.dismiss()
@@ -85,10 +92,25 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
                     Log.e("push",response.toString())
                     Log.e("push",response.raw().toString())
                     this.dismiss()
+                 /*   val builder = AlertDialog.Builder(activity!!)
+                    //set title for alert dialog
+                    builder.setTitle(R.string.SucdialogTitle)
+                    //set message for alert dialog
+                    builder.setMessage(R.string.SucdialogMessage)
+                    builder.setIconAttribute(R.drawable.ic_baseline_done_outline_24)
 
+                    //performing positive action
+                    builder.setPositiveButton("OK"){dialogInterface, which ->
+                        // Toast.makeText(requireActivity(),"clicked yes",Toast.LENGTH_LONG).show()
+*/
+                        startActivity(Intent(requireContext(),
+                            FindYourCarActivity::class.java))
+                    /*}
+
+                    // END ALERT DIALOG
                     val alertDialog: AlertDialog = builder.create()
                     alertDialog.setCancelable(false)
-                    alertDialog.show()
+                    alertDialog.show()*/
 
 
                 }

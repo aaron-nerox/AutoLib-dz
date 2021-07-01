@@ -57,8 +57,8 @@ class CarDetailsFragment : Fragment() {
         val uni_hr=arguments?.getInt("hr")
         val uni_jr=arguments?.getInt("jr")
         val brand=arguments?.getString("brand")
-        price_hr.text= uni_hr.toString()
-        price_jr.text=uni_jr.toString()
+        price_hr.text= "Prix par heur:"+uni_hr.toString()+"DA/HR"
+        price_jr.text="Prix par jour:"+uni_jr.toString()+"DA/JR"
         val repository = RentalRepository()
         val factory = RentalViewModelFactory(repository)
         rentalViewModel = ViewModelProvider(this,factory)

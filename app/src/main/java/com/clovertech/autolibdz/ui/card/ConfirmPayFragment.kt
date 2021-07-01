@@ -1,5 +1,9 @@
 package com.clovertech.autolibdz.ui.card
 
+import ViewModel.ViewModelCard
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,19 +13,19 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolibdz.DataClass.Pay
+import com.clovertech.autolibdz.FindYourCarActivity
 import com.clovertech.autolibdz.R
-import com.clovertech.autolibdz.ViewModel.MainViewModel
-import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
+import com.clovertech.autolibdz.ViewModel.MainViewModelFactoryCard
 import com.clovertech.autolibdz.repository.PaymentRepository
+import com.clovertech.autolibdz.ui.promo.idCodePromo
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.fragment_add_card.*
 import kotlinx.android.synthetic.main.fragment_add_card.close
 import kotlinx.android.synthetic.main.fragment_confirm_pay.*
 
 class ConfirmPayFragment : BottomSheetDialogFragment() {
 
 
-    private lateinit var viewModel : MainViewModel
+    private lateinit var viewModel : ViewModelCard
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -32,8 +36,30 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
 
     }
 
+    @SuppressLint("ResourceType", "UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
         super.onViewCreated(view, savedInstanceState)
+       /* // START ALERT DIALOG
+        val builder = AlertDialog.Builder(context)
+        //set title for alert dialog
+        builder.setTitle(R.string.SucdialogTitle)
+        //set message for alert dialog
+        builder.setMessage(R.string.SucdialogMessage)
+        builder.setIconAttribute(R.drawable.ic_baseline_done_outline_24)
+
+        //performing positive action
+        builder.setPositiveButton("OK"){dialogInterface, which ->
+           // Toast.makeText(requireActivity(),"clicked yes",Toast.LENGTH_LONG).show()
+
+            startActivity(Intent(requireContext(),
+                FindYourCarActivity::class.java))
+        }*/
+
+        // END ALERT DIALOG
+
+     //   super.onViewCreated(view, savedInstanceState)
 
         close.setOnClickListener{
             this.dismiss()
@@ -43,17 +69,17 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
         }
         last4.setText("xxx xxxx "+arguments?.getString("last4").toString())
         val repository = PaymentRepository()
-        val viewModelFactory = MainViewModelFactory(repository)
+        val viewModelFactory = MainViewModelFactoryCard(repository)
         viewModel = ViewModelProvider(this,viewModelFactory)
-                .get(MainViewModel::class.java)
+                .get(ViewModelCard::class.java)
         confirm.setOnClickListener{
             val paymentId=arguments?.getString("paymentId").toString()
             val amount= arguments?.getString("amount").toString()
             val idRental= arguments?.getString("idRental").toString()
             val type=arguments?.getString("type").toString()
-            println("paymentId is"+paymentId)
+
             Toast.makeText(context,amount,Toast.LENGTH_LONG).show()
-            val pay = Pay(paymentId,amount,idRental,type)
+            val pay = Pay(paymentId,amount,idRental,type,idCodePromo)
 
             viewModel.pay(pay)
             viewModel.PayResponse.observe(viewLifecycleOwner, Observer { response ->
@@ -66,12 +92,25 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
                     Log.e("push",response.toString())
                     Log.e("push",response.raw().toString())
                     this.dismiss()
+                 /*   val builder = AlertDialog.Builder(activity!!)
+                    //set title for alert dialog
+                    builder.setTitle(R.string.SucdialogTitle)
+                    //set message for alert dialog
+                    builder.setMessage(R.string.SucdialogMessage)
+                    builder.setIconAttribute(R.drawable.ic_baseline_done_outline_24)
 
-                    Toast.makeText(
-                            context,
-                            "Payment process successful yaay",
-                            Toast.LENGTH_SHORT
-                    ).show()
+                    //performing positive action
+                    builder.setPositiveButton("OK"){dialogInterface, which ->
+                        // Toast.makeText(requireActivity(),"clicked yes",Toast.LENGTH_LONG).show()
+*/
+                        startActivity(Intent(requireContext(),
+                            FindYourCarActivity::class.java))
+                    /*}
+
+                    // END ALERT DIALOG
+                    val alertDialog: AlertDialog = builder.create()
+                    alertDialog.setCancelable(false)
+                    alertDialog.show()*/
 
 
                 }

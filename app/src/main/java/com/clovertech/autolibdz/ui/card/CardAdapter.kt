@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolibdz.DataClass.paymentInfo
 import com.clovertech.autolibdz.R
-import kotlinx.android.synthetic.main.fragment_card.*
 
 class CardAdapter(val context: Context, var data: List<paymentInfo>,var fragmentManager: FragmentManager,
                   var amount:String,var idrental:String): RecyclerView.Adapter<MyViewHolder>(){
@@ -36,10 +35,10 @@ class CardAdapter(val context: Context, var data: List<paymentInfo>,var fragment
 
                 val paymentId=data[position].paymentId
                 val last4=data[position].card.last4
-                Toast.makeText(context,amount, Toast.LENGTH_LONG).show()
+                Toast.makeText(context,"amount to pay adapter $amount", Toast.LENGTH_LONG).show()
                 Toast.makeText(context,idrental, Toast.LENGTH_LONG).show()
                 val args = bundleOf("paymentId" to paymentId,"amount"
-                        to amount,"idRental" to idrental, "type" to "penaltyRate","last4" to last4)
+                        to amount,"idRental" to idrental, "type" to "rentalRate","last4" to last4)
 
                 val confirmPayFragment = ConfirmPayFragment()
                 confirmPayFragment.arguments=args
@@ -53,12 +52,13 @@ class CardAdapter(val context: Context, var data: List<paymentInfo>,var fragment
         }
 
 
+
     }
 
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        val cv= view.findViewById<CardView>(R.id.cardView)
+        val cv= view.findViewById<CardView>(R.id.promo_item)
         val nom= view.findViewById<TextView>(R.id.nom)
         val rip= view.findViewById<TextView>(R.id.rib)
         val date_exp= view.findViewById<TextView>(R.id.date_exp)

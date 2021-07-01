@@ -19,7 +19,7 @@ interface CardsApi {
         operator fun invoke():CardsApi{
             return Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl("http://54.37.87.85:5040/payment/cards/")
+                    .baseUrl(baseUrl+"payment/cards/")
                     .build()
                     .create(CardsApi::class.java)
 

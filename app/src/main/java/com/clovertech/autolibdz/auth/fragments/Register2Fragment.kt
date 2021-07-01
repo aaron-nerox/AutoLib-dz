@@ -1,6 +1,6 @@
 package com.clovertech.autolibdz.auth.fragments
 
-import `view-model`.RegisterViewModel
+import com.clovertech.autolibdz.ViewModel.RegisterViewModel
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observe
 import com.clovertech.autolibdz.R
 import kotlinx.android.synthetic.main.fragment_register2.view.*
 

@@ -6,9 +6,16 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_home"
+            android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
-
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_gallery" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_slideshow" />
         <item
             android:id="@+id/nav_facture"
             android:icon="@drawable/ic_baseline_facture_24"
@@ -24,6 +31,5 @@
             android:icon="@drawable/ic_baseline_payment_24"
             android:iconTint="@color/black"
             android:title="Subscription" />
-
     </group>
 </menu>

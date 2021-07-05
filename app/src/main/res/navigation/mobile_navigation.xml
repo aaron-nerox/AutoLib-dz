@@ -29,9 +29,6 @@
         <action
             android:id="@+id/action_nav_slideshow_to_nav_card"
             app:destination="@id/nav_card" />
-        <action
-            android:id="@+id/action_nav_slideshow_to_nav_sub"
-            app:destination="@id/nav_sub" />
     </fragment>
     <fragment
         android:id="@+id/nav_listcar"
@@ -57,10 +54,5 @@
         android:name="com.clovertech.autolibdz.ui.subscription.SubscriptionFragment"
         android:label="fragment_subscription"
         tools:layout="@layout/fragment_subscription" />
-    <fragment
-        android:id="@+id/nav_promo"
-        android:name="com.clovertech.autolibdz.ui.promo.PromoFragment"
-        android:label="fragment_promo"
-        tools:layout="@layout/fragment_promo" />
 
 </navigation>

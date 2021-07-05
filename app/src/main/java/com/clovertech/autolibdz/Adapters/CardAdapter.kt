@@ -12,7 +12,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolibdz.DataClass.paymentInfo
 import com.clovertech.autolibdz.R
+import com.clovertech.autolibdz.ui.card.Card
 import com.clovertech.autolibdz.ui.card.ConfirmPayFragment
+import com.clovertech.autolibdz.ui.card.MyViewHolder
 
 class CardAdapter(val context: Context, var data:List<paymentInfo>,var fragmentManager: FragmentManager): RecyclerView.Adapter<MyVHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyVHolder {
@@ -47,7 +49,7 @@ class CardAdapter(val context: Context, var data:List<paymentInfo>,var fragmentM
 }
 class MyVHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    val cv= view.findViewById<CardView>(R.id.promo_item)
+    val cv= view.findViewById<CardView>(R.id.cardView)
     val nom= view.findViewById<TextView>(R.id.nom)
     val rip= view.findViewById<TextView>(R.id.rib)
     val date_exp= view.findViewById<TextView>(R.id.date_exp)

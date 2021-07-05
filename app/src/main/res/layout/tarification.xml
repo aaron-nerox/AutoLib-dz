@@ -116,8 +116,7 @@
 
     </androidx.cardview.widget.CardView>
 
-
-    <Spinner
+    <TextView
         android:id="@+id/card_choix"
         android:layout_width="300dp"
         android:layout_height="40dp"
@@ -128,20 +127,19 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:text="Carte Credit"
         android:textSize="15sp"
         android:textAlignment="center"
         app:layout_constraintVertical_bias="0.308" />
 
-    <Spinner
+    <TextView
         android:id="@+id/type_spinner"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/input"
-
-        android:textAlignment="center"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Jour"        android:textAlignment="center"
+        android:textSize="15sp"       app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/card_choix"
@@ -235,27 +233,27 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/input"
-        android:text="0"
         android:textAlignment="center"
+        android:text="0"
         android:textSize="20sp"
+        android:background="@drawable/input"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.205"
+        app:layout_constraintHorizontal_bias="0.201"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.62" />
+        app:layout_constraintVertical_bias="0.619" />
 
     <Button
-        android:id="@+id/code_promo"
+        android:id="@+id/pay"
 
-        android:layout_width="142dp"
-        android:layout_height="50dp"
+        android:layout_width="126dp"
+        android:layout_height="47dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="105dp"
 
         android:background="@drawable/button_bgr2"
-        android:text="@string/code"
+        android:text="@string/pay"
         android:textColor="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -265,12 +263,15 @@
         app:layout_constraintVertical_bias="0.545" />
 
     <Button
-        android:id="@+id/pay"
+        android:id="@+id/code"
+
         android:layout_width="206dp"
         android:layout_height="46dp"
+
         android:layout_marginBottom="176dp"
         android:background="@drawable/button_bgr2"
-        android:text="@string/pay"
+
+        android:text="@string/code"
         android:textColor="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

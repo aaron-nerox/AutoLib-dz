@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/sub_card"
+        android:id="@+id/cardView"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -59,88 +59,44 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/date_creation1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="45dp"
-            android:text="Date création"
-            android:layout_marginBottom="20dp"
-            android:textSize="15sp" />
-        <TextView
             android:id="@+id/date_creation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="180dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="45dp"
             android:layout_marginBottom="20dp"
             android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/date_expiration1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:text="Date d'expiration"
-            android:layout_marginTop="70dp"
-            android:layout_marginBottom="20dp"
-            android:textSize="15sp" />
-        <TextView
-            android:id="@+id/date_expiration2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:text="Type"
-            android:layout_marginTop="95dp"
-            android:layout_marginBottom="20dp"
-            android:textSize="15sp" />
+
         <TextView
             android:id="@+id/type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="180dp"
-            android:layout_marginTop="95dp"
-            android:layout_marginBottom="20dp"
-            android:textSize="15sp" />
-        <TextView
-            android:id="@+id/date_expiration3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:textColor="@color/orange"
-            android:text="Solde total"
-            android:layout_marginTop="140dp"
-            android:layout_marginBottom="20dp"
-            android:textSize="20sp" />
-        <TextView
-            android:id="@+id/date_expiration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="180dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="85dp"
             android:layout_marginBottom="20dp"
             android:textSize="15sp" />
+
         <TextView
-            android:id="@+id/solde"
-            android:textSize="20dp"
+            android:id="@+id/state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="180dp"
-            android:layout_marginTop="140dp" />
+            android:layout_marginLeft="250dp"
+            android:layout_marginTop="75dp" />
 
 
     </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/create"
-        android:layout_width="186dp"
-        android:layout_height="57dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:background="@drawable/rounded_button"
         android:text="@string/create"
+        android:background="@drawable/rounded_button"
         app:backgroundTint="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sub_card" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,24 +1,26 @@
 package com.clovertech.autolibdz.ui.card
 
-import ViewModel.ViewModelCard
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolibdz.DataClass.Adress
 import com.clovertech.autolibdz.DataClass.PaymentMethod
 import com.clovertech.autolibdz.R
-import com.clovertech.autolibdz.ViewModel.MainViewModelFactoryCard
+import com.clovertech.autolibdz.ViewModel.MainViewModel
+import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
+import com.clovertech.autolibdz.repository.CardsRepository
 import com.clovertech.autolibdz.repository.PaymentRepository
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_add_card.*
 
 class AddCardFragment : BottomSheetDialogFragment () {
-    private lateinit var viewModel : ViewModelCard
+    private lateinit var viewModel : MainViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,9 +37,9 @@ class AddCardFragment : BottomSheetDialogFragment () {
             this.dismiss()
         }
         val repository = PaymentRepository()
-        val viewModelFactory = MainViewModelFactoryCard(repository)
+        val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this,viewModelFactory)
-                .get(ViewModelCard::class.java)
+                .get(MainViewModel::class.java)
 
         add_card_conf.setOnClickListener {
 
@@ -95,7 +97,6 @@ class AddCardFragment : BottomSheetDialogFragment () {
                             "Card Added sucessfully",
                             Toast.LENGTH_SHORT
                     ).show()
-                    this.dismiss()
 
 
                 }
@@ -103,13 +104,11 @@ class AddCardFragment : BottomSheetDialogFragment () {
                     Log.e("Push", response.body().toString())
                     Log.e("Push", response.code().toString())
                     Log.e("Push", response.message().toString())
-
                     Toast.makeText(
                             context,
                             "echec",
                             Toast.LENGTH_SHORT
                     ).show()
-                    this.dismiss()
                 }
             })
 

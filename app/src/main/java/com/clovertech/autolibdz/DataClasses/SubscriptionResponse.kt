@@ -5,6 +5,5 @@ data class SubscriptionResponse (
         val creationDate:String,
         val expirationDate:String,
         val subState:String,
-        val idSub:Int,
-        val solde:Int
+        val idSub:Int
 )

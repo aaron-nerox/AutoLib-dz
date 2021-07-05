@@ -1,7 +1,7 @@
 package com.clovertech.autolibdz.ui.subscription
-import ViewModel.ViewModelCard
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +12,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolibdz.DataClasses.SubscriptionRequest
 import com.clovertech.autolibdz.R
-import com.clovertech.autolibdz.ViewModel.MainViewModelFactoryCard
+import com.clovertech.autolibdz.ViewModel.MainViewModel
+import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
 import com.clovertech.autolibdz.repository.PaymentRepository
-import com.clovertech.autolibdz.ui.promo.idTenantHelper
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_add_sub.*
 class AddSubFragment :  BottomSheetDialogFragment() {
-    private lateinit var viewModel : ViewModelCard
+    private lateinit var viewModel : MainViewModel
 
     val dropdownlist= arrayOf("Select an option","Mensuel","Par 6 mois","Annuel")
 
@@ -59,14 +59,14 @@ class AddSubFragment :  BottomSheetDialogFragment() {
         create_card.setOnClickListener {
 
             val repository = PaymentRepository()
-            val viewModelFactory = MainViewModelFactoryCard(repository)
+            val viewModelFactory = MainViewModelFactory(repository)
             viewModel = ViewModelProvider(this,viewModelFactory)
-                    .get(ViewModelCard::class.java)
+                    .get(MainViewModel::class.java)
 
             var idSpinner=spinner.selectedItemPosition
             Toast.makeText(context,"you entered $idSpinner",Toast.LENGTH_SHORT).show()
 
-            val subscriptionRequest= SubscriptionRequest(idTenantHelper,idSpinner)
+            val subscriptionRequest= SubscriptionRequest(1,idSpinner)
             viewModel.addSub(subscriptionRequest)
             viewModel.SubResponse.observe(viewLifecycleOwner, Observer { response ->
                 if (response.isSuccessful) {

@@ -15,7 +15,6 @@
         android:background="@color/yello">
 
         <TextView
-            android:id="@+id/testBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="AutoLib"

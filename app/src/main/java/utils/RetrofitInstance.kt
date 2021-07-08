@@ -1,8 +1,6 @@
 package utils
 
-import api.AuthenticationApi
-import api.BorneApi
-import api.RegistrationApi
+import api.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

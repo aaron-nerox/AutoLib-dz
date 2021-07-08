@@ -21,9 +21,9 @@ class ViewModelCars (private val repository: CarsRepository): ViewModel() {
     val carsByStat:LiveData<List<Vehicle>>
         get() = myResponse
 
-      fun getListCarsByStat(Status: String){
+      fun getListCarsByStat(Status: String,idborn:Int){
          job= Couroutines.ioThenMain(
-             {repository.getCarsByStat(Status)},{
+             {repository.getCarsByStat(Status,idborn)},{
                 myResponse.value=it
              })
         /*val carsByStat=repository.getCarsByStat(Status)

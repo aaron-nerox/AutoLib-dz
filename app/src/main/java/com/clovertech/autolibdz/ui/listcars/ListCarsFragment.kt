@@ -47,11 +47,11 @@ class ListCarsFragment : Fragment() {
 
 
         CoroutineScope(Dispatchers.Main).launch{
-            val response=repository.getCarsByStat("available")
+            val response=repository.getCarsByStat("available",2)
             if(!response.isEmpty()){
                 Toast.makeText(
                     activity,
-                    "prix: ${response[0].unitpriceperday}",
+                    "prix: ${response[0].unitPricePerDay}",
 
                     Toast.LENGTH_LONG
                 ).show()
@@ -69,7 +69,7 @@ class ListCarsFragment : Fragment() {
 
            /* list_cars.layoutManager = LinearLayoutManager(activity)
             list_cars.adapter = adapter*/
-        viewModel.getListCarsByStat("available")
+        viewModel.getListCarsByStat("available",2)
        // Toast.makeText(requireContext(),viewModel.carsByStat.toString(),Toast.LENGTH_LONG)
         viewModel.carsByStat.observe(viewLifecycleOwner, Observer { cars->
             list_cars.also {

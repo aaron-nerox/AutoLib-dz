@@ -12,8 +12,9 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface CarsApi {
-    @GET("vehiclesListByState/{state}")
-    suspend fun getCarsListByState(@Path("state") state : String): Response<MutableList<Vehicle>>
+    @GET("vehiclesListByState/{state}/{idborn}")
+    suspend fun getCarsListByState(@Path("state") state : String,
+                                    @Path("idborn") idborn:Int): Response<MutableList<Vehicle>>
 
     @POST("addRental")
     suspend fun addRental(

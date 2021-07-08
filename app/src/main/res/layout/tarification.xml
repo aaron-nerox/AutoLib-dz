@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/titre"
-        android:layout_width="183dp"
-        android:layout_height="61dp"
+        android:layout_width="326dp"
+        android:layout_height="46dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -20,10 +20,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.14"
+        app:layout_constraintHorizontal_bias="0.188"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.046" />
+        app:layout_constraintVertical_bias="0.036" />
 
     <TextView
         android:id="@+id/warning"
@@ -76,31 +76,32 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.893" />
 
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_width="306dp"
+        android:layout_height="119dp"
         android:background="@color/light_gray"
         android:orientation="horizontal"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.184">
+        app:layout_constraintVertical_bias="0.127">
 
         <ImageView
             android:id="@+id/img_v"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:src="@drawable/car_pic" />
 
         <TextView
             android:id="@+id/model"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="80dp"
             android:text="@string/car"
             android:textColor="@color/gray"
             android:textStyle="bold" />
@@ -110,12 +111,39 @@
             android:id="@+id/brand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="80dp"
             android:layout_marginTop="20dp"
-            android:text="@string/car" />
+            android:text="Brand : Volkswagen" />
 
+        <TextView
+
+            android:id="@+id/color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="40dp"
+            android:text="Color : Noir" />
+
+        <TextView
+            android:id="@+id/price_hr"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="70dp"
+            android:text="@string/price_hr"
+            android:textColor="@color/green"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/price_jr"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="90dp"
+            android:text="@string/price_jr"
+            android:textColor="@color/green"
+            android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
-
 
     <Spinner
         android:id="@+id/card_choix"
@@ -149,8 +177,8 @@
 
     <EditText
         android:id="@+id/duree"
-        android:layout_width="115dp"
-        android:layout_height="50dp"
+        android:layout_width="103dp"
+        android:layout_height="33dp"
         android:layout_marginEnd="80dp"
         android:background="@drawable/input"
         android:ems="10"

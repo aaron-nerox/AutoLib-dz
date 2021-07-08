@@ -57,12 +57,24 @@ class CarDetailsFragment : Fragment() {
         val uni_hr=arguments?.getInt("hr")
         val uni_jr=arguments?.getInt("jr")
         val brand=arguments?.getString("brand")
+         val matricule=arguments?.getString("matricule")
+        val color=arguments?.getString("color")
+        val fuel=arguments?.getString("fuel")
+        val lat=arguments?.getString("lat")
+        val lang=arguments?.getString("lang")
+
         price_hr.text= "Prix par heur:"+uni_hr.toString()+"DA/HR"
         price_jr.text="Prix par jour:"+uni_jr.toString()+"DA/JR"
+
         val repository = RentalRepository()
         val factory = RentalViewModelFactory(repository)
         rentalViewModel = ViewModelProvider(this,factory)
                 .get(RentalViewModel::class.java)
+
+        fuel_txt.setText(fuel)
+        marque.setText(matricule)
+        eng_val.setText(brand)
+        val_col.setText(color)
         button.setOnClickListener {view->
             val date_time=DateTimeFormatter
                     .ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS")
@@ -94,6 +106,8 @@ class CarDetailsFragment : Fragment() {
                     Toast.makeText(requireContext(),"Alert",Toast.LENGTH_SHORT).show()
                 }
             })*/
+
+
 
          val bundle = bundleOf("id" to id,"img" to img,"model" to model, "hr" to uni_hr, "jr" to uni_jr,
             "brand" to brand)

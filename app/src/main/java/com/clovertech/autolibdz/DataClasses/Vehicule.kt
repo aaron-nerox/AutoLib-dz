@@ -5,8 +5,15 @@ data class Vehicle (
     val vehicletype:String,
     val vehiclebrand:String,
     val availibility:String,
-    val unitpriceperhour: Int,
-    val unitpriceperday:Int,
+    val unitPricePerHour: Int,
+    val unitPricePerDay:Int,
     val vehiclemodel:String,
-    val image:String
+    val image:String,
+    val fuelType:String,
+    val vehicleColor:String,
+    val registrationNumber:String,
+    val idBorne:Int,
+    val longitude:String,
+    val latitude:String,
+    val chassisNumber:String
 )

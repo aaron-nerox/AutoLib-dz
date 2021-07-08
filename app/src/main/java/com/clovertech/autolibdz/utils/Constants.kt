@@ -11,6 +11,8 @@ class Constants {
         const val Bill_BASE_URL=baseUrl+"bill/"
         const val CARD_BASE_URL = baseUrl+"payment/cards/"
         const val SUB_BASE_URL = baseUrl+"subscription/"
+        const val USER_BASE_URL = "https://08fcf7abde58.ngrok.io/"
+        const val SIGNAL_BASE_URL = "https://50a478272d17.ngrok.io/"
 
     }
 }

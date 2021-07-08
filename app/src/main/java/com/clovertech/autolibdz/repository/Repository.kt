@@ -2,9 +2,7 @@ package repository
 
 import com.clovertech.autolibdz.utils.RetrofitInst
 import com.clovertech.autolibdz.utils.RetrofitInstance
-import model.Authentication
-import model.AuthenticationResponse
-import model.Token
+import model.*
 import retrofit2.Response
 
 class Repository {
@@ -15,6 +13,13 @@ class Repository {
 
     suspend fun getToken(authentication : Authentication) : Response<Token> {
         return RetrofitInst.authenticationApi.getToken(authentication)
+    }
+    suspend fun pushSignal(signal: Signal): Response<Signal> {
+        return RetrofitInstance.signalApi.pushSignal(signal)
+    }
+
+    suspend fun getUser(): User {
+        return RetrofitInstance.apiUser.getUser()
     }
 
 }

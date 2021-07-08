@@ -1,15 +1,15 @@
 package com.clovertech.autolibdz.utils
 
-import api.AuthenticationApi
-import api.BorneApi
-import api.RegistrationApi
+import api.*
 import com.clovertech.autolibdz.APIs.*
 import com.clovertech.autolibdz.utils.Constants.Companion.Bill_BASE_URL
 import com.clovertech.autolibdz.utils.Constants.Companion.CARD_BASE_URL
 import com.clovertech.autolibdz.utils.Constants.Companion.Cars_BASE_URL
 import com.clovertech.autolibdz.utils.Constants.Companion.Pricing_BASE_URL
 import com.clovertech.autolibdz.utils.Constants.Companion.Rental_BASE_URL
+import com.clovertech.autolibdz.utils.Constants.Companion.SIGNAL_BASE_URL
 import com.clovertech.autolibdz.utils.Constants.Companion.SUB_BASE_URL
+import com.clovertech.autolibdz.utils.Constants.Companion.USER_BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -96,4 +96,24 @@ object RetrofitInstance {
                 GsonConverterFactory.create()).build().create(FactureApi::class.java)
 
     }
+    private val retrofitUser by lazy {
+        Retrofit.Builder()
+                .baseUrl(USER_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+    }
+    val apiUser : UserApi by lazy {
+        retrofitUser.create(UserApi::class.java)
+    }
+    private val retrofitSignal by lazy {
+        Retrofit.Builder()
+                .baseUrl(SIGNAL_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+    }
+    val signalApi : SignalApi by lazy {
+        retrofitSignal.create(SignalApi::class.java)
+    }
+
+
 }

@@ -33,7 +33,8 @@ class CardAdapter(val context: Context, var data:List<paymentInfo>,var fragmentM
         holder.cv.setOnClickListener{
             val paymentId=data[position].paymentId
             val last4=data[position].card.last4
-            val args = bundleOf("paymentId" to paymentId,"amount" to "1900","idRental" to "10", "type" to "penaltyRate","last4" to last4)
+            val args = bundleOf("paymentId"
+                    to paymentId,"amount" to "1900","idRental" to "10", "type" to "penaltyRate","last4" to last4)
 
             val confirmPayFragment = ConfirmPayFragment()
             confirmPayFragment.arguments=args

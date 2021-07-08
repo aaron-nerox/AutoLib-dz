@@ -5,6 +5,9 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_home">
 
+
+
+
     <fragment
         android:id="@+id/nav_home"
         android:name="com.clovertech.autolibdz.ui.listcars.ListCarsFragment"
@@ -62,5 +65,21 @@
         android:name="com.clovertech.autolibdz.ui.promo.PromoFragment"
         android:label="fragment_promo"
         tools:layout="@layout/fragment_promo" />
+
+
+
+    <fragment
+        android:id="@+id/nav_profil"
+        android:name="com.clovertech.autolibdz.ui.profil.ProfilFragment"
+        android:label="Mon Profil"
+        tools:layout="@layout/activity_profile"
+        />
+
+    <fragment
+        android:id="@+id/nav_signals"
+        android:name="com.clovertech.autolibdz.ui.signals.SignalFragment"
+        android:label="Report Un Problème"
+        tools:layout="@layout/activity_signal"
+        />
 
 </navigation>

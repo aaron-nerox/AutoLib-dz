@@ -28,11 +28,11 @@ class RegisterViewModel: ViewModel() {
     }
 
     fun setNom(nom: String) {
-        _user.value?.nom = nom
+        _user.value?.lastName = nom
     }
 
     fun setPrenom(prenom: String) {
-        _user.value?.prenom = prenom
+        _user.value?.firstName = prenom
     }
 
     fun setaddress(adresse: String) {
@@ -40,7 +40,7 @@ class RegisterViewModel: ViewModel() {
     }
 
     fun setNumTel(numtel: String) {
-        _user.value?.numeroTelephone = numtel
+        _user.value?.phoneNumber = numtel
     }
 
     fun setPhotoPerso(photo: String) {

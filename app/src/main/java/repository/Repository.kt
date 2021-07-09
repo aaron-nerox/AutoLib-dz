@@ -2,6 +2,8 @@ package repository
 
 import model.Authentication
 import model.AuthenticationResponse
+import model.Signal
+import model.User
 import retrofit2.Response
 import utils.RetrofitInstance
 

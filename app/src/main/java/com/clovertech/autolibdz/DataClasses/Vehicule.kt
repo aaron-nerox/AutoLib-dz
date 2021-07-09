@@ -15,5 +15,7 @@ data class Vehicle (
     val idBorne:Int,
     val longitude:String,
     val latitude:String,
-    val chassisNumber:String
+    val chassisNumber:String,
+    val numberOfPlaces:Int,
+    val speed:Int
 )

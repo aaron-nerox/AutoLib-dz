@@ -25,7 +25,7 @@ interface CarsApi {
         operator fun invoke():CarsApi{
             return Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl(baseUrl+"rental/")
+                    .baseUrl(baseUrl+"cars/")
                     .build()
                 .create(CarsApi::class.java)
 

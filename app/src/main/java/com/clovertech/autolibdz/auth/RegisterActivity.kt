@@ -85,7 +85,6 @@ class RegisterActivity : AppCompatActivity()  , View.OnClickListener {
     }
 
     fun register() {
-//        Toast.makeText(this, "Entered here ${model.user.value!!.nom}", Toast.LENGTH_SHORT).show()
         RetrofitInstance.registrationApi.registerUser(model.user.value!!).enqueue(object : Callback<User> {
             override fun onFailure(call: Call<User>, t: Throwable) {
                 Toast.makeText(this@RegisterActivity, "Register failed.", Toast.LENGTH_SHORT).show()

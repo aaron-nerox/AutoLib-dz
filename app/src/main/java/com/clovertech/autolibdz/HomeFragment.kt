@@ -37,7 +37,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import utils.RetrofitInstance
 
-
 class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickListener , View.OnClickListener {
 
     private lateinit var googleMap: GoogleMap
@@ -131,7 +130,8 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
                 searchDialogPark.show()
             }
             R.id.see_cars_btn -> {
-                startActivity(Intent(context,FindYourCarActivity::class.java))
+//                startActivity(Intent(context,FindYourCarActivity::class.java))
+                startActivity(Intent(context,CarsActivity::class.java))
             }
         }
     }
@@ -158,6 +158,7 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
 //                Toast.makeText(context, "Entered here", Toast.LENGTH_SHORT).show()
                 if (response.isSuccessful) {
 //                    Toast.makeText(context, "Response is successful", Toast.LENGTH_SHORT).show()
+
                     if (response.body() != null) {
                         val bornes = response.body()
                         bornes?.forEach { borne: Borne ->

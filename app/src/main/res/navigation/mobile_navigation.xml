@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+
+
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.clovertech.autolibdz.ui.listcars.ListCarsFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_list_car" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_listcar"
+            app:destination="@id/nav_listcar" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.clovertech.autolibdz.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="com.clovertech.autolibdz.ui.tarification.TarificationFragment"
+        tools:layout="@layout/tarification"
+        android:label="Tarification de reservation">
+        <action
+            android:id="@+id/action_nav_slideshow_to_nav_card"
+            app:destination="@id/nav_card" />
+        <action
+            android:id="@+id/action_nav_slideshow_to_nav_sub"
+            app:destination="@id/nav_sub" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_listcar"
+        android:name="com.clovertech.autolibdz.ui.cardetails.CarDetailsFragment"
+        android:label="Detail de Voiture"
+        tools:layout="@layout/fragment_car_details" >
+        <action
+            android:id="@+id/action_nav_listcar_to_nav_slideshow"
+            app:destination="@id/nav_slideshow" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_facture"
+        android:name="com.clovertech.autolibdz.ui.facture.FactureFragment"
+        android:label="@string/menu_facture"
+        tools:layout="@layout/fragment_facture" />
+    <fragment
+        android:id="@+id/nav_card"
+        android:name="com.clovertech.autolibdz.ui.card.CardFragment"
+        android:label="@string/menu_card"
+        tools:layout="@layout/fragment_card" />
+    <fragment
+        android:id="@+id/nav_sub"
+        android:name="com.clovertech.autolibdz.ui.subscription.SubscriptionFragment"
+        android:label="fragment_subscription"
+        tools:layout="@layout/fragment_subscription" />
+    <fragment
+        android:id="@+id/nav_promo"
+        android:name="com.clovertech.autolibdz.ui.promo.PromoFragment"
+        android:label="fragment_promo"
+        tools:layout="@layout/fragment_promo" />
+
+
+
+    <fragment
+        android:id="@+id/nav_profil"
+        android:name="com.clovertech.autolibdz.ui.profil.ProfilFragment"
+        android:label="Mon Profil"
+        tools:layout="@layout/activity_profile"
+        />
+
+    <fragment
+        android:id="@+id/nav_signals"
+        android:name="com.clovertech.autolibdz.ui.signals.SignalFragment"
+        android:label="Report Un Problème"
+        tools:layout="@layout/activity_signal"
+        />
+
+</navigation>

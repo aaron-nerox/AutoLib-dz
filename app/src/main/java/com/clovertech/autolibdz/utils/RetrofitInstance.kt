@@ -24,6 +24,7 @@ object RetrofitInstance {
             .readTimeout(60, TimeUnit.SECONDS)
             .build()
     }
+
     fun retrofitInstance(url: String): Retrofit =
         Retrofit.Builder()
             .baseUrl(url)

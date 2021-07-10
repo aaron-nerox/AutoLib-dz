@@ -15,6 +15,8 @@
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="android:windowBackground">?attr/colorPrimary</item>
+        <item name="fontFamily">@font/montserrat</item>
     </style>
 
     <style name="Theme.DarkGrey" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -64,7 +66,7 @@
     </style>
     <style name="AppModalStyle"
         parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/_rounded_top_20dp_white</item>
+        <item name="android:background">@drawable/view_background</item>
     </style>
     <!-- Style for Top corners radius Bottom Sheet -->
 

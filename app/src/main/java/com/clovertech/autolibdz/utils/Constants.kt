@@ -13,6 +13,6 @@ class Constants {
         const val SUB_BASE_URL = baseUrl+"subscription/"
         const val USER_BASE_URL = "http://54.37.87.85:7000/users/"
         const val SIGNAL_BASE_URL = "http://54.37.87.85:7000/signalements/"
-
+        const val APP_PREFS = "AUTO_LIB"
     }
 }

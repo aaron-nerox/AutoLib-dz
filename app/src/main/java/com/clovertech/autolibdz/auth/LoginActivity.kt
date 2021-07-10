@@ -2,7 +2,6 @@ package com.clovertech.autolibdz.auth
 
 import com.clovertech.autolibdz.ViewModel.MainViewModel
 import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
-import com.clovertech.autolibdz.ViewModel.MainViewModelFactoryCard
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -58,7 +57,7 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
         viewModel = ViewModelProvider(this, viewModelFactory)
                 .get(MainViewModel::class.java)
 
-        //startActivity(Intent(this, HomeActivity::class.java))
+        startActivity(Intent(this, HomeActivity::class.java))
 
         if (email_edit_txt.text.toString() == ""){
             email_edit_txt.setError("Email required !")

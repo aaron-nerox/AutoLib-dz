@@ -63,7 +63,7 @@ class TarificationFragment : Fragment(){
         val mod=arguments?.getString("model")
         model.text=mod
         val img=arguments?.getString("img")
-        Glide.with(context).load(img).into(img_v)
+        Glide.with(requireContext()).load(img).into(img_v)
         val uni_hr=arguments?.getInt("hr")
         val uni_jr=arguments?.getInt("jr")
         var sub=false

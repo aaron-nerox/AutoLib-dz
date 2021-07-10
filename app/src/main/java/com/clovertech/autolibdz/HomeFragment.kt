@@ -1,25 +1,38 @@
 package com.clovertech.autolibdz
 
+import android.Manifest
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.location.Geocoder
+import android.location.Location
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
+import android.text.TextWatcher
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.clovertech.autolibdz.Adapters.BorneAdapter
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import kotlinx.android.synthetic.main.activity_home.*
@@ -27,8 +40,10 @@ import kotlinx.android.synthetic.main.bottom_sheet_presistant_park.*
 import kotlinx.android.synthetic.main.bottom_sheet_presistant_park.view.*
 import kotlinx.android.synthetic.main.custom_search_dialog_black.*
 import kotlinx.android.synthetic.main.custom_search_dialog_black.view.*
+import kotlinx.android.synthetic.main.custom_search_dialog_park_expanded.*
 import kotlinx.android.synthetic.main.custom_search_dialog_yello.*
 import kotlinx.android.synthetic.main.custom_search_dialog_yello.view.*
+import kotlinx.android.synthetic.main.fragment_car_details.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import model.Borne
@@ -36,6 +51,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import utils.RetrofitInstance
+import java.util.*
 
 class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickListener , View.OnClickListener {
 
@@ -46,6 +62,48 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
     lateinit var searchDialogPark : Dialog
     var xPosition : Float = 0.0f
     var yPosition : Float = 0.0f
+    var mLastLocation: Location? = null
+    internal var mFusedLocationClient: FusedLocationProviderClient? = null
+    lateinit var mLocationRequest: LocationRequest
+
+    lateinit var bornes: List<Borne>
+    lateinit var adapter: BorneAdapter
+
+    internal var mLocationCallback: LocationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            val locationList = locationResult.locations
+            if (locationList.isNotEmpty()) {
+                //The last location in the list is the newest
+                val location = locationList.last()
+                Log.i("HomeFragment", "Location: " + location.latitude + " " + location.longitude)
+                mLastLocation = location
+
+                //Place current location marker
+                val latLng = LatLng(location.latitude, location.longitude)
+
+                val geo = Geocoder(requireContext(), Locale.getDefault())
+
+                var addresses = geo.getFromLocation(latLng.latitude, latLng.longitude, 1)
+                if (addresses.isNotEmpty()) {
+
+                    ville.text = addresses[0].subAdminArea
+                    region.text = addresses[0].locality
+//                    Toast.makeText(requireContext(), "Address:- " + addresses[0].featureName + addresses[0].adminArea + addresses[0].locality, Toast.LENGTH_LONG).show()
+                }
+
+                val borne = closestBorne(location)
+                addresses = geo.getFromLocation(borne.latitude.toDouble(),
+                    borne.longitude.toDouble(), 1)
+                if (addresses.isNotEmpty()) {
+                    borne_name.text = borne.city
+                    borne_address.text = addresses[0].locality
+                }
+
+                //move map camera
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13.0F))
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +126,13 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
         view.search_park.setOnClickListener(this)
         view.search_position_dialog.setOnClickListener(this)
         view.see_cars_btn.setOnClickListener(this)
+
+        adapter = BorneAdapter(requireContext(), this)
+        adapter.selectedBorne.observe(viewLifecycleOwner, {
+            borne_name.text = it.city
+        })
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         mapFragment = childFragmentManager.findFragmentById(R.id.google_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -93,6 +158,12 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
         })
 
         return view
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        mFusedLocationClient?.removeLocationUpdates(mLocationCallback)
     }
 
     override fun onClick(view: View?) {
@@ -121,13 +192,24 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
             }
             R.id.search_position -> {
                 searchDialogPosition.setContentView(R.layout.custom_search_dialog_position_expanded)
-                searchDialogPosition.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+                searchDialogPosition.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 searchDialogPosition.show()
             }
             R.id.search_park -> {
                 searchDialogPark.setContentView(R.layout.custom_search_dialog_park_expanded)
-                searchDialogPark.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+                searchDialogPark.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 searchDialogPark.show()
+
+                searchDialogPark.bornes_list.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+                searchDialogPark.bornes_list.adapter = adapter
+                searchDialogPark.searched_txt_position.addTextChangedListener {
+                    if (it != null) {
+                        val search = it.toString()
+                        adapter.setBornes(bornes.filter {
+                            it.city.contains(search)
+                        })
+                    }
+                }
             }
             R.id.see_cars_btn -> {
 //                startActivity(Intent(context,FindYourCarActivity::class.java))
@@ -138,14 +220,30 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
-        // Add a marker in Sydney and move the camera
-        val algeria = LatLng(28.0268755, 1.6528399999999976)
-        googleMap.addMarker(
-                MarkerOptions()
-                        .position(algeria)
-                        .title("Algeria")
-        )
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(algeria, 5f))
+
+        mLocationRequest = LocationRequest()
+        mLocationRequest.interval = 6000 // two minute interval
+        mLocationRequest.fastestInterval = 120000
+        mLocationRequest.priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                //Location Permission already granted
+                mFusedLocationClient?.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper()!!)
+                googleMap.isMyLocationEnabled = true
+            } else {
+                //Request Location Permission
+                checkLocationPermission()
+            }
+        } else {
+            mFusedLocationClient?.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper()!!)
+            googleMap.isMyLocationEnabled = true
+        }
+
 
         val call = RetrofitInstance.borneApi.getBornes()
         call.enqueue(object: Callback<List<Borne>> {
@@ -159,16 +257,17 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
                 if (response.isSuccessful) {
 //                    Toast.makeText(context, "Response is successful", Toast.LENGTH_SHORT).show()
 
-                    if (response.body() != null) {
-                        val bornes = response.body()
-                        bornes?.forEach { borne: Borne ->
-                            val borneCoordinates = LatLng(borne.latitude.toString().toDouble(), borne.longitude.toString().toDouble())
+                    val borne = response.body()
+                    if (borne != null) {
+                        bornes = borne
+                        adapter.setBornes(bornes)
+                        bornes.forEach {
+                            val borneCoordinates = LatLng(it.latitude.toString().toDouble(), it.longitude.toString().toDouble())
                             googleMap.addMarker(
                                     MarkerOptions()
                                             .position(borneCoordinates)
-                                            .title("Wilaya: ${borne.city}")
+                                            .title("Wilaya: ${it.city}")
                             )
-                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(borneCoordinates, 5f))
                         }
                     }
                 } else {
@@ -192,15 +291,115 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
     private fun moveSearchPositionDialog(){
         xPosition = search_position_dialog.x
         yPosition = search_position_dialog.y
-        var handler= Handler()
-        handler.postDelayed(object : Runnable {
-            override fun run() {
-                search_position_dialog.x = search_position_dialog.x + (search_position_dialog.width * 0.9).toFloat()
-                search_position_dialog.y = (0).toFloat()
-                checked_position.visibility = View.GONE
-                search_position.visibility = View.GONE
-            }
+        val handler= Handler()
+        handler.postDelayed({
+            search_position_dialog.x = search_position_dialog.x + (search_position_dialog.width * 0.9).toFloat()
+            search_position_dialog.y = (0).toFloat()
+            checked_position.visibility = View.GONE
+            search_position.visibility = View.GONE
         }, 500)
+    }
+
+    private fun checkLocationPermission() {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    requireActivity(),
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            ) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Location Permission Needed")
+                    .setMessage("This app needs the Location permission, please accept to use location functionality")
+                    .setPositiveButton(
+                        "OK"
+                    ) { _, _ ->
+                        //Prompt the user once explanation has been shown
+                        ActivityCompat.requestPermissions(
+                            requireActivity(),
+                            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                            MY_PERMISSIONS_REQUEST_LOCATION
+                        )
+                    }
+                    .create()
+                    .show()
+
+
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    MY_PERMISSIONS_REQUEST_LOCATION
+                )
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>, grantResults: IntArray
+    ) {
+        when (requestCode) {
+            MY_PERMISSIONS_REQUEST_LOCATION -> {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // location-related task you need to do.
+                    if (ContextCompat.checkSelfPermission(
+                            requireContext(),
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        ) == PackageManager.PERMISSION_GRANTED
+                    ) {
+
+                        mFusedLocationClient?.requestLocationUpdates(
+                            mLocationRequest,
+                            mLocationCallback,
+                            Looper.myLooper()!!
+                        )
+                        googleMap.isMyLocationEnabled = true
+                    }
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(requireContext(), "permission denied", Toast.LENGTH_LONG).show()
+                }
+                return
+            }
+        }
+    }
+
+    fun closestBorne(source: Location): Borne {
+
+        var distance = 1000000f
+        var borne = bornes[0]
+        bornes.forEach {
+            val destination = Location("destination")
+            destination.latitude = it.latitude.toDouble()
+            destination.longitude = it.longitude.toDouble()
+
+            val dist = source.distanceTo(destination)
+            if (dist < distance) {
+                distance = dist
+                borne = it
+            }
+        }
+
+        return borne
+    }
+
+    companion object {
+        const val MY_PERMISSIONS_REQUEST_LOCATION = 99
     }
 
 }

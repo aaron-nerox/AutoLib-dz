@@ -9,13 +9,14 @@ import model.SubscriptionResponse
 import model.paySubRequest
 import model.paySubResponse
 import retrofit2.Response
+import utils.RetrofitInstance
 
 class PaymentRepository {
     suspend fun pushCard(paymentMethod: PaymentMethod) : Response<paymentResponse> {
-        return RetrofitInstance.api.pushCard(paymentMethod)
+        return RetrofitInstance.cardApi.pushCard(paymentMethod)
     }
     suspend fun pay(pay: Pay) : Response<PayResponse> {
-        return RetrofitInstance.api.pay(pay)
+        return RetrofitInstance.cardApi.pay(pay)
     }
     suspend fun addSub(subscriptionRequest: SubscriptionRequest) : Response<SubscriptionResponse> {
         return RetrofitInstance.subApi.addSub(subscriptionRequest)

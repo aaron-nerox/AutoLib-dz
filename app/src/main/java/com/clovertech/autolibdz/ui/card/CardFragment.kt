@@ -1,5 +1,6 @@
 package com.clovertech.autolibdz.ui.card
 
+import ViewModel.ViewModelCard
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_card.*
 class CardFragment : Fragment() {
 
 
-    private lateinit var cardViewModel: CardViewModel
+    private lateinit var cardViewModel: ViewModelCard
     private lateinit var viewModel: ViewModelCards
     private lateinit var cardFactory:ViewModelCardsFactory
 
@@ -33,7 +34,7 @@ class CardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         cardViewModel =
-            ViewModelProvider(this).get(CardViewModel::class.java)
+            ViewModelProvider(this).get(ViewModelCard::class.java)
         val root = inflater.inflate(R.layout.fragment_card, container, false)
 
         return root

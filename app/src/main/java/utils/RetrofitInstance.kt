@@ -111,4 +111,8 @@ object RetrofitInstance {
         retrofitUser.create(UserApi::class.java)
     }
 
+    val cardApi : PayApi by lazy {
+        retrofitGetCards.create(PayApi::class.java)
+    }
+
 }

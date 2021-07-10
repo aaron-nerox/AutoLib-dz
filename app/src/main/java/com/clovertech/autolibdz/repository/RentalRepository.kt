@@ -2,6 +2,7 @@ package com.clovertech.autolibdz.repository
 
 import model.Rental
 import retrofit2.Response
+import utils.RetrofitInstance
 
 class RentalRepository {
 

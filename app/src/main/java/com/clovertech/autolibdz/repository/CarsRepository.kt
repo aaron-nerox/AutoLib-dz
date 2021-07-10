@@ -1,7 +1,7 @@
 package com.clovertech.autolibdz.repository
 
 import api.CarsApi
-import com.clovertech.autolibdz.APIs.SafeCarsRequest
+import api.SafeCarsRequest
 import model.Rental
 
 class CarsRepository(

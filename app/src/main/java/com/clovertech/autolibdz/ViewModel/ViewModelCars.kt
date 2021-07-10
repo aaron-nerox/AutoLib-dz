@@ -3,7 +3,7 @@ package com.clovertech.autolibdz.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.clovertech.autolibdz.APIs.Couroutines
+import api.Couroutines
 import model.Rental
 import model.Vehicle
 import com.clovertech.autolibdz.repository.CarsRepository

@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.ViewModel.RentalViewModel
 import com.clovertech.autolibdz.ViewModel.RentalViewModelFactory
+import com.clovertech.autolibdz.ViewModel.ViewModelCars
 import com.clovertech.autolibdz.repository.RentalRepository
 import kotlinx.android.synthetic.main.fragment_car_details.*
 import java.time.Instant
@@ -26,7 +27,7 @@ import java.time.format.DateTimeFormatter
 class CarDetailsFragment : Fragment() {
 
 
-    private lateinit var carDetailViewModel: CarDetailsViewModel
+    private lateinit var carDetailViewModel: ViewModelCars
     private lateinit var rentalViewModel: RentalViewModel
 
     override fun onCreateView(
@@ -35,7 +36,7 @@ class CarDetailsFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         carDetailViewModel =
-                ViewModelProvider(this).get(CarDetailsViewModel::class.java)
+                ViewModelProvider(this).get(ViewModelCars::class.java)
         val root = inflater.inflate(R.layout.fragment_car_details, container, false)
 
         return root
@@ -48,7 +49,7 @@ class CarDetailsFragment : Fragment() {
         val model=arguments?.getString("model")
         car.text=model
         val img=arguments?.getString("img")
-        Glide.with(context).load(img).into(img_car)
+        Glide.with(requireContext()).load(img).into(img_car)
         val uni_hr=arguments?.getInt("hr")
         val uni_jr=arguments?.getInt("jr")
         val brand=arguments?.getString("brand")

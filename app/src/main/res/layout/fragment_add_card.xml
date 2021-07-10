@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.card.AddCardFragment">
+
+
+    <LinearLayout
+        android:id="@+id/add_card_frag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <ImageButton
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@null"
+            android:padding="10dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="45dp"
+            android:text="@string/add_card"
+            android:textSize="25dp" />
+
+
+        <EditText
+            android:id="@+id/card_number"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_input"
+            android:ems="10"
+            android:hint="@string/card_num"
+            android:inputType="number"
+            android:paddingLeft="20dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
+                android:text="@string/exp"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/mois_exp"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/rounded_input"
+                android:ems="10"
+                android:hint="@string/mm"
+                android:inputType="number"
+                android:paddingLeft="20dp" />
+
+            <EditText
+                android:id="@+id/year_exp"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded_input"
+                android:ems="10"
+                android:hint="@string/yy"
+                android:inputType="number"
+                android:paddingLeft="20dp" />
+
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/sec_code"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rounded_input"
+            android:ems="10"
+            android:hint="@string/sec_code"
+            android:inputType="number"
+            android:paddingLeft="20dp" />
+
+        <EditText
+            android:id="@+id/nom"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rounded_input"
+            android:ems="10"
+            android:hint="@string/firstname"
+            android:inputType="textPersonName"
+            android:paddingLeft="20dp" />
+
+        <EditText
+            android:id="@+id/prenom"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rounded_input"
+            android:ems="10"
+            android:hint="@string/lastname"
+            android:inputType="textPersonName"
+            android:paddingLeft="20dp" />
+
+        <Button
+            android:id="@+id/add_card_conf"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/rounded_button"
+            android:drawableLeft="@drawable/ic_baseline_add_24"
+            android:gravity="center"
+            android:text="@string/add_card"
+            app:backgroundTint="@color/grey" />
+
+
+    </LinearLayout>
+</FrameLayout>

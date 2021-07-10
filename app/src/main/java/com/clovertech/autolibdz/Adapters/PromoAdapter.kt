@@ -20,6 +20,7 @@ import com.clovertech.autolibdz.ui.promo.pricetotarif
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import utils.RetrofitInstance
 import kotlin.math.roundToInt
 
 class PromoAdapter(val context: Context, var data:List<Promo>, var priceReduHelper:EditText, val totalprice:Int): RecyclerView.Adapter<MyPHolder>() {
@@ -45,7 +46,7 @@ class PromoAdapter(val context: Context, var data:List<Promo>, var priceReduHelp
             idCodePromo=id
           //  Toast.makeText(context,"total for reduction : $totalprice",Toast.LENGTH_SHORT).show()
 
-            val call =RetrofitInstance.retrofitReduPrice.getReduPriceByidPromo(totalprice,id)
+            val call = RetrofitInstance.retrofitReduPrice.getReduPriceByidPromo(totalprice,id)
             call.enqueue(object:Callback<ReduPriceResponse> {
                 override fun onFailure(call: Call<ReduPriceResponse>, t: Throwable) {
                     Log.d("fail", t.toString())

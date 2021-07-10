@@ -33,11 +33,7 @@ class Register2Fragment : Fragment() , View.OnClickListener{
         view.photo_profile_layout.setOnClickListener(this)
 
         viewModel.user.observe(viewLifecycleOwner, {
-<<<<<<< HEAD
             view.phone.append(it.phoneNumber)
-=======
-            view.phone.append(it.numeroTelephone)
->>>>>>> d61fb732fea93565d7e7f1452d87d75e7c4b505f
         })
 
         view.phone.addTextChangedListener{

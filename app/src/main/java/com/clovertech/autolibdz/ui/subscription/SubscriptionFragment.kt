@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_subscription.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import utils.RetrofitInstance
 
 class SubscriptionFragment  : Fragment() {
 

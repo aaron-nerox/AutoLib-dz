@@ -2,7 +2,7 @@ package com.clovertech.autolibdz.repository
 
 import api.CardsApi
 
-import com.clovertech.autolibdz.APIs.SafeCardsRequest
+import api.SafeCardsRequest
 
 class CardsRepository (
     private val apiGetCard : CardsApi

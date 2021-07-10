@@ -41,7 +41,7 @@ class ListCarsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val carsApi= CarsApi()
+        val carsApi=CarsApi()
         val repository=CarsRepository(carsApi)
 
 
@@ -55,21 +55,21 @@ class ListCarsFragment : Fragment() {
                     Toast.LENGTH_LONG
                 ).show()
             }   else {
-            Toast.makeText(
-                activity,
-                "Error Occurred: ${response.isEmpty()}",
-                Toast.LENGTH_LONG
-            ).show()
-        }
+                Toast.makeText(
+                    activity,
+                    "Error Occurred: ${response.isEmpty()}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
 
         }
-       carsFactory=ViewModelCarsFactory(repository)
+        carsFactory=ViewModelCarsFactory(repository)
         viewModel=ViewModelProvider(this,carsFactory).get(ViewModelCars::class.java)
 
-           /* list_cars.layoutManager = LinearLayoutManager(activity)
-            list_cars.adapter = adapter*/
+        /* list_cars.layoutManager = LinearLayoutManager(activity)
+         list_cars.adapter = adapter*/
         viewModel.getListCarsByStat("available",2)
-       // Toast.makeText(requireContext(),viewModel.carsByStat.toString(),Toast.LENGTH_LONG)
+        // Toast.makeText(requireContext(),viewModel.carsByStat.toString(),Toast.LENGTH_LONG)
         viewModel.carsByStat.observe(viewLifecycleOwner, Observer { cars->
             list_cars.also {
                 it.layoutManager=LinearLayoutManager(requireContext())
@@ -78,25 +78,22 @@ class ListCarsFragment : Fragment() {
                 //it.adapter.setCarsList(cars)
                 //adapter.setCarsList(cars)
             }
-            })
-        }
-
-
-
-
-
+        })
     }
+
+
+
+
+
+}
 /*
     private fun executeCall():List<Vehicle>{
         var data = mutableListOf<Vehicle>()
-
         val executorService = Executors.newFixedThreadPool(4)
         //AsyncTask.execute(){
         executorService.execute { CoroutineScope(Dispatchers.Main).launch {
-
             try {
                 val response = ApiClientCars.apiService.getCarsListByState("available")
-
                 if (response.isSuccessful && response.body() != null) {
                     val content = response.body()
                     if (content != null) {
@@ -107,11 +104,9 @@ class ListCarsFragment : Fragment() {
                         Toast.makeText(
                             activity,
                             "prix: ${content[0].unitpriceperday}",
-
                             Toast.LENGTH_LONG
                         ).show()
                     }
-
                 } else {
                     Toast.makeText(
                         activity,
@@ -119,7 +114,6 @@ class ListCarsFragment : Fragment() {
                         Toast.LENGTH_LONG
                     ).show()
                 }
-
             } catch (e: Exception) {
                 Toast.makeText(
                     activity,
@@ -129,7 +123,5 @@ class ListCarsFragment : Fragment() {
             }
         }
         }
-
         return  data
-
     }*/

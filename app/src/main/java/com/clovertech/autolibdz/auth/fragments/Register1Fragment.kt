@@ -8,10 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-<<<<<<< HEAD
-=======
 import androidx.lifecycle.observe
->>>>>>> d61fb732fea93565d7e7f1452d87d75e7c4b505f
 import com.clovertech.autolibdz.R
 import kotlinx.android.synthetic.main.fragment_register1.view.*
 
@@ -30,13 +27,8 @@ class Register1Fragment : Fragment() {
 
         viewModel.user.observe(viewLifecycleOwner, {
             view.email.append(it.userName)
-<<<<<<< HEAD
             view.nom.append(it.lastName)
             view.prenom.append(it.firstName)
-=======
-            view.nom.append(it.nom)
-            view.prenom.append(it.prenom)
->>>>>>> d61fb732fea93565d7e7f1452d87d75e7c4b505f
             view.adresse.append(it.address)
         })
 

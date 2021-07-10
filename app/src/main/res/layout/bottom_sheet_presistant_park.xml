@@ -37,6 +37,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/park_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
@@ -244,6 +245,7 @@
                 app:tint="@color/yello" />
 
             <TextView
+                android:id="@+id/location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
@@ -307,7 +309,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:text="Open 25/24H"
+                android:text="Open 24/24H"
                 android:textSize="18sp"
                 android:textColor="#FFF"/>
 

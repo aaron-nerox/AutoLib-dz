@@ -59,7 +59,7 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
     private lateinit var mapFragment: SupportMapFragment
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
     lateinit var searchDialogPosition : Dialog
-    lateinit var searchDialogPark : Dialog
+    var searchDialogPark : Dialog? = null
     var xPosition : Float = 0.0f
     var yPosition : Float = 0.0f
     var mLastLocation: Location? = null
@@ -92,6 +92,7 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
                 }
 
                 val borne = closestBorne(location)
+                adapter.selectedBorne.value = borne
                 addresses = geo.getFromLocation(borne.latitude.toDouble(),
                     borne.longitude.toDouble(), 1)
                 if (addresses.isNotEmpty()) {
@@ -109,7 +110,7 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
         super.onCreate(savedInstanceState)
 
         searchDialogPosition = Dialog(requireContext())
-        searchDialogPark = Dialog(requireContext())
+
 
     }
 
@@ -128,9 +129,6 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
         view.see_cars_btn.setOnClickListener(this)
 
         adapter = BorneAdapter(requireContext(), this)
-        adapter.selectedBorne.observe(viewLifecycleOwner, {
-            borne_name.text = it.city
-        })
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
@@ -182,13 +180,32 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
                 moveSearchPositionDialog()
             }
             R.id.checked_park -> {
-                search_park_dialog.visibility = View.GONE
-                bottomSheetBehavior.state = STATE_COLLAPSED
-                val layout = mapFragment.view?.layoutParams
 
-                val height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 520f , resources.displayMetrics).toInt()
-                layout?.height = height
-                mapFragment.view?.layoutParams = layout
+                val borne = adapter.selectedBorne.value
+
+                if (borne != null) {
+                    park_name.text = borne.city
+
+                    val geo = Geocoder(requireContext(), Locale.getDefault())
+
+                    val addresses = geo.getFromLocation(borne.latitude.toDouble(), borne.longitude.toDouble(), 1)
+                    if (addresses.isNotEmpty()) {
+                        location.text = addresses[0].locality
+
+                        search_park_dialog.visibility = View.GONE
+                        bottomSheetBehavior.state = STATE_COLLAPSED
+                        val layout = mapFragment.view?.layoutParams
+
+                        // reduce the size of the map to ensure that the bottom bar functions correctly
+                        val height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 520f , resources.displayMetrics).toInt()
+                        layout?.height = height
+                        mapFragment.view?.layoutParams = layout
+                    }
+                } else {
+                    Log.e("no borne", "no selected borne found")
+                }
+
+
             }
             R.id.search_position -> {
                 searchDialogPosition.setContentView(R.layout.custom_search_dialog_position_expanded)
@@ -196,20 +213,37 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
                 searchDialogPosition.show()
             }
             R.id.search_park -> {
-                searchDialogPark.setContentView(R.layout.custom_search_dialog_park_expanded)
-                searchDialogPark.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                searchDialogPark.show()
+                if (searchDialogPark == null) {
+                    searchDialogPark = Dialog(requireContext())
 
-                searchDialogPark.bornes_list.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-                searchDialogPark.bornes_list.adapter = adapter
-                searchDialogPark.searched_txt_position.addTextChangedListener {
-                    if (it != null) {
-                        val search = it.toString()
-                        adapter.setBornes(bornes.filter {
-                            it.city.contains(search)
-                        })
+                    searchDialogPark!!.setContentView(R.layout.custom_search_dialog_park_expanded)
+                    searchDialogPark!!.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                    searchDialogPark!!.bornes_list.layoutManager = LinearLayoutManager(
+                        requireActivity(),
+                        LinearLayoutManager.VERTICAL,
+                        false
+                    )
+                    searchDialogPark!!.bornes_list.adapter = adapter
+
+                    adapter.selectedBorne.observe(viewLifecycleOwner, {
+                        borne_name.text = it.city
+                        searchDialogPark!!.dismiss()
+                    })
+
+                    searchDialogPark!!.searched_txt_position.addTextChangedListener {
+                        if (it != null) {
+                            val search = it.toString()
+                            adapter.setBornes(bornes.filter {
+                                it.city.contains(search)
+                            })
+                        }
                     }
+
                 }
+
+                searchDialogPark?.show()
+
             }
             R.id.see_cars_btn -> {
 //                startActivity(Intent(context,FindYourCarActivity::class.java))

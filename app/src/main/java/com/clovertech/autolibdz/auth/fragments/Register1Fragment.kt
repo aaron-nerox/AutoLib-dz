@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observe
 import com.clovertech.autolibdz.R
 import kotlinx.android.synthetic.main.fragment_register1.view.*
 

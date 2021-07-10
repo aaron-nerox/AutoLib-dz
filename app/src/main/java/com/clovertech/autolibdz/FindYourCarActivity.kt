@@ -45,8 +45,9 @@ class FindYourCarActivity : AppCompatActivity() {
     }
     private val onLink: Emitter.Listener = Emitter.Listener {
 
-        val data: JSONObject = it[0] as JSONObject
+        /*val data: JSONObject = it[0] as JSONObject
         nameTablet = data.getString("nomLocataire")
+        */
         this.runOnUiThread(Runnable {
             Toast.makeText(this, "Discovering ...", Toast.LENGTH_SHORT).show()
         })
@@ -119,15 +120,19 @@ class FindYourCarActivity : AppCompatActivity() {
         }
 
         val jsonInfos = JSONObject()
-        jsonInfos.put("idVehicule", 2)
+        jsonInfos.put("idVehicule", 4)
         val jsonInfosObj = JSONObject()
-        jsonInfosObj.put("id", 1)
+        jsonInfosObj.put("id", 5)
+
+
         val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
         val name: String = mBluetoothAdapter.name
         jsonInfosObj.put("nom", name)
         jsonInfos.put("locataire", jsonInfosObj)
-        Toast.makeText(this, "Discover peers button Clicked ...", Toast.LENGTH_SHORT).show()
         mSocket.emit("demande vehicule", jsonInfos)
+
+        // end location { idLoc }
+
 
         val acceptThread = AcceptThread(this)
         acceptThread?.start()
@@ -139,7 +144,7 @@ class FindYourCarActivity : AppCompatActivity() {
         mSocket.on(Socket.EVENT_CONNECT, onConnected)
         mSocket.on("error", onError)
         mSocket.on("connect_error", onError)
-        mSocket.on("start link", onLink)
+        mSocket.on("link started", onLink)
         mSocket.on("disconnect", onDisconnect)
         mSocket.connect()
 
@@ -166,8 +171,8 @@ class FindYourCarActivity : AppCompatActivity() {
 
     private val onConnected: Emitter.Listener = Emitter.Listener {
         val obj = JSONObject()
-        obj.put("id", 1)
-        mSocket.emit("connected vehicule", obj)
+        obj.put("id", 3)
+        // mSocket.emit("connected vehicule", obj)
     }
 
     override fun onDestroy() {
@@ -187,20 +192,35 @@ class FindYourCarActivity : AppCompatActivity() {
 
 
 private class AcceptThread(
-        val activity: FindYourCarActivity
+
+    val activity: FindYourCarActivity
 ) : Thread() {
 
     private var mmServerSocket: BluetoothServerSocket? = null
 
     override fun run() {
-        mmServerSocket = bluetoothAdapter?.listenUsingInsecureRfcommWithServiceRecord("PermissionsP2p", UUID(100, 200))
+        try {
+            mmServerSocket = bluetoothAdapter?.listenUsingInsecureRfcommWithServiceRecord(
+                "PermissionsP2p",
+                UUID(100, 200)
+            )
+        } catch (e: Exception) {
+            Log.e("exception", e.localizedMessage)
+        }
         // Keep listening until exception occurs or a socket is returned.
         var shouldLoop = true
         while (shouldLoop) {
             val socket: BluetoothSocket? = try {
 
                 val bluetoothSocket = mmServerSocket?.accept()
-                activity.runOnUiThread { Toast.makeText(activity, "Change the UI to indicate that the connexion has been done successfully!", Toast.LENGTH_LONG).show() }
+//                activity.runOnUiThread {
+//                    Toast.makeText(
+//                        activity,
+//                        "Change the UI to indicate that the connexion has been done successfully!",
+//                        Toast.LENGTH_LONG
+//                    ).show()
+//                }
+
                 bluetoothSocket
             } catch (e: IOException) {
                 Log.e(ContentValues.TAG, "Socket's accept() method failed", e)
@@ -211,8 +231,10 @@ private class AcceptThread(
                 var input = ByteArray(1)
                 it.inputStream.read(input)
                 activity.runOnUiThread {
-                    val associationStatus = activity.findViewById<TextView>(R.id.association_status_id)
-                    associationStatus.text = "Association effectuée avec ${socket.remoteDevice.name}"
+                    val associationStatus =
+                        activity.findViewById<TextView>(R.id.association_status_id)
+                    associationStatus.text =
+                        "Association effectuée avec ${socket.remoteDevice.name}"
                 }
                 // mmServerSocket?.close()
                 // shouldLoop = false

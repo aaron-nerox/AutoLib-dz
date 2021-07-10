@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolibdz.HomeActivity
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.password.ResetPasswordActivity
+import com.clovertech.autolibdz.ui.promo.idTenantHelper
 import kotlinx.android.synthetic.main.activity_login.*
 import model.Authentication
 import repository.Repository
@@ -57,6 +58,7 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
                 .get(MainViewModel::class.java)
 
         startActivity(Intent(this, HomeActivity::class.java))
+
         if (email_edit_txt.text.toString() == ""){
             email_edit_txt.setError("Email required !")
         }else if (password_edit_txt.text.toString() == ""){
@@ -68,11 +70,15 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
                 if (response.isSuccessful) {
                     Toast.makeText(this, "SignIn Successfully", Toast.LENGTH_SHORT).show()
                     saveUserToken(response.body()?.token.toString())
+
+                    val idTenant=response.body()?.id
+                    idTenantHelper=idTenant!!
                     startActivity(Intent(this, HomeActivity::class.java))
-                    Log.e("Push", response.body()?.token.toString())
+                    Log.e("Push", response.body()?.id.toString())
                     Log.e("Push", response.body().toString())
                     Log.e("Push", response.code().toString())
                     Log.e("Push", response.message())
+
                 } else {
                     Toast.makeText(this, "Login failed !!! ${response.message()}", Toast.LENGTH_SHORT).show()
                     Log.e("Push", response.body().toString())

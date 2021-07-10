@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profil"
+            android:icon="@drawable/ic_baseline_account_box_24"
+            android:title="Mon Profil"
+            />
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/menu_home" />
+
+        <item
+            android:id="@+id/nav_facture"
+            android:icon="@drawable/ic_baseline_facture_24"
+            android:iconTint="@color/black"
+            android:title="@string/menu_facture" />
+        <item
+            android:id="@+id/nav_card"
+            android:icon="@drawable/ic_baseline_payment_24"
+            android:iconTint="@color/black"
+            android:title="@string/menu_card" />
+        <item
+            android:id="@+id/nav_sub"
+            android:icon="@drawable/ic_baseline_payment_24"
+            android:iconTint="@color/black"
+            android:title="Subscription" />
+        <item android:id="@+id/nav_signals"
+            android:icon="@drawable/ic_baseline_message_24"
+            android:iconTint="@color/black"
+            android:title="Signalé problème"
+            />
+
+
+    </group>
+</menu>

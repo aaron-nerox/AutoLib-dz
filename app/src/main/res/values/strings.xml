@@ -1,20 +1,34 @@
 <resources>
     <string name="app_name">AutoLib DZ</string>
-    <string name="map_key" translatable="false">AIzaSyB_qsP8AOP_P0MdlPz-48TDaJYjTP3vbjo</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!--       -->
+
     <string name="pay">Payer</string>
     <string name="prix">Prix Total</string>
     <string name="dure">Durée</string>
-    <string name="reservation">Informations de reservation</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallerie</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="reservation">Informations de réservation</string>
     <string name="code">Code Promo</string>
-    <string name="condition">J"accepte cette condition de location.</string>
-    <string name="warning">Assurez-vous de remettre la voiture dans delai sinon il y aura une pénalité tardive</string>
+    <string name="condition">J\'accepte cette condition de location</string>
+    <string name="warning">Assurez-vous de remettre la voiture dans les delai sinon il y aura une pénalité de retard</string>
     <string name="car">VOLKSWAGEN POLO 6</string>
     <string name="general">Specifications General</string>
     <string name="marque">VOLKSWAGEN POLO</string>
-    <string name="price">4000 Da/Hr</string>
+    <string name="unit_price_hour_text">Prix unitaire par Heure</string>
+    <string name="unit_price_hour">4000 Da/Hr</string>
+    <string name="unit_price_day_text">Prix unitaire par jour</string>
+    <string name="unit_price_day">4000 Da/Hr</string>
     <string name="estimation">Prix estimé.</string>
     <string name="detrails">Details</string>
-    <string name="search">   Chercher par marque voiture ...</string>
+    <string name="search">Chercher voiture par marque ...</string>
     <string name="rating">4.6</string>
     <string name="speed">240 Km/H</string>
     <string name="engine">12488 cc</string>
@@ -37,19 +51,55 @@
         <item>Jour</item>
         <item>Heure</item>
     </string-array>
+    <string-array name="cards">
+        <item>Card Credit</item>
+        <item>Card Abonnement</item>
+    </string-array>
+
+    <!--  Facture   -->
+
     <string name="menu_facture">Mes factures</string>
     <string name="menu_card">Mes cartes</string>
-    <string name="choose_card">Choose your card</string>
-    <string name="id_facture">ID Facture</string>
+    <string name="choose_card">Choisissez une carte</string>
+    <string name="id_facture">N° Facture</string>
     <string name="date">Date</string>
     <string name="Lieu">Lieu</string>
-    <string name="add_card">Add Card</string>
-    <string name="card_num">Card number</string>
-    <string name="exp">Expiry</string>
+
+    <!--  Subscription   -->
+
+    <string name="add_card">Ajouter carte</string>
+    <string name="card_num">N° Carte</string>
+    <string name="exp">Date d\'expiration</string>
+    <string name="sec_code">Code de sécurité</string>
+    <string name="lamia">Selmane Lamia</string>
+    <string name="firstname">Prénom</string>
+    <string name="lastname">Nom</string>
+
+
+    <string name="do_pay">Voulez-vous vraiment utiliser cette carte pour le paiement ?</string>
+    <string name="confirm">Confirmer</string>
+    <string name="ur_card">Ma carte d\'abonnement</string>
+    <string name="create">Créer</string>
+    <string name="cancel">Annuler</string>
+    <string name="create_abon">Créer une carte d\'abonnement</string>
+    <string name="total">Vos points</string>
+    <string name="select">Selectionnez un code promo</string>
+    <string name="SucdialogTitle">Paiement effectué !</string>
+    dialogMessage
+    <string name="SucdialogMessage">Votre paiement a été effectué avec succes, vérifier votre mail pour la facture.</string>
+    <string name="map_key" translatable="false">AIzaSyB_qsP8AOP_P0MdlPz-48TDaJYjTP3vbjo</string>
+
+    <!--  Additional stuff   -->
+
     <string name="mm">MM</string>
     <string name="yy">YY</string>
-    <string name="sec_code">Security Code</string>
-    <string name="lamia">Selmane Lamia</string>
-    <string name="firstname">First Name</string>
-    <string name="lastname">Last Name</string>
+
+
+
+    <string name="mat">Matricule :</string>
+    <string name="mat_v"> 115 119 25634</string>
+    <string name="model">Model :</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="getting_your_location">Getting your location</string>
+    <string name="please_wait">please wait...</string>
 </resources>

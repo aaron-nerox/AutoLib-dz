@@ -1,6 +1,7 @@
 package com.clovertech.autolibdz
 
 import android.Manifest
+import android.app.ActionBar
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
@@ -27,6 +28,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.clovertech.autolibdz.Adapters.BorneAdapter
+import com.clovertech.autolibdz.Adapters.ImageVehiculeAdapter
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -47,6 +49,7 @@ import kotlinx.android.synthetic.main.fragment_car_details.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import model.Borne
+import model.Vehicle
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -81,6 +84,9 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
                 //Place current location marker
                 val latLng = LatLng(location.latitude, location.longitude)
 
+                //move map camera
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13.0F))
+
                 val geo = Geocoder(requireContext(), Locale.getDefault())
 
                 var addresses = geo.getFromLocation(latLng.latitude, latLng.longitude, 1)
@@ -91,17 +97,18 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
 //                    Toast.makeText(requireContext(), "Address:- " + addresses[0].featureName + addresses[0].adminArea + addresses[0].locality, Toast.LENGTH_LONG).show()
                 }
 
-                val borne = closestBorne(location)
-                adapter.selectedBorne.value = borne
-                addresses = geo.getFromLocation(borne.latitude.toDouble(),
-                    borne.longitude.toDouble(), 1)
-                if (addresses.isNotEmpty()) {
-                    borne_name.text = borne.city
-                    borne_address.text = addresses[0].locality
+                if (bornes != null) {
+                    val borne = closestBorne(location)
+                    adapter.selectedBorne.value = borne
+                    addresses = geo.getFromLocation(borne.latitude.toDouble(),
+                        borne.longitude.toDouble(), 1)
+                    if (addresses.isNotEmpty()) {
+                        borne_name.text = borne.city
+                        borne_address.text = addresses[0].locality
+                    }
                 }
 
-                //move map camera
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13.0F))
+
             }
         }
     }
@@ -139,17 +146,31 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
         bottomSheetBehavior.state = STATE_HIDDEN
         bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
+                val layout = mapFragment.view?.layoutParams
                 if (newState == STATE_EXPANDED) {
                     activity?.bottom_bar?.visibility = View.GONE
                     images_container.visibility = View.VISIBLE
                     img_container.visibility = View.GONE
                     dots.visibility = View.VISIBLE
                 }
-                else if (newState == STATE_HIDDEN || newState == STATE_COLLAPSED) {
+                else if (newState == STATE_COLLAPSED) {
                     activity?.bottom_bar?.visibility = View.VISIBLE
                     images_container.visibility = View.GONE
                     img_container.visibility = View.VISIBLE
                     dots.visibility = View.GONE
+
+                    // reduce the size of the map to ensure that the bottom bar functions correctly
+                    val height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 520f , resources.displayMetrics).toInt()
+                    layout?.height = height
+                    mapFragment.view?.layoutParams = layout
+                } else if (newState == STATE_HIDDEN) {
+                    activity?.bottom_bar?.visibility = View.VISIBLE
+                    images_container.visibility = View.GONE
+                    img_container.visibility = View.VISIBLE
+                    dots.visibility = View.GONE
+
+                    layout?.height = ActionBar.LayoutParams.MATCH_PARENT
+                    mapFragment.view?.layoutParams = layout
                 }
             }
             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
@@ -186,6 +207,29 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
                 if (borne != null) {
                     park_name.text = borne.city
 
+                    // get vehicules borne
+                    val vehiculeAdapter = ImageVehiculeAdapter(requireContext())
+                    images_container.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                    images_container.adapter = vehiculeAdapter
+
+                    RetrofitInstance.borneApi.getVehiculesBorne(borne.idBorne)
+                        .enqueue(object: Callback<List<Vehicle>> {
+                            override fun onResponse(
+                                call: Call<List<Vehicle>>,
+                                response: Response<List<Vehicle>>
+                            ) {
+                                if (response.isSuccessful) {
+                                    vehiculeAdapter.setCarList(response.body()!!)
+                                }
+                            }
+
+                            override fun onFailure(call: Call<List<Vehicle>>, t: Throwable) {
+                                Log.e("list vehicules", t.localizedMessage)
+                            }
+
+                        })
+
+
                     val geo = Geocoder(requireContext(), Locale.getDefault())
 
                     val addresses = geo.getFromLocation(borne.latitude.toDouble(), borne.longitude.toDouble(), 1)
@@ -194,12 +238,7 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
 
                         search_park_dialog.visibility = View.GONE
                         bottomSheetBehavior.state = STATE_COLLAPSED
-                        val layout = mapFragment.view?.layoutParams
 
-                        // reduce the size of the map to ensure that the bottom bar functions correctly
-                        val height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 520f , resources.displayMetrics).toInt()
-                        layout?.height = height
-                        mapFragment.view?.layoutParams = layout
                     }
                 } else {
                     Log.e("no borne", "no selected borne found")
@@ -247,7 +286,7 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
             }
             R.id.see_cars_btn -> {
 //                startActivity(Intent(context,FindYourCarActivity::class.java))
-                startActivity(Intent(context,CarsActivity::class.java))
+                startActivity(Intent(context, CarsActivity::class.java))
             }
         }
     }

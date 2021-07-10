@@ -2,7 +2,7 @@ package model
 
 
 class Borne(
-        val idBorne: String,
+        val idBorne: Int,
         val nbOccupiedPlaces: Int,
         val nbTotalPlaces: Int,
         val nbMaintenanceAgents: Int,

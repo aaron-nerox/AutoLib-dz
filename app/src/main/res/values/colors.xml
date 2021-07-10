@@ -23,4 +23,5 @@
     <color name="light_grey">#EFEFEF</color>
     <color name="visa_blue500">#0071A5</color>
     <color name="visa_blue200">#1FB7FB</color>
+    <color name="input_color">#41737373</color>
 </resources>

@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -29,6 +30,7 @@ import com.clovertech.autolibdz.ViewModel.RentalViewModelFactory
 import com.clovertech.autolibdz.repository.RentalRepository
 import com.clovertech.autolibdz.ui.card.ConfirmPayFragment
 import com.clovertech.autolibdz.ui.promo.*
+import com.clovertech.autolibdz.utils.Constants
 import kotlinx.android.synthetic.main.fragment_promo.*
 import kotlinx.android.synthetic.main.tarification.*
 import java.time.Instant
@@ -80,8 +82,8 @@ class TarificationFragment : Fragment(){
                 .get(RentalViewModel::class.java)
         Log.d("idTenant",id.toString())
 
-        val preferences: SharedPreferences =  requireActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE)
-        preferences.edit().putInt("idcar", idcar).apply()
+        val prefs = requireActivity().getSharedPreferences(Constants.APP_PREFS, AppCompatActivity.MODE_PRIVATE)
+        prefs.edit().putInt("idcar", idcar).apply()
         //tyoe de paiement :)
         type_spinner.adapter=
             ArrayAdapter<String>(requireActivity(),android.R.layout.simple_list_item_1,typepaiement

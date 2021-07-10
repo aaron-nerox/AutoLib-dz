@@ -39,7 +39,7 @@ class RegisterActivity : AppCompatActivity()  , View.OnClickListener {
                 .replace(R.id.container, Register1Fragment())
                 .commitAllowingStateLoss()
 
-        next_layout.setOnClickListener(this)
+        next_button.setOnClickListener(this)
         login_txt_view.setOnClickListener(this)
         registr_btn.setOnClickListener(this)
 
@@ -53,7 +53,7 @@ class RegisterActivity : AppCompatActivity()  , View.OnClickListener {
             R.id.registr_btn -> {
                 register()
             }
-            R.id.next_layout -> {
+            R.id.next_button -> {
                 when (currentFragment){
                     1 -> {
                         if (email.error == null && nom.error == null && prenom.error == null && adresse.error == null) {

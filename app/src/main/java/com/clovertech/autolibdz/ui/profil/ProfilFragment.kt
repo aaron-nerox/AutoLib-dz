@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +16,7 @@ import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.ViewModel.MainViewModel
 import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
 import com.clovertech.autolibdz.ui.promo.PromoViewModel
+import com.clovertech.autolibdz.utils.Constants
 import kotlinx.android.synthetic.main.activity_profile.*
 import repository.Repository
 
@@ -40,10 +42,11 @@ class ProfilFragment :Fragment() {
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this,viewModelFactory)
             .get(MainViewModel::class.java)
-        val preferences: SharedPreferences =  requireActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE)
-        val idUser=preferences.getInt("idUser",0)
+
+        val prefs = requireActivity().getSharedPreferences(Constants.APP_PREFS, AppCompatActivity.MODE_PRIVATE)
+        val idUser=prefs.getInt("idUser",0)
         Log.d("idHere",idUser.toString())
-        viewModel.getUser(14)
+        viewModel.getUser(idUser)
         viewModel.profil.observe(viewLifecycleOwner, Observer {
                 response ->
             Log.d("Response", response.firstName)

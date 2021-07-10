@@ -27,6 +27,7 @@ import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
 import com.clovertech.autolibdz.auth.fragments.Register1Fragment
 import com.clovertech.autolibdz.auth.fragments.Register2Fragment
 import com.clovertech.autolibdz.auth.fragments.Register3Fragment
+import com.clovertech.autolibdz.utils.Constants
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.bottom_bar_layout.*
@@ -81,10 +82,11 @@ class CarsActivity : AppCompatActivity() {
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this,viewModelFactory)
             .get(MainViewModel::class.java)
-        val preferences: SharedPreferences =  getSharedPreferences("MY_APP", Context.MODE_PRIVATE)
-        val idUser=preferences.getInt("idUser",0)
+
+        val prefs = getSharedPreferences(Constants.APP_PREFS, MODE_PRIVATE)
+        val idUser=prefs.getInt("idUser",0)
         Log.d("idHere",idUser.toString())
-        viewModel.getUser(14)
+        viewModel.getUser(idUser)
         viewModel.profil.observe(this,  {
                 response ->
             Log.d("Response", response.firstName)

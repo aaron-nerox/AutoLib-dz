@@ -30,7 +30,7 @@
         android:id="@+id/prix"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="64dp"
         android:fontFamily="sans-serif-condensed-light"
         android:gravity="center"
 
@@ -79,9 +79,10 @@
         android:id="@+id/prix4"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:fontFamily="sans-serif-condensed-light"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
 
+        android:fontFamily="sans-serif-condensed-light"
         android:gravity="center"
         android:text="@string/unit_price_day"
         android:textAlignment="center"

@@ -25,9 +25,14 @@ class SplashActivity : AppCompatActivity() {
                         startActivity(toOnBoardingIntent)
                         finish()
                     }else {
-                        val toMain = Intent(this@SplashActivity, MainActivity::class.java)
-                        startActivity(toMain)
-                        finish()
+                        if(!prefs.getString("TOKEN","").isNullOrEmpty()){
+                            val toMain = Intent(this@SplashActivity, HomeActivity::class.java)
+                            startActivity(toMain)
+                        }else{
+                            val toMain = Intent(this@SplashActivity, MainActivity::class.java)
+                            startActivity(toMain)
+                            finish()
+                        }
                     }
                 }
             }

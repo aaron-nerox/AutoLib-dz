@@ -17,6 +17,7 @@ import com.clovertech.autolibdz.ViewModel.MainViewModel
 import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
 import com.clovertech.autolibdz.password.ResetPasswordActivity
 import com.clovertech.autolibdz.ui.promo.idTenantHelper
+import com.clovertech.autolibdz.utils.Constants
 import kotlinx.android.synthetic.main.activity_login.*
 import model.Authentication
 import repository.Repository
@@ -74,6 +75,7 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
 
                     idTenantHelper=idTenant!!
                     startActivity(Intent(this, HomeActivity::class.java))
+                    finish()
                     Log.e("Push", response.body()?.id.toString())
                     Log.e("Push", response.body().toString())
                     Log.e("Push", response.code().toString())
@@ -90,11 +92,11 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
     }
 
     private fun saveUserToken(token: String,id:Int){
-        val preferences: SharedPreferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE)
+        val preferences: SharedPreferences = getSharedPreferences(Constants.APP_PREFS, Context.MODE_PRIVATE)
         preferences.edit().putString("TOKEN", token).apply()
-        preferences.edit().putInt("idUser",id)
+        preferences.edit().putInt("idUser",id).apply()
         Log.d("idTenant",id.toString())
-
+        Log.d("token",token)
         /// Retrive Saved TOKEN
         //val retrivedToken = preferences.getString("TOKEN", null) //second parameter default value.
     }

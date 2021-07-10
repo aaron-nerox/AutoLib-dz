@@ -7,11 +7,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.provider.SyncStateContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolibdz.DataClass.Pay
@@ -25,6 +27,7 @@ import com.clovertech.autolibdz.repository.PaymentRepository
 import com.clovertech.autolibdz.repository.RentalRepository
 import com.clovertech.autolibdz.ui.promo.idCodePromo
 import com.clovertech.autolibdz.ui.promo.idcarHelper
+import com.clovertech.autolibdz.utils.Constants
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_add_card.close
 import kotlinx.android.synthetic.main.fragment_confirm_pay.*
@@ -142,8 +145,10 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
     fun validateRental(){
         val rentalRepository=RentalRepository()
         val rentalViewModel:RentalViewModel
-        val preferences: SharedPreferences =  requireActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE)
-        val idcar=preferences.getInt("idcar",0)
+
+        val prefs = requireActivity().getSharedPreferences(Constants.APP_PREFS, AppCompatActivity.MODE_PRIVATE)
+       // val idUser=prefs.getInt("idUser",0)
+        val idcar=prefs.getInt("idcar",0)
         val factory=RentalViewModelFactory(rentalRepository)
         Log.d("idcarHelperPay",idcar.toString())
         rentalViewModel= ViewModelProvider(this,factory)

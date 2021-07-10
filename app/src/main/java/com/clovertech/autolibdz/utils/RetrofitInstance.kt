@@ -75,6 +75,9 @@ object RetrofitInstance {
     val AddRentalApi: RentalApi by lazy {
         retrofitRental.create(RentalApi::class.java)
     }
+    val validateLocation :RentalApi by lazy {
+        retrofitRental.create(RentalApi::class.java)
+    }
     private val retrofitAddCard by lazy {
         Retrofit.Builder()
                 .baseUrl(Cars_BASE_URL)

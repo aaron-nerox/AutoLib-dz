@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolibdz.DataClass.Pay
+import com.clovertech.autolibdz.EndLocationActivity
 import com.clovertech.autolibdz.FindYourCarActivity
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.ViewModel.MainViewModelFactoryCard
@@ -91,7 +92,7 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
             viewModel.PayResponse.observe(viewLifecycleOwner, Observer { response ->
                 if (response.isSuccessful) {
 
-                    validateRental(idcarHelper)
+                    validateRental()
                     Log.e("Push", (response.body().toString()))
                     Log.e("Push", response.code().toString())
                     Log.e("Push", response.message())
@@ -100,6 +101,8 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
                     Log.e("push",response.toString())
                     Log.e("push",response.raw().toString())
                     this.dismiss()
+                    startActivity(Intent(requireContext(),
+                        EndLocationActivity::class.java))
                  /*   val builder = AlertDialog.Builder(activity!!)
                     //set title for alert dialog
                     builder.setTitle(R.string.SucdialogTitle)
@@ -136,7 +139,7 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
 
     }
 
-    fun validateRental(id:Int){
+    fun validateRental(){
         val rentalRepository=RentalRepository()
         val rentalViewModel:RentalViewModel
         val preferences: SharedPreferences =  requireActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE)
@@ -145,9 +148,9 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
         Log.d("idcarHelperPay",idcar.toString())
         rentalViewModel= ViewModelProvider(this,factory)
             .get(RentalViewModel::class.java)
-        rentalViewModel.endRental(idcar)
+        rentalViewModel.validateLocation(idcar)
 
-        rentalViewModel.msg.observe(viewLifecycleOwner, Observer { response ->
+        rentalViewModel.locationRep.observe(viewLifecycleOwner, Observer { response ->
 
             if(response.isSuccessful){
                 Log.d("push","yes")
@@ -155,8 +158,7 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
                 Log.d("push",response.code().toString())
                 Toast.makeText(requireActivity(),"Location validé",Toast.LENGTH_LONG).show()
 
-                startActivity(Intent(requireContext(),
-                    FindYourCarActivity::class.java))
+
             }else{
                 Toast.makeText(requireActivity(),"error pas location",Toast.LENGTH_LONG).show()
                 Log.d("errorPay",response.body().toString())

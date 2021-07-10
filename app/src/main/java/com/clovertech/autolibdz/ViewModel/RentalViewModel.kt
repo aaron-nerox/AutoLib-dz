@@ -3,6 +3,7 @@ package com.clovertech.autolibdz.ViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.clovertech.autolibdz.DataClasses.Location
 import com.clovertech.autolibdz.DataClasses.Rental
 import com.clovertech.autolibdz.repository.RentalRepository
 import kotlinx.coroutines.launch
@@ -16,6 +17,7 @@ val myResponse: MutableLiveData<Rental> = MutableLiveData()
 val rentalResponse: MutableLiveData<Response<Rental>> = MutableLiveData()
 
     var msg:MutableLiveData<Response<String>> = MutableLiveData()
+    var locationRep:MutableLiveData<Response<Location>> = MutableLiveData()
 
     fun addRental(rental: Rental){
         viewModelScope.launch {
@@ -28,6 +30,13 @@ val rentalResponse: MutableLiveData<Response<Rental>> = MutableLiveData()
         viewModelScope.launch {
             val rep:Response<String> = repository.endRental(id)
             msg.value=rep
+        }
+    }
+
+    fun validateLocation(id:Int){
+        viewModelScope.launch {
+            val rep:Response<Location> = repository.validateLocation(id)
+            locationRep.value=rep
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.clovertech.autolibdz.repository
 
+import com.clovertech.autolibdz.DataClasses.Location
 import com.clovertech.autolibdz.DataClasses.Rental
 import com.clovertech.autolibdz.utils.RetrofitInstance
 import retrofit2.Response
@@ -11,5 +12,8 @@ class RentalRepository {
     }
     suspend fun endRental(id:Int):Response<String>{
         return  RetrofitInstance.AddRentalApi.endRental(id)
+    }
+    suspend fun validateLocation(id:Int):Response<Location>{
+        return RetrofitInstance.validateLocation.validateLocation(id)
     }
 }

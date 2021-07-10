@@ -10,19 +10,18 @@ import androidx.cardview.widget.CardView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.clovertech.autolibdz.DataClass.paymentInfo
+import com.clovertech.autolibdz.DataClasses.PaymentInfo
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.ui.card.ConfirmPayFragment
 
-class CardAdapter(val context: Context, var data:List<paymentInfo>,var fragmentManager: FragmentManager): RecyclerView.Adapter<MyVHolder>() {
+class CardAdapter(val context: Context, var data:List<PaymentInfo>, var fragmentManager: FragmentManager)
+    : RecyclerView.Adapter<MyVHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyVHolder {
         return MyVHolder(LayoutInflater.from(context).inflate(R.layout.card_item, parent, false))
     }
 
     override fun getItemCount()=data.size
-
-
-
 
     override fun onBindViewHolder(holder: MyVHolder, position: Int) {
         holder.nom.text=data[position].paymentId

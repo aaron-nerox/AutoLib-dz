@@ -1,10 +1,7 @@
 package com.clovertech.autolibdz.APIs
 
-import com.clovertech.autolibdz.DataClass.paymentInfo
 import com.clovertech.autolibdz.DataClasses.Promo
 import com.clovertech.autolibdz.DataClasses.ReduPriceResponse
-import com.clovertech.autolibdz.DataClasses.Vehicle
-import com.clovertech.autolibdz.utils.Constants.Companion.Pricing_BASE_URL
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit

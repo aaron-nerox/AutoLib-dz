@@ -100,7 +100,7 @@
         <TextView
             android:id="@+id/model"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_marginLeft="80dp"
             android:text="@string/car"
             android:textColor="@color/gray"
@@ -112,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="35dp"
             android:text="Brand : Volkswagen" />
 
         <TextView
@@ -121,27 +121,47 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="55dp"
             android:text="Color : Noir" />
 
         <TextView
             android:id="@+id/price_hr"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
+            android:layout_marginLeft="180dp"
             android:layout_marginTop="70dp"
             android:text="@string/price_hr"
             android:textColor="@color/green"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/prix_hr"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="70dp"
+            android:text="Prix Par Heur:"
+
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/price_jr"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
+            android:layout_marginLeft="180dp"
             android:layout_marginTop="90dp"
             android:text="@string/price_jr"
             android:textColor="@color/green"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/prix_jr"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="90dp"
+            android:text="Prix Par Jour :"
+
             android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
 
@@ -178,7 +198,7 @@
     <EditText
         android:id="@+id/duree"
         android:layout_width="104dp"
-        android:layout_height="37dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="80dp"
         android:background="@drawable/input"
         android:ems="10"
@@ -259,6 +279,7 @@
         android:id="@+id/total"
         android:layout_width="143dp"
         android:layout_height="40dp"
+
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"

@@ -1,82 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout2"
+    android:id="@+id/payment_card_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="180dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/master_card_background"
     tools:context=".MainActivity">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/promo_item"
-        android:layout_width="350dp"
+    <TextView
+        android:id="@+id/nom"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="22dp"
-        android:layout_marginBottom="20dp"
-        app:cardBackgroundColor="@color/grey_C8"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
-        app:cardMaxElevation="12dp"
-        app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/lamia"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <!--
-    In the above cardview widget
-    cardelevation property will give elevation to your card view
-    card corner radius will provide radius to your card view
-    card background color will give background color to your card view
-    card max elevation will give the cardview maximum elevation
-    card prevent corner overlap will add padding to CardView on v20 and before to prevent intersections between the Card content and rounded corners.
-    card use compact padding will add padding in API v21+ as well to have the same measurements with previous versions.
-    below are the two widgets imageview and text view we are displaying inside our card view.
-    -->
-
-        <TextView
-            android:id="@+id/nom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="@string/lamia"
-            android:textColor="@color/gray"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/rib"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="50dp"
-            android:text="test"
-            android:textColor="@color/gray2"
-            android:textSize="15sp" />
+    <TextView
+        android:id="@+id/rib"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="test"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/card_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nom" />
 
 
-        <TextView
-            android:id="@+id/date_exp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="80dp"
-            android:text="test"
-            android:textColor="@color/gray2"
-            android:textSize="15sp" />
+    <TextView
+        android:id="@+id/date_exp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="test"
+        android:textAlignment="textEnd"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/card_img"
+        app:layout_constraintEnd_toStartOf="@+id/card_img"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/card_img" />
 
-        <ImageView
-            android:id="@+id/card_img"
-            android:layout_width="56dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="250dp"
-            android:layout_marginTop="75dp"
-
-            app:srcCompat="@drawable/visa_logo" />
-
-
-    </androidx.cardview.widget.CardView>
+    <ImageView
+        android:id="@+id/card_img"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_mc_symbol" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

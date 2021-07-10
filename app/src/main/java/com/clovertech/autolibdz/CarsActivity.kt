@@ -1,8 +1,12 @@
 package com.clovertech.autolibdz
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 
@@ -11,18 +15,25 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.clovertech.autolibdz.ViewModel.MainViewModel
+import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
 import com.clovertech.autolibdz.auth.fragments.Register1Fragment
 import com.clovertech.autolibdz.auth.fragments.Register2Fragment
 import com.clovertech.autolibdz.auth.fragments.Register3Fragment
 import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.bottom_bar_layout.*
+import kotlinx.android.synthetic.main.nav_header_main.*
+import repository.Repository
 import java.util.ArrayList
+import java.util.Observer
 
 class CarsActivity : AppCompatActivity() {
 
@@ -30,6 +41,7 @@ class CarsActivity : AppCompatActivity() {
     private val layouts : ArrayList<LinearLayout> = ArrayList()
     private val images : ArrayList<ImageView> = ArrayList()
     private val fragments : ArrayList<Fragment> = ArrayList()
+    private lateinit var viewModel : MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cars_main)
@@ -59,9 +71,29 @@ class CarsActivity : AppCompatActivity() {
                         .commit()
             }
         }*/
+        initHeader(navView.getHeaderView(0))
 
 
     }
+
+    private fun initHeader(headerView: View?) {
+        val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
+        viewModel = ViewModelProvider(this,viewModelFactory)
+            .get(MainViewModel::class.java)
+        val preferences: SharedPreferences =  getSharedPreferences("MY_APP", Context.MODE_PRIVATE)
+        val idUser=preferences.getInt("idUser",0)
+        Log.d("idHere",idUser.toString())
+        viewModel.getUser(14)
+        viewModel.profil.observe(this,  {
+                response ->
+            Log.d("Response", response.firstName)
+            nav_header_name.text = response.firstName +" "+ response.lastName
+            nav_header_email.text = response.userName
+
+        })
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
@@ -88,7 +120,7 @@ class CarsActivity : AppCompatActivity() {
         fragments.add(Register3Fragment())
     }
 
-   /* private fun editTint(pos: Int) {
+    /*private fun editTint(pos: Int) {
         images.get(pos).setColorFilter(
                 ContextCompat.getColor(this@CarsActivity, R.color.yello),
                 PorterDuff.Mode.SRC_IN
@@ -102,4 +134,4 @@ class CarsActivity : AppCompatActivity() {
             }
         }
     }*/
-    }
+}

@@ -4,17 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.clovertech.autolibdz.APIs.Couroutines
-import com.clovertech.autolibdz.DataClass.paymentInfo
+import com.clovertech.autolibdz.DataClasses.PaymentInfo
 
 import com.clovertech.autolibdz.repository.CardsRepository
-import com.clovertech.autolibdz.ui.card.Card
 import kotlinx.coroutines.Job
 
 
 class ViewModelCards(private val repository: CardsRepository): ViewModel()  {
     private lateinit var job: Job
-    private val myResponse= MutableLiveData<List<paymentInfo>>()
-    val userCards: LiveData<List<paymentInfo>>
+    private val myResponse= MutableLiveData<List<PaymentInfo>>()
+    val userCards: LiveData<List<PaymentInfo>>
         get() = myResponse
     fun getCards(){
         job=Couroutines.ioThenMain(

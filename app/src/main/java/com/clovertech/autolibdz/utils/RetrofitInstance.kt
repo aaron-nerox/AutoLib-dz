@@ -48,24 +48,28 @@ object RetrofitInstance {
         Retrofit.Builder()
                 .baseUrl(Cars_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
                 .build()
     }
     private val retrofitGetPring by lazy {
         Retrofit.Builder()
                 .baseUrl(Pricing_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
                 .build()
     }
     private val retrofitGetCards by lazy {
         Retrofit.Builder()
                 .baseUrl(CARD_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
                 .build()
     }
     private val retrofitRental by lazy {
         Retrofit.Builder()
-                .baseUrl(Rental_BASE_URL)
+                .baseUrl("http://54.37.87.85:7000/cars/")
                 .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
                 .build()
     }
     val AddRentalApi: RentalApi by lazy {
@@ -75,12 +79,14 @@ object RetrofitInstance {
         Retrofit.Builder()
                 .baseUrl(Cars_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
                 .build()
     }
         val retrofitReduPrice:PromoApi by lazy {
         Retrofit.Builder()
             .baseUrl(Pricing_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
             .build().create(PromoApi::class.java)
     }
     val api : PayApi by lazy {
@@ -88,7 +94,9 @@ object RetrofitInstance {
     }
     val subApi:PayApi by lazy {
         Retrofit.Builder().baseUrl(SUB_BASE_URL).addConverterFactory(
-                GsonConverterFactory.create()).build().create(PayApi::class.java)
+                GsonConverterFactory.create()).
+            client(client).
+        build().create(PayApi::class.java)
 
     }
     val factureApi:FactureApi by lazy {
@@ -100,6 +108,7 @@ object RetrofitInstance {
         Retrofit.Builder()
                 .baseUrl(USER_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
                 .build()
     }
     val apiUser : UserApi by lazy {
@@ -109,6 +118,7 @@ object RetrofitInstance {
         Retrofit.Builder()
                 .baseUrl(SIGNAL_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
                 .build()
     }
     val signalApi : SignalApi by lazy {

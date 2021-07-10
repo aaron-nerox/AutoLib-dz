@@ -1,5 +1,6 @@
 package repository
 
+import com.clovertech.autolibdz.model.Profil
 import com.clovertech.autolibdz.utils.RetrofitInst
 import com.clovertech.autolibdz.utils.RetrofitInstance
 import model.*
@@ -21,5 +22,10 @@ class Repository {
     suspend fun getUser(): User {
         return RetrofitInstance.apiUser.getUser()
     }
+    suspend fun getUserById(id :Int): Profil {
+        return RetrofitInstance.apiUser.getUserById(id)
+    }
+
+
 
 }

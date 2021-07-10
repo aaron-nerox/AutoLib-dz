@@ -1,7 +1,10 @@
 package com.clovertech.autolibdz.ui.tarification
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -25,10 +28,7 @@ import com.clovertech.autolibdz.ViewModel.RentalViewModel
 import com.clovertech.autolibdz.ViewModel.RentalViewModelFactory
 import com.clovertech.autolibdz.repository.RentalRepository
 import com.clovertech.autolibdz.ui.card.ConfirmPayFragment
-import com.clovertech.autolibdz.ui.promo.PromoFragment
-import com.clovertech.autolibdz.ui.promo.idTenantHelper
-import com.clovertech.autolibdz.ui.promo.listner
-import com.clovertech.autolibdz.ui.promo.pricetotarif
+import com.clovertech.autolibdz.ui.promo.*
 import kotlinx.android.synthetic.main.fragment_promo.*
 import kotlinx.android.synthetic.main.tarification.*
 import java.time.Instant
@@ -42,6 +42,7 @@ class TarificationFragment : Fragment(){
     private lateinit var tarificationViewModel: TarificationViewModel
     private lateinit var rentalViewModel: RentalViewModel
     val typepaiement = arrayOf("Jour", "Heur")
+    var typerental=""
     val cardslist = arrayOf("Credit Card", "Carte d'abonnement")
     var days = 0
     var totalprice = 0
@@ -63,7 +64,7 @@ class TarificationFragment : Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         total.text="0DA"
-        val id=arguments?.getInt("id")
+        val idcar=arguments?.getInt("id")
         val mod=arguments?.getString("model")
         model.text=mod
         val img=arguments?.getString("img")
@@ -72,11 +73,15 @@ class TarificationFragment : Fragment(){
         val uni_jr=arguments?.getInt("jr")
         var sub=false
         brand.text=arguments?.getString("brand")
+        idcarHelper=idcar!!
         val repository = RentalRepository()
         val factory = RentalViewModelFactory(repository)
         rentalViewModel = ViewModelProvider(this,factory)
                 .get(RentalViewModel::class.java)
+        Log.d("idTenant",id.toString())
 
+        val preferences: SharedPreferences =  requireActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE)
+        preferences.edit().putInt("idcar", idcar).apply()
         //tyoe de paiement :)
         type_spinner.adapter=
             ArrayAdapter<String>(requireActivity(),android.R.layout.simple_list_item_1,typepaiement
@@ -87,7 +92,9 @@ class TarificationFragment : Fragment(){
             }
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                typerental=typepaiement.get(p2)
                 if(typepaiement.get(p2)=="jour"){
+
                     var d:Int
 
                     d=0
@@ -191,15 +198,23 @@ class TarificationFragment : Fragment(){
             val d= LocalDate.now()
             Toast.makeText(context,"id $id",Toast.LENGTH_LONG).show()
             val rental=
-                    id?.let {
+                    idcar?.let {
+                        Log.d("days",days.toString())
                         Rental(0,
-                            idTenantHelper, it,date_time,LocalTime.now().toString(),d.plusDays(2).toString()+" "+t.toString(),
-                                t.toString(),d.plusDays(2).toString()+" "+t.toString(),t.toString(),"jour",
-                                1,1,"active")
+                            12, it,date_time,LocalTime.now().toString(),d.plusDays(days.toLong()).toString()+" "+t.toString(),
+                                t.toString(),d.plusDays(days.toLong()).toString()+" "+t.toString(),t.toString(),typerental,
+                                1,1,"pending")
+
                     }
+         /*   val r= idcar?.let { it1 ->
+                Rental(0,12, it1,"12-12-2021","10:00","12-12-2021",
+                        "10:00","12-12-2021","10:00",typerental,1,2,
+                        "pending"
+                )
+            }*/
 
-
-            rental?.let { rentalViewModel.addRental(it) }
+            Log.d("rental",rental.toString())
+           rentalViewModel.addRental(rental!!)
             rentalViewModel.rentalResponse
                     .observe(viewLifecycleOwner, Observer {
                         response ->
@@ -213,8 +228,10 @@ class TarificationFragment : Fragment(){
                             //code promo
                             if (listner)
                             {   Toast.makeText(requireContext(),"to card :$pricetotarif",Toast.LENGTH_SHORT).show()
+                             /*val preferences: SharedPreferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE)
+                                preferences.edit().putInt("idcar", idcar).apply()*/
 
-                                val bundle = bundleOf("amount" to pricetotarif,"idrental" to idrental)
+                                val bundle = bundleOf("amount" to pricetotarif,"idrental" to idrental,"idcar" to idcar)
                                 Toast.makeText(requireContext(),"to card :$pricetotarif",Toast.LENGTH_SHORT).show()
                                 view?.findNavController()?.navigate(R.id.action_nav_slideshow_to_nav_card,bundle)
 
@@ -241,8 +258,9 @@ class TarificationFragment : Fragment(){
 
                             Toast.makeText(requireContext(),"rental added successfully",Toast.LENGTH_SHORT).show()
                         }else{
-                            Log.e("Push",response.body().toString())
-                            Log.e("Push",response.code().toString())
+                            Log.e("Push Rental",response.body().toString())
+                            Log.e("Push Rental",response.code().toString())
+                            Log.e("Push rental",response.raw().toString())
                             Toast.makeText(requireContext(),"erreur rental not added ",Toast.LENGTH_SHORT).show()
                         }
                     })

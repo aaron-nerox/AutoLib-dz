@@ -3,7 +3,9 @@ package com.clovertech.autolibdz.ui.card
 import ViewModel.ViewModelCard
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,8 +18,12 @@ import com.clovertech.autolibdz.DataClass.Pay
 import com.clovertech.autolibdz.FindYourCarActivity
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.ViewModel.MainViewModelFactoryCard
+import com.clovertech.autolibdz.ViewModel.RentalViewModel
+import com.clovertech.autolibdz.ViewModel.RentalViewModelFactory
 import com.clovertech.autolibdz.repository.PaymentRepository
+import com.clovertech.autolibdz.repository.RentalRepository
 import com.clovertech.autolibdz.ui.promo.idCodePromo
+import com.clovertech.autolibdz.ui.promo.idcarHelper
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_add_card.close
 import kotlinx.android.synthetic.main.fragment_confirm_pay.*
@@ -84,6 +90,8 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
             viewModel.pay(pay)
             viewModel.PayResponse.observe(viewLifecycleOwner, Observer { response ->
                 if (response.isSuccessful) {
+
+                    validateRental(idcarHelper)
                     Log.e("Push", (response.body().toString()))
                     Log.e("Push", response.code().toString())
                     Log.e("Push", response.message())
@@ -103,8 +111,6 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
                     builder.setPositiveButton("OK"){dialogInterface, which ->
                         // Toast.makeText(requireActivity(),"clicked yes",Toast.LENGTH_LONG).show()
 */
-                        startActivity(Intent(requireContext(),
-                            FindYourCarActivity::class.java))
                     /*}
 
                     // END ALERT DIALOG
@@ -130,5 +136,34 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
 
     }
 
+    fun validateRental(id:Int){
+        val rentalRepository=RentalRepository()
+        val rentalViewModel:RentalViewModel
+        val preferences: SharedPreferences =  requireActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE)
+        val idcar=preferences.getInt("idcar",0)
+        val factory=RentalViewModelFactory(rentalRepository)
+        Log.d("idcarHelperPay",idcar.toString())
+        rentalViewModel= ViewModelProvider(this,factory)
+            .get(RentalViewModel::class.java)
+        rentalViewModel.endRental(idcar)
+
+        rentalViewModel.msg.observe(viewLifecycleOwner, Observer { response ->
+
+            if(response.isSuccessful){
+                Log.d("push","yes")
+                Log.d("push",response.body().toString())
+                Log.d("push",response.code().toString())
+                Toast.makeText(requireActivity(),"Location validé",Toast.LENGTH_LONG).show()
+
+                startActivity(Intent(requireContext(),
+                    FindYourCarActivity::class.java))
+            }else{
+                Toast.makeText(requireActivity(),"error pas location",Toast.LENGTH_LONG).show()
+                Log.d("errorPay",response.body().toString())
+                Log.d("errorPay",response.code().toString())
+            }
+
+        })
+    }
 
 }

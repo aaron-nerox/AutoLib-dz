@@ -8,3 +8,4 @@ var pricetotarif:Int=0
 var listner=false
 var idCodePromo:Int=0
 var idTenantHelper=0
+var idcarHelper=0

@@ -73,7 +73,16 @@
         android:name="com.clovertech.autolibdz.ui.profil.ProfilFragment"
         android:label="Mon Profil"
         tools:layout="@layout/activity_profile"
-        />
+        >
+        <action
+            android:id="@+id/nav_to_payment"
+            app:destination="@+id/nav_card"
+            />
+        <action
+            android:id="@+id/nav_to_signal"
+            app:destination="@+id/nav_signals"
+            />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_signals"

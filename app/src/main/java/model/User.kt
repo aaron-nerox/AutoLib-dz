@@ -2,10 +2,11 @@ package model
 
 class User (
         var idUser: Int,
-        var nom: String,
-        var prenom: String,
+        var lastName: String,
+        var firstName: String,
         var address: String,
-        var numeroTelephone: String,
+        var phoneNumber: String,
         var userName: String,
-        var type: String
+        var userType: String,
+        var creationDate: String
 )

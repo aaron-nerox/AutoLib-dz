@@ -1,7 +1,7 @@
 package com.clovertech.autolibdz
 
-import `view-model`.MainViewModel
-import `view-model`.MainViewModelFactory
+import com.clovertech.autolibdz.ViewModel.MainViewModel
+import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

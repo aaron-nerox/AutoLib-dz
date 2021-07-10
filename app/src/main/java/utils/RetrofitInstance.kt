@@ -1,12 +1,12 @@
 package utils
 
-import api.AuthenticationApi
-import api.BorneApi
-import api.RegistrationApi
+import api.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import utils.Constants.Companion.AUTH_BASE_URL
+import utils.Constants.Companion.BORNE_BASE_URL
 import utils.Constants.Companion.SIGNAL_BASE_URL
 import utils.Constants.Companion.USER_BASE_URL
 import java.util.concurrent.TimeUnit
@@ -28,11 +28,11 @@ object RetrofitInstance {
             .build()
 
     val authenticationApi : AuthenticationApi by lazy {
-        retrofitInstance("http://192.168.137.93:8005").create(AuthenticationApi::class.java)
+        retrofitInstance(AUTH_BASE_URL).create(AuthenticationApi::class.java)
     }
 
     val registrationApi: RegistrationApi by lazy {
-        retrofitInstance("http://192.168.137.93:8100").create(RegistrationApi::class.java)
+        retrofitInstance(USER_BASE_URL).create(RegistrationApi::class.java)
 
     }
     private val retrofitUser by lazy {
@@ -55,7 +55,7 @@ object RetrofitInstance {
     }
 
     val borneApi: BorneApi by lazy {
-        retrofitInstance("http://192.168.137.93:8200").create(BorneApi::class.java)
+        retrofitInstance(BORNE_BASE_URL).create(BorneApi::class.java)
     }
 
 }

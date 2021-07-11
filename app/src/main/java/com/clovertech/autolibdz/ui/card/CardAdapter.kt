@@ -12,11 +12,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.clovertech.autolibdz.DataClasses.PaymentInfo
 import com.clovertech.autolibdz.R
+import com.clovertech.autolibdz.model.PaymentInfo
 
 class CardAdapter(val context: Context, var data: List<PaymentInfo>, var fragmentManager: FragmentManager,
                   var amount:String, var idrental:String): RecyclerView.Adapter<MyViewHolder>(){
+
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
             return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.card_item, parent, false))

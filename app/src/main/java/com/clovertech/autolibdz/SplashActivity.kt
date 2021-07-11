@@ -1,5 +1,6 @@
 package com.clovertech.autolibdz
 
+
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import android.os.Bundle
 import com.clovertech.autolibdz.utils.Constants
 
 class SplashActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -28,6 +30,7 @@ class SplashActivity : AppCompatActivity() {
                         if(!prefs.getString("TOKEN","").isNullOrEmpty()){
                             val toMain = Intent(this@SplashActivity, HomeActivity::class.java)
                             startActivity(toMain)
+                            finish()
                         }else{
                             val toMain = Intent(this@SplashActivity, MainActivity::class.java)
                             startActivity(toMain)

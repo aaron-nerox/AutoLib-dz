@@ -1,4 +1,4 @@
-package model
+package com.clovertech.autolibdz.model
 
 class Locataire (
         var idUser: Int,

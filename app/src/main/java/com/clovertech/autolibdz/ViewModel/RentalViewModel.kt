@@ -4,10 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.clovertech.autolibdz.DataClasses.Location
-import com.clovertech.autolibdz.DataClasses.Rental
+import com.clovertech.autolibdz.model.Rental
 import com.clovertech.autolibdz.repository.RentalRepository
 import kotlinx.coroutines.launch
-import model.Signal
 import retrofit2.Response
 
 
@@ -26,9 +25,9 @@ val rentalResponse: MutableLiveData<Response<Rental>> = MutableLiveData()
         }
     }
 
-    fun endRental(id:Int){
+    fun endRental(idVehicle:Int,idborn:Int){
         viewModelScope.launch {
-            val rep:Response<String> = repository.endRental(id)
+            val rep:Response<String> = repository.endRental(idVehicle,idborn)
             msg.value=rep
         }
     }

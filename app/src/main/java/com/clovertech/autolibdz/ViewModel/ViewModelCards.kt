@@ -3,8 +3,8 @@ package com.clovertech.autolibdz.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.clovertech.autolibdz.APIs.Couroutines
-import com.clovertech.autolibdz.DataClasses.PaymentInfo
+import com.clovertech.autolibdz.api.Couroutines
+import com.clovertech.autolibdz.model.PaymentInfo
 
 import com.clovertech.autolibdz.repository.CardsRepository
 import kotlinx.coroutines.Job

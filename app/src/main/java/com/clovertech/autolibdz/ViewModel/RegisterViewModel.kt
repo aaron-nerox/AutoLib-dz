@@ -3,8 +3,8 @@ package com.clovertech.autolibdz.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import model.Locataire
-import model.User
+import com.clovertech.autolibdz.model.Locataire
+import com.clovertech.autolibdz.model.User
 
 class RegisterViewModel: ViewModel() {
 
@@ -28,11 +28,11 @@ class RegisterViewModel: ViewModel() {
     }
 
     fun setNom(nom: String) {
-        _user.value?.nom = nom
+        _user.value?.lastName = nom
     }
 
     fun setPrenom(prenom: String) {
-        _user.value?.prenom = prenom
+        _user.value?.firstName = prenom
     }
 
     fun setaddress(adresse: String) {
@@ -40,7 +40,7 @@ class RegisterViewModel: ViewModel() {
     }
 
     fun setNumTel(numtel: String) {
-        _user.value?.numeroTelephone = numtel
+        _user.value?.phoneNumber = numtel
     }
 
     fun setPhotoPerso(photo: String) {

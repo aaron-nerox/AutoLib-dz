@@ -27,8 +27,8 @@ class Register1Fragment : Fragment() {
 
         viewModel.user.observe(viewLifecycleOwner, {
             view.email.append(it.userName)
-            view.nom.append(it.nom)
-            view.prenom.append(it.prenom)
+            view.nom.append(it.lastName)
+            view.prenom.append(it.firstName)
             view.adresse.append(it.address)
         })
 

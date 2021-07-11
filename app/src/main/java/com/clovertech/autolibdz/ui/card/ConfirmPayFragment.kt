@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.provider.SyncStateContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,9 +15,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.clovertech.autolibdz.DataClass.Pay
 import com.clovertech.autolibdz.EndLocationActivity
-import com.clovertech.autolibdz.FindYourCarActivity
+import com.clovertech.autolibdz.model.Pay
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.ViewModel.MainViewModelFactoryCard
 import com.clovertech.autolibdz.ViewModel.RentalViewModel
@@ -26,17 +24,15 @@ import com.clovertech.autolibdz.ViewModel.RentalViewModelFactory
 import com.clovertech.autolibdz.repository.PaymentRepository
 import com.clovertech.autolibdz.repository.RentalRepository
 import com.clovertech.autolibdz.ui.promo.idCodePromo
-import com.clovertech.autolibdz.ui.promo.idcarHelper
 import com.clovertech.autolibdz.utils.Constants
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.fragment_add_card.close
 import kotlinx.android.synthetic.main.fragment_confirm_pay.*
 
 class ConfirmPayFragment : BottomSheetDialogFragment() {
 
 
     private lateinit var viewModel : ViewModelCard
-
+    var clicked="false"
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -95,7 +91,7 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
             viewModel.PayResponse.observe(viewLifecycleOwner, Observer { response ->
                 if (response.isSuccessful) {
 
-                    validateRental()
+                  //  validateRental()
                     Log.e("Push", (response.body().toString()))
                     Log.e("Push", response.code().toString())
                     Log.e("Push", response.message())
@@ -104,8 +100,36 @@ class ConfirmPayFragment : BottomSheetDialogFragment() {
                     Log.e("push",response.toString())
                     Log.e("push",response.raw().toString())
                     this.dismiss()
-                    startActivity(Intent(requireContext(),
+
+                    val preferences: SharedPreferences = requireActivity().getSharedPreferences(Constants.APP_PREFS, Context.MODE_PRIVATE)
+
+                    preferences.edit().putString("amount",amount).apply()
+                    // dialog msg
+
+                    val builder = AlertDialog.Builder(activity!!)
+                    builder.setTitle(R.string.SucdialogTitle)
+                    builder.setMessage(R.string.SucdialogMessage)
+                    builder.setIconAttribute(R.drawable.ic_baseline_done_outline_24)
+
+                    builder.setPositiveButton("Ok"){dialogInterface, which ->
+                        Log.d("Ok","Ok")
+                        clicked="true"
+
+                    }
+                    builder.setNeutralButton("Cancel"){dialogInterface , which ->
+                    }
+                    val alertDialog: AlertDialog = builder.create()
+                    alertDialog.setCancelable(false)
+                    alertDialog.show()
+                    Log.d("clicked",clicked.toString())
+                    if(clicked=="true"){
+                        startActivity(Intent(requireActivity(),
+                            EndLocationActivity::class.java))
+                    }
+                    startActivity(Intent(requireActivity(),
                         EndLocationActivity::class.java))
+
+
                  /*   val builder = AlertDialog.Builder(activity!!)
                     //set title for alert dialog
                     builder.setTitle(R.string.SucdialogTitle)

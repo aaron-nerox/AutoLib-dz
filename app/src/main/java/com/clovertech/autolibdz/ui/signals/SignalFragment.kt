@@ -15,8 +15,8 @@ import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.ViewModel.MainViewModel
 import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
 import kotlinx.android.synthetic.main.activity_signal.*
-import model.Signal
-import repository.Repository
+import com.clovertech.autolibdz.model.Signal
+import com.clovertech.autolibdz.repository.Repository
 
 
 class SignalFragment:Fragment() {

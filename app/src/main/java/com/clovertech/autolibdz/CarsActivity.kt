@@ -1,8 +1,5 @@
 package com.clovertech.autolibdz
 
-import android.content.Context
-import android.content.SharedPreferences
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -12,11 +9,9 @@ import android.widget.LinearLayout
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -29,12 +24,10 @@ import com.clovertech.autolibdz.auth.fragments.Register2Fragment
 import com.clovertech.autolibdz.auth.fragments.Register3Fragment
 import com.clovertech.autolibdz.utils.Constants
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.bottom_bar_layout.*
 import kotlinx.android.synthetic.main.nav_header_main.*
-import repository.Repository
+import com.clovertech.autolibdz.repository.Repository
 import java.util.ArrayList
-import java.util.Observer
 
 class CarsActivity : AppCompatActivity() {
 
@@ -72,7 +65,7 @@ class CarsActivity : AppCompatActivity() {
                         .commit()
             }
         }*/
-        initHeader(navView.getHeaderView(0))
+   initHeader(navView.getHeaderView(0))
 
 
     }

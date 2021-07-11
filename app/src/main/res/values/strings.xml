@@ -102,4 +102,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="latitudeBabel">Latitude</string>
     <string name="longitudeBabel">Longitude</string>
+    <string name="getting_your_location">Getting your location</string>
+    <string name="please_wait">please wait...</string>
+    <string name="end_Location">FIN LOCATION !</string>
+    <string name="end_location_msg">Vous avez arrivé à la borne destination,Veuillez rendre la véhicule.</string>
 </resources>

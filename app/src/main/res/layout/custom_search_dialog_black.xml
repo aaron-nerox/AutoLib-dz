@@ -76,10 +76,11 @@
                 app:tint="@color/yello"/>
 
             <TextView
+                android:id="@+id/ville"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:text="Bab Ezzouar"
+                android:text="@string/getting_your_location"
                 android:textSize="18sp"
                 android:textColor="#FFF"
                 android:textStyle="bold"
@@ -89,10 +90,11 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/region"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="37dp"
-            android:text="cité universitaire alia"
+            android:text="@string/please_wait"
             android:textSize="14sp"
             android:textColor="#fff" />
 

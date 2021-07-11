@@ -1,8 +1,13 @@
 package com.clovertech.autolibdz
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.location.Location
 import android.net.Uri
@@ -20,9 +25,15 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.clovertech.autolibdz.ViewModel.RentalViewModel
+import com.clovertech.autolibdz.ViewModel.RentalViewModelFactory
 import com.clovertech.autolibdz.auth.fragments.Register1Fragment
 import com.clovertech.autolibdz.auth.fragments.Register2Fragment
 import com.clovertech.autolibdz.auth.fragments.Register3Fragment
+import com.clovertech.autolibdz.repository.RentalRepository
+import com.clovertech.autolibdz.utils.Constants
 import kotlinx.android.synthetic.main.bottom_bar_layout.*
 import kotlinx.android.synthetic.main.end_location.*
 import java.util.ArrayList
@@ -60,11 +71,43 @@ class EndLocationActivity: AppCompatActivity() {
         longitudeLabel = resources.getString(R.string.longitudeBabel)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         countDown()
+        CheckEndRental()
     }
 
 
 
+    @SuppressLint("ResourceType")
+    private fun CheckEndRental(){
+        val prefs = getSharedPreferences(Constants.APP_PREFS, Context.MODE_PRIVATE)
+        val idcar=prefs.getInt("idcar",0)
+        Log.d("idcar",idcar.toString())
+        val rentalRepository= RentalRepository()
+        val rentalViewModel: RentalViewModel
+        val factory= RentalViewModelFactory(rentalRepository)
+        Log.d("idcarHelperPay",idcar.toString())
+        rentalViewModel= ViewModelProvider(this,factory)
+            .get(RentalViewModel::class.java)
+        rentalViewModel.endRental(26,15)
+        rentalViewModel.msg.observe(this,  Observer { response ->
 
+            if(response.isSuccessful){
+                Log.d("push","yes")
+                Log.d("push",response.body().toString())
+                Log.d("push",response.code().toString())
+                Toast.makeText(this,"Location validé",Toast.LENGTH_LONG).show()
+                val msg=response.body()
+                if(msg=="success"){
+                    EndRentalAlert()
+                }
+            }else{
+                Log.d("error","non error")
+                Log.d("error",response.body().toString())
+                Log.d("error",response.code().toString())
+            }
+        })
+
+
+    }
     private fun init() {
         layouts.add(home_layout as LinearLayout)
         layouts.add(event_layout as LinearLayout)
@@ -95,8 +138,42 @@ class EndLocationActivity: AppCompatActivity() {
         }
     }
 
+    @SuppressLint("ResourceType")
+    private fun EndRentalAlert(){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(R.string.end_Location)
+        builder.setMessage(R.string.end_location_msg)
+        builder.setIconAttribute(R.drawable.ic_baseline_warning_24)
+
+        builder.setPositiveButton("Ok"){dialogInterface, which ->
+            //clicked=true
+        }
+        builder.setNeutralButton("Cancel"){dialogInterface , which ->
+        }
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.setCancelable(false)
+        alertDialog.show()
+    }
     private fun countDown() {
-        val countDownTimer = object : CountDownTimer(1584700200, 1000) {
+
+        val prefs: SharedPreferences =getSharedPreferences(Constants.APP_PREFS, Context.MODE_PRIVATE)
+        val type=prefs.getString("typerental","")
+        var heure= 0
+        var days=0
+        if (type != null) {
+            Log.d("typerental",type)
+        }
+        if(type=="Jour"){
+           days=prefs.getInt("days",0)
+            Log.d("jour",days.toString())
+        }else{
+            heure=prefs.getInt("days",0)
+        }
+
+        val total=days*86400+ heure*3600
+
+
+        val countDownTimer = object : CountDownTimer((total*1000).toLong(), 1000) {
             override fun onTick(p0: Long) {
                 val millis: Long = p0
                 val hms = String.format(
@@ -120,8 +197,10 @@ class EndLocationActivity: AppCompatActivity() {
 
             override fun onFinish() {
                 /*clearing all fields and displaying countdown finished message          */
-                fin_loc.setText("Votre Location est expiré");
+                fin_loc.setText("Votre Location est expiré")
+                fin_loc.setTextColor(Color.RED)
                 System.out.println("Time up")
+                EndRentalAlert()
             }
         }
         countDownTimer.start()

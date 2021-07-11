@@ -1,6 +1,5 @@
 package com.clovertech.autolibdz
 
-
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,14 +9,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolibdz.ViewModel.MainViewModel
 import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
 import kotlinx.android.synthetic.main.activity_profile.*
-import repository.Repository
+import com.clovertech.autolibdz.repository.Repository
 
 class ProfileAct : AppCompatActivity() {
     private lateinit var viewModel : MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
-    /*    val repository = Repository()
+        val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this,viewModelFactory)
             .get(MainViewModel::class.java)
@@ -32,6 +31,6 @@ class ProfileAct : AppCompatActivity() {
         report_problem.setOnClickListener {
             val i = Intent(this@ProfileAct, SignalAct::class.java)
             startActivity(i)
-        }*/
+        }
     }
 }

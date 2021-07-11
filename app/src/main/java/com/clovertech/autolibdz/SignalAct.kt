@@ -1,6 +1,7 @@
 package com.clovertech.autolibdz
 
-
+import com.clovertech.autolibdz.ViewModel.MainViewModel
+import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,10 +10,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.clovertech.autolibdz.ViewModel.MainViewModel
 import kotlinx.android.synthetic.main.activity_signal.*
-import model.Signal
-import repository.Repository
+import com.clovertech.autolibdz.model.Signal
+import com.clovertech.autolibdz.repository.Repository
 
 class SignalAct : AppCompatActivity() {
     private lateinit var viewModel : MainViewModel
@@ -20,7 +20,7 @@ class SignalAct : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signal)
-        /*val repository = Repository()
+        val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this,viewModelFactory)
             .get(MainViewModel::class.java)
@@ -73,6 +73,6 @@ class SignalAct : AppCompatActivity() {
                 }
                 mbuilder.show()
             }
-        }*/
+        }
     }
 }

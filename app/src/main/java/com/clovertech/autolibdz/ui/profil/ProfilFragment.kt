@@ -1,7 +1,5 @@
 package com.clovertech.autolibdz.ui.profil
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,10 +13,9 @@ import androidx.navigation.findNavController
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.ViewModel.MainViewModel
 import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
-import com.clovertech.autolibdz.ui.promo.PromoViewModel
 import com.clovertech.autolibdz.utils.Constants
 import kotlinx.android.synthetic.main.activity_profile.*
-import repository.Repository
+import com.clovertech.autolibdz.repository.Repository
 
 class ProfilFragment :Fragment() {
     private lateinit var profilViewModel: ProfilViewModel

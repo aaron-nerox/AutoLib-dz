@@ -9,13 +9,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.clovertech.autolibdz.DataClass.Adress
-import com.clovertech.autolibdz.DataClass.PaymentMethod
+import com.clovertech.autolibdz.model.Adress
+import com.clovertech.autolibdz.model.PaymentMethod
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.ViewModel.MainViewModelFactoryCard
 import com.clovertech.autolibdz.repository.PaymentRepository
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_add_card.*
+import com.clovertech.autolibdz.model.CardRequest
 
 class AddCardFragment : BottomSheetDialogFragment () {
     private lateinit var viewModel : ViewModelCard

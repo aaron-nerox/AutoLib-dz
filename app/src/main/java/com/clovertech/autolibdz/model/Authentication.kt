@@ -1,4 +1,4 @@
-package model
+package com.clovertech.autolibdz.model
 
 class Authentication (
 

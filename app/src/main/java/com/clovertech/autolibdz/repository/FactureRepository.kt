@@ -1,7 +1,7 @@
 package com.clovertech.autolibdz.repository
 
-import api.FactureApi
-import api.SafeFactureRequest
+import com.clovertech.autolibdz.api.FactureApi
+import com.clovertech.autolibdz.api.SafeFactureRequest
 
 class FactureRepository(
         private val apiFactures : FactureApi

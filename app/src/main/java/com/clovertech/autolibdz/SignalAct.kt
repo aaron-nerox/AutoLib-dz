@@ -11,8 +11,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_signal.*
-import model.Signal
-import repository.Repository
+import com.clovertech.autolibdz.model.Signal
+import com.clovertech.autolibdz.repository.Repository
 
 class SignalAct : AppCompatActivity() {
     private lateinit var viewModel : MainViewModel

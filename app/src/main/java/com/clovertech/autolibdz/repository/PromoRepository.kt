@@ -1,7 +1,7 @@
 package com.clovertech.autolibdz.repository
 
-import api.PromoApi
-import api.SafePromoRequest
+import com.clovertech.autolibdz.api.PromoApi
+import com.clovertech.autolibdz.api.SafePromoRequest
 
 
 class PromoRepository( private val apiPromoApi: PromoApi) : SafePromoRequest(){

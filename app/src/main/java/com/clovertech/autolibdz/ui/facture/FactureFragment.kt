@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import api.FactureApi
+import com.clovertech.autolibdz.api.FactureApi
 import com.clovertech.autolibdz.Adapters.BillAdapter
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.ViewModel.BillViewModel
@@ -84,8 +84,8 @@ class FactureFragment : Fragment() {
             list_facture.adapter = FactureAdapter(context, loadData())
         }*/
         val factureApi= FactureApi()
-        val repository= FactureRepository(factureApi)
-        factoryBill=BillViewModelFactory(repository)
+        val com.clovertech.autolibdz.repository= FactureRepository(factureApi)
+        factoryBill=BillViewModelFactory(com.clovertech.autolibdz.repository)
         viewModelfact=ViewModelProvider(this,factoryBill).get(BillViewModel::class.java)
         viewModelfact.getFact()
         viewModelfact.facts.observe(viewLifecycleOwner, Observer { factList->

@@ -1,8 +1,8 @@
 package com.clovertech.autolibdz
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.clovertech.autolibdz.auth.LoginActivity
 import com.clovertech.autolibdz.auth.RegisterActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -13,12 +13,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        signIn_btn.setOnClickListener{
-            startActivity(Intent(this,LoginActivity::class.java))
+        signin_btn.setOnClickListener{
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
 
-        signUp_btn.setOnClickListener{
-            startActivity(Intent(this,RegisterActivity::class.java))
+        signup_btn.setOnClickListener{
+            startActivity(Intent(this, RegisterActivity::class.java))
+            finish()
         }
 
     }

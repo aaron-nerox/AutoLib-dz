@@ -1,15 +1,16 @@
 package com.clovertech.autolibdz.repository
 
-import model.Pay
-import model.PayResponse
-import model.PaymentMethod
-import model.paymentResponse
-import model.SubscriptionRequest
-import model.SubscriptionResponse
-import model.paySubRequest
-import model.paySubResponse
+import com.clovertech.autolibdz.model.Pay
+import com.clovertech.autolibdz.model.PayResponse
+import com.clovertech.autolibdz.model.PaymentMethod
+import com.clovertech.autolibdz.model.paymentResponse
+import com.clovertech.autolibdz.model.SubscriptionRequest
+import com.clovertech.autolibdz.model.SubscriptionResponse
+import com.clovertech.autolibdz.model.paySubRequest
+import com.clovertech.autolibdz.model.paySubResponse
+import com.clovertech.autolibdz.utils.RetrofitInstance
 import retrofit2.Response
-import utils.RetrofitInstance
+
 
 class PaymentRepository {
     suspend fun pushCard(paymentMethod: PaymentMethod) : Response<paymentResponse> {

@@ -1,8 +1,8 @@
 package com.clovertech.autolibdz.repository
 
-import api.CarsApi
-import api.SafeCarsRequest
-import model.Rental
+import com.clovertech.autolibdz.api.CarsApi
+import com.clovertech.autolibdz.api.SafeCarsRequest
+import com.clovertech.autolibdz.model.Rental
 
 class CarsRepository(
         private val apiCarsByStat : CarsApi

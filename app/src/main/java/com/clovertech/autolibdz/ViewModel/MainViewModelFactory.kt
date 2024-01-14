@@ -2,7 +2,7 @@ package com.clovertech.autolibdz.ViewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import repository.Repository
+import com.clovertech.autolibdz.repository.Repository
 
 class MainViewModelFactory (private val  repository: Repository) : ViewModelProvider.Factory {
 

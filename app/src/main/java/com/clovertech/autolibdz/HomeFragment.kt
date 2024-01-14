@@ -14,13 +14,11 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.text.TextWatcher
 import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -45,15 +43,16 @@ import kotlinx.android.synthetic.main.custom_search_dialog_black.view.*
 import kotlinx.android.synthetic.main.custom_search_dialog_park_expanded.*
 import kotlinx.android.synthetic.main.custom_search_dialog_yello.*
 import kotlinx.android.synthetic.main.custom_search_dialog_yello.view.*
-import kotlinx.android.synthetic.main.fragment_car_details.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
-import model.Borne
-import model.Vehicle
+import com.clovertech.autolibdz.model.Borne
+import com.clovertech.autolibdz.model.Vehicle
+import com.clovertech.autolibdz.utils.Constants.Companion.idbornDefault
+import com.clovertech.autolibdz.utils.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import utils.RetrofitInstance
+
 import java.util.*
 
 class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickListener , View.OnClickListener {
@@ -71,7 +70,7 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
 
     lateinit var bornes: List<Borne>
     lateinit var adapter: BorneAdapter
-
+ //   var idbornDefault=0
     internal var mLocationCallback: LocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             val locationList = locationResult.locations
@@ -200,15 +199,20 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
             R.id.checked_position -> {
                 moveSearchPositionDialog()
             }
+          /*  R.id.park_img->{
+                startActivity(Intent(context, CarsActivity::class.java))
+
+            }*/
             R.id.checked_park -> {
+                startActivity(Intent(context, CarsActivity::class.java))
+               /* val borne = adapter.selectedBorne.value
 
-                val borne = adapter.selectedBorne.value
 
-                if (borne != null) {
+              if (borne != null) {
                     park_name.text = borne.city
-
+                  startActivity(Intent(context, CarsActivity::class.java))*/
                     // get vehicules borne
-                    val vehiculeAdapter = ImageVehiculeAdapter(requireContext())
+                  /*  val vehiculeAdapter = ImageVehiculeAdapter(requireContext())
                     images_container.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     images_container.adapter = vehiculeAdapter
 
@@ -239,10 +243,11 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
                         search_park_dialog.visibility = View.GONE
                         bottomSheetBehavior.state = STATE_COLLAPSED
 
-                    }
-                } else {
-                    Log.e("no borne", "no selected borne found")
-                }
+                    }*/
+             /*   } else {
+                  //startActivity(Intent(context, CarsActivity::class.java))
+                  Log.e("no borne", "no selected borne found")
+                }*/
 
 
             }
@@ -284,10 +289,10 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
                 searchDialogPark?.show()
 
             }
-            R.id.see_cars_btn -> {
+           /* R.id.see_cars_btn -> {
 //                startActivity(Intent(context,FindYourCarActivity::class.java))
                 startActivity(Intent(context, CarsActivity::class.java))
-            }
+            }*/
         }
     }
 
@@ -317,7 +322,7 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
             googleMap.isMyLocationEnabled = true
         }
 
-
+        //get bornes
         val call = RetrofitInstance.borneApi.getBornes()
         call.enqueue(object: Callback<List<Borne>> {
             override fun onFailure(call: Call<List<Borne>>, t: Throwable) {
@@ -333,13 +338,13 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
                     val borne = response.body()
                     if (borne != null) {
                         bornes = borne
-                        adapter.setBornes(bornes)
+                        adapter.setBornes(bornes!!)
                         bornes.forEach {
                             val borneCoordinates = LatLng(it.latitude.toString().toDouble(), it.longitude.toString().toDouble())
                             googleMap.addMarker(
                                     MarkerOptions()
                                             .position(borneCoordinates)
-                                            .title("Wilaya: ${it.city}")
+                                            .title("Park: ${it.city}")
                             )
                         }
                     }
@@ -456,6 +461,7 @@ class HomeFragment : Fragment() , OnMapReadyCallback , GoogleMap.OnMarkerClickLi
 
         var distance = 1000000f
         var borne = bornes[0]
+        idbornDefault= bornes[0].idBorne
         bornes.forEach {
             val destination = Location("destination")
             destination.latitude = it.latitude.toDouble()

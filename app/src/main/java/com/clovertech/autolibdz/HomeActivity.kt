@@ -55,14 +55,9 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-
-
     public fun closeConnection(mmServerSocket: BluetoothServerSocket?) {
         mmServerSocket?.close()
     }
-
-
-
 
 
     private fun init() {

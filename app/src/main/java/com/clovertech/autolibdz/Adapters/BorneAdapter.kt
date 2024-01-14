@@ -1,24 +1,15 @@
 package com.clovertech.autolibdz.Adapters
 
 import android.content.Context
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
-import androidx.core.os.bundleOf
-import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolibdz.HomeFragment
-import model.paymentInfo
 import com.clovertech.autolibdz.R
-import com.clovertech.autolibdz.ui.card.ConfirmPayFragment
-import model.Borne
+import com.clovertech.autolibdz.model.Borne
 
 class BorneAdapter(val context: Context, var fragmentManager: HomeFragment): RecyclerView.Adapter<MyBorneHolder>() {
     lateinit var data: List<Borne>

@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import api.CardsApi
+import com.clovertech.autolibdz.api.CardsApi
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.ViewModel.ViewModelCards
 import com.clovertech.autolibdz.ViewModel.ViewModelCardsFactory
@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_card.*
 class CardFragment : Fragment() {
 
 
-    private lateinit var cardViewModel: ViewModelCard
+    private lateinit var cardViewModel: CardViewModel
     private lateinit var viewModel: ViewModelCards
     private lateinit var cardFactory:ViewModelCardsFactory
 
@@ -34,7 +34,7 @@ class CardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         cardViewModel =
-            ViewModelProvider(this).get(ViewModelCard::class.java)
+            ViewModelProvider(this).get(CardViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_card, container, false)
 
         return root
@@ -46,6 +46,7 @@ class CardFragment : Fragment() {
 
         val amount=arguments?.getInt("amount").toString()
         val id=arguments?.getInt("idrental").toString()
+        val idcar=arguments?.getInt("idcar")
         val add_card_fragment = AddCardFragment()
         Toast.makeText(context,"amount to pay $amount", Toast.LENGTH_LONG).show()
         val fragmentManager = (activity as FragmentActivity).supportFragmentManager

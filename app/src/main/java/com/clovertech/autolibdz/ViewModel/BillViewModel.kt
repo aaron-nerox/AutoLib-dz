@@ -3,8 +3,8 @@ package com.clovertech.autolibdz.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import api.CouroutineFact
-import model.Facture
+import com.clovertech.autolibdz.api.CouroutineFact
+import com.clovertech.autolibdz.model.Facture
 import com.clovertech.autolibdz.repository.FactureRepository
 import kotlinx.coroutines.Job
 

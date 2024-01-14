@@ -7,6 +7,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="royal_black">#454545</color>
     <color name="yello">#F9C319</color>
     <color name="dark_grey">#333333</color>
     <color name="white">#FFFFFFFF</color>
@@ -20,4 +21,7 @@
     <color name="grey">#333333</color>
     <color name="grey_C8">#EFEFEF</color>
     <color name="light_grey">#EFEFEF</color>
+    <color name="visa_blue500">#0071A5</color>
+    <color name="visa_blue200">#1FB7FB</color>
+    <color name="input_color">#41737373</color>
 </resources>

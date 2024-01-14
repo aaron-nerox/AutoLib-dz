@@ -3,8 +3,8 @@ package com.clovertech.autolibdz.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import model.Locataire
-import model.User
+import com.clovertech.autolibdz.model.Locataire
+import com.clovertech.autolibdz.model.User
 
 class RegisterViewModel: ViewModel() {
 

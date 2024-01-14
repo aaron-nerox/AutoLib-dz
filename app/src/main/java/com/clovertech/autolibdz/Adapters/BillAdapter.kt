@@ -16,8 +16,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import api.FactureApi
-import model.Facture
+import com.clovertech.autolibdz.api.FactureApi
+import com.clovertech.autolibdz.model.Facture
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.repository.FactureRepository
 import kotlinx.coroutines.CoroutineScope

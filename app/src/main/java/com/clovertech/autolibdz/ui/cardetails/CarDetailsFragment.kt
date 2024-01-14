@@ -27,7 +27,7 @@ import java.time.format.DateTimeFormatter
 class CarDetailsFragment : Fragment() {
 
 
-    private lateinit var carDetailViewModel: ViewModelCars
+    private lateinit var carDetailViewModel: CarDetailsViewModel
     private lateinit var rentalViewModel: RentalViewModel
 
     override fun onCreateView(
@@ -36,7 +36,7 @@ class CarDetailsFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         carDetailViewModel =
-                ViewModelProvider(this).get(ViewModelCars::class.java)
+                ViewModelProvider(this).get(CarDetailsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_car_details, container, false)
 
         return root
@@ -45,7 +45,7 @@ class CarDetailsFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val id=arguments?.getInt("id")
+        val idcar=arguments?.getInt("id")
         val model=arguments?.getString("model")
         car.text=model
         val img=arguments?.getString("img")
@@ -105,7 +105,7 @@ class CarDetailsFragment : Fragment() {
 
 
 
-         val bundle = bundleOf("id" to id,"img" to img,"model" to model, "hr" to uni_hr, "jr" to uni_jr,
+         val bundle = bundleOf("id" to idcar,"img" to img,"model" to model, "hr" to uni_hr, "jr" to uni_jr,
             "brand" to brand)
             view?.findNavController()?.navigate(R.id.action_nav_listcar_to_nav_slideshow,bundle)
 

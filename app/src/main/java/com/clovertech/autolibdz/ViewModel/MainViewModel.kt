@@ -4,12 +4,13 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.clovertech.autolibdz.model.Profil
 import kotlinx.coroutines.launch
-import model.Authentication
-import model.AuthenticationResponse
-import model.Signal
-import model.User
-import repository.Repository
+import com.clovertech.autolibdz.model.Authentication
+import com.clovertech.autolibdz.model.AuthenticationResponse
+import com.clovertech.autolibdz.model.Signal
+import com.clovertech.autolibdz.model.User
+import com.clovertech.autolibdz.repository.Repository
 import retrofit2.Response
 
 class MainViewModel (private val repository: Repository): ViewModel() {
@@ -29,7 +30,7 @@ class MainViewModel (private val repository: Repository): ViewModel() {
         }
     }
     val authenticationResponse: MutableLiveData<Response<AuthenticationResponse>> = MutableLiveData()
-
+    val profil: MutableLiveData<Profil > = MutableLiveData()
     fun pushAuthentication(authentication : Authentication){
         viewModelScope.launch {
             try {
@@ -39,6 +40,14 @@ class MainViewModel (private val repository: Repository): ViewModel() {
                 Log.e("pushAuthentication err", e.localizedMessage)
             }
         }
+    }
+
+    fun getUser(id:Int){
+        viewModelScope.launch {
+            val rep: Profil =repository.getUserById(id)
+            profil.value=rep
+        }
+
     }
 
 }

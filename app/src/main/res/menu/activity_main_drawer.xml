@@ -34,7 +34,5 @@
             android:iconTint="@color/black"
             android:title="Signalé problème"
             />
-
-
     </group>
 </menu>

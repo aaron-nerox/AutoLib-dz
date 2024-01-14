@@ -4,43 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryColor"
+
     android:orientation="vertical"
-    tools:context=".SignalAct">
+    >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="15dp">
-
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="30dp"
-            android:rotation="180"
-            android:src="@drawable/ic_back"
-            app:tint="#fff">
-
-        </ImageView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/monteserrat_semibold"
-            android:text="Report a problem"
-            android:textColor="#fff"
-            android:textSize="18sp"
-            android:textStyle="bold">
-
-        </TextView>
-
-    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="0dp"
         android:background="@drawable/x_solid_top_radius_10dp"
         android:orientation="vertical">
 

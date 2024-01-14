@@ -16,9 +16,10 @@ import com.clovertech.autolibdz.HomeActivity
 import com.clovertech.autolibdz.R
 import com.clovertech.autolibdz.password.ResetPasswordActivity
 import com.clovertech.autolibdz.ui.promo.idTenantHelper
+import com.clovertech.autolibdz.utils.Constants
 import kotlinx.android.synthetic.main.activity_login.*
-import model.Authentication
-import repository.Repository
+import com.clovertech.autolibdz.model.Authentication
+import com.clovertech.autolibdz.repository.Repository
 
 
 class LoginActivity : AppCompatActivity() , View.OnClickListener {
@@ -69,11 +70,12 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
             viewModel.authenticationResponse.observe(this, Observer { response ->
                 if (response.isSuccessful) {
                     Toast.makeText(this, "SignIn Successfully", Toast.LENGTH_SHORT).show()
-                    saveUserToken(response.body()?.token.toString())
-
+                    saveUserToken(response.body()?.token.toString(),response.body()?.id!!)
                     val idTenant=response.body()?.id
+
                     idTenantHelper=idTenant!!
                     startActivity(Intent(this, HomeActivity::class.java))
+                    finish()
                     Log.e("Push", response.body()?.id.toString())
                     Log.e("Push", response.body().toString())
                     Log.e("Push", response.code().toString())
@@ -89,9 +91,12 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
         }
     }
 
-    private fun saveUserToken(token: String){
-        val preferences: SharedPreferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE)
+    private fun saveUserToken(token: String,id:Int){
+        val preferences: SharedPreferences = getSharedPreferences(Constants.APP_PREFS, Context.MODE_PRIVATE)
         preferences.edit().putString("TOKEN", token).apply()
+        preferences.edit().putInt("idUser",id).apply()
+        Log.d("idTenant",id.toString())
+        Log.d("token",token)
         /// Retrive Saved TOKEN
         //val retrivedToken = preferences.getString("TOKEN", null) //second parameter default value.
     }

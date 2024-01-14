@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolibdz.ViewModel.MainViewModel
 import com.clovertech.autolibdz.ViewModel.MainViewModelFactory
 import kotlinx.android.synthetic.main.activity_profile.*
-import repository.Repository
+import com.clovertech.autolibdz.repository.Repository
 
 class ProfileAct : AppCompatActivity() {
     private lateinit var viewModel : MainViewModel
